@@ -1,0 +1,7 @@
+.auth__link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    padding: 25px 0 10px;
+}
