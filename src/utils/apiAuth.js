@@ -23,21 +23,30 @@ class ApiAuth {
   }
 
   login(data) {
-    this._options.body = JSON.stringify({
+    this.options.body = JSON.stringify({
       email: data.email,
       password: data.password
     })
     return this._request('/signin', 'POST');
   }
 
-  test() {
-    return this._request('/signin', 'GET');
+  validate(token) {
+    delete this.options.body;
+    this.options.headers['x-access-token'] = token;
+    return this._request('/test', 'GET');
+  }
+
+  test(token) {
+    delete this.options.body;
+    this.options.headers['x-access-token'] = token;
+    return this._request('/test', 'GET');
   }
 }
 
 const apiAuth = new ApiAuth({
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   }
 });
 

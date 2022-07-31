@@ -14,34 +14,56 @@ function App() {
   const navigate = useNavigate();
 
   function handleSignIn(data) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user.email === data.email && user.password === data.password) {
-      setLoggedIn(true);
-
-      navigate('/');
-    }
+    apiAuth.login(data)
+      .then((response) => {
+        const { token } = response;
+        if (token) {
+          localStorage.setItem('jwt', token);
+          setLoggedIn(true);
+          navigate('/');
+        }
+      })
   }
 
   function handleSignUp(data) {
     apiAuth.register(data)
       .then(userData => {
-        console.log(userData);
         setSignedUp(true);
         navigate('/signin');
       })
       .catch(err => console.log(err));
   }
+
+  function testRequest() {
+    const token = localStorage.getItem('jwt');
+    apiAuth.test(token)
+      .then((res) => {
+        console.log(res);
+      })
+  }
   
   function handleAuthorize() {
-    if (localStorage.getItem('jwt')) {
-      setLoggedIn(true);
-      navigate('/');
+    if (!localStorage.getItem('jwt')) {
+      return;
     }
+    const token = localStorage.getItem('jwt');
+    apiAuth.validate(token)
+      .then((res) => {
+        console.log(res);
+        setLoggedIn(true);
+        navigate('/');
+        })
+      .catch(err => console.log(err));  
+  }
+
+  function logout() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    navigate('/signin');
   }
 
   useEffect(() => {
-    apiAuth.test()
-      .then(res => setBackendData(res));
+    handleAuthorize();
   }, []);
 
   return (
@@ -52,7 +74,7 @@ function App() {
 
         <Route
           exact path='/' 
-          element={ loggedIn ? <Main /> : <Navigate to='/signin' />}
+          element={ loggedIn ? <Main test={testRequest} logout={logout} /> : <Navigate to='/signin' />}
         />
 
         <Route
