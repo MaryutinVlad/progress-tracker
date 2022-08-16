@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+
+import Header from './Header';
 import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
@@ -10,6 +11,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
   const [backendData, setBackendData] = useState([{}]); 
+  const [userEmail, setUserEmail] = useState('');
 
   const navigate = useNavigate();
 
@@ -19,6 +21,7 @@ function App() {
         const { token } = response;
         if (token) {
           localStorage.setItem('jwt', token);
+          setUserEmail(data.email);
           setLoggedIn(true);
           navigate('/');
         }
@@ -27,7 +30,7 @@ function App() {
 
   function handleSignUp(data) {
     apiAuth.register(data)
-      .then(userData => {
+      .then(() => {
         setSignedUp(true);
         navigate('/signin');
       })
@@ -48,8 +51,9 @@ function App() {
     }
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
-      .then((res) => {
-        console.log(res);
+      .then(({ email }) => {
+        console.log(email);
+        setUserEmail(email);
         setLoggedIn(true);
         navigate('/');
         })
@@ -58,6 +62,7 @@ function App() {
 
   function logout() {
     localStorage.removeItem('jwt');
+    setUserEmail('');
     setLoggedIn(false);
     navigate('/signin');
   }
@@ -68,13 +73,13 @@ function App() {
 
   return (
     <div className='page'>
-      <Header/>
+      <Header logout={logout} loggedIn={loggedIn} email={userEmail} />
             
       <Routes>
 
         <Route
-          exact path='/' 
-          element={ loggedIn ? <Main test={testRequest} logout={logout} /> : <Navigate to='/signin' />}
+          exact path='*' 
+          element={ loggedIn ? <Main test={testRequest} /> : <Navigate to='/signin' />}
         />
 
         <Route

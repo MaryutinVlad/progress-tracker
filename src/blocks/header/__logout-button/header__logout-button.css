@@ -1,0 +1,11 @@
+.header__logout-button {
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(212, 176, 78);
+    cursor: pointer;
+}
+
+.header__logout-button:hover {
+    background-color: rgb(243, 203, 92);
+}

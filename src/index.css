@@ -4,9 +4,17 @@
 
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__title/header__title.css');
+@import url('./blocks/header/__profile-info/header__profile-info.css');
+@import url('./blocks/header/__profile-email/header__profile-email.css');
+@import url('./blocks/header/__logout-button/header__logout-button.css');
 
 @import url('./blocks/form/form.css');
 @import url('./blocks/form/__error/form__error.css');
+
+@import url('./blocks/main/main.css');
+
+@import url('./blocks/navigation/navigation.css');
+@import url('./blocks/navigation/__link/navigation__link.css');
 
 @import url('./blocks/auth/auth.css');
 @import url('./blocks/auth/__header/auth__header.css');
