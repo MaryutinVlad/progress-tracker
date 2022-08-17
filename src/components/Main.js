@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from 'react-router-dom';
 
 import Navigation from './Navigation';
-import Maps from './Maps';
+import Activities from './Activities';
 import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
@@ -16,9 +16,9 @@ function Main({ test }) {
       <Routes>
 
         <Route 
-          path="/maps"
+          path="/activities"
           element={
-            <Maps />
+            <Activities />
           }
         />
 

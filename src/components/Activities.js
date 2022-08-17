@@ -1,9 +1,9 @@
 import React from "react";
 
-function Maps() {
+function Activities() {
   return (
     <></>
   )
 }
 
-export default Maps;
+export default Activities;
