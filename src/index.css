@@ -17,6 +17,13 @@
 @import url('./blocks/navigation/__link/navigation__link.css');
 @import url('./blocks/navigation/__link/_active/navigation__link_active.css');
 
+@import url('./blocks/activities/activities.css');
+@import url('./blocks/activities/__available/activities__available.css');
+@import url('./blocks/activities/__current/activities__current.css');
+@import url('./blocks/activities/__current-slots/activities__current-slots.css');
+@import url('./blocks/activities/__slots-number/activities__slots-number.css');
+@import url('./blocks/activities/__description/activities__description.css');
+
 @import url('./blocks/auth/auth.css');
 @import url('./blocks/auth/__header/auth__header.css');
 @import url('./blocks/auth/__input-field/auth__input-field.css');

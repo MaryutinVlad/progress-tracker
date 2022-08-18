@@ -5,6 +5,7 @@ import Header from './Header';
 import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
+import api from '../utils/api';
 
 function App() {
 
@@ -37,14 +38,6 @@ function App() {
       })
       .catch(err => console.log(err));
   }
-
-  function testRequest() {
-    const token = localStorage.getItem('jwt');
-    apiAuth.test(token)
-      .then((res) => {
-        console.log(res);
-      })
-  }
   
   function handleAuthorize() {
     if (!localStorage.getItem('jwt')) {
@@ -52,13 +45,19 @@ function App() {
     }
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
-      .then(({ email }) => {
-        console.log(email);
-        setUserEmail(email);
+      .then((res) => {
+        console.log(res);
+        setUserEmail(res.email);
         setLoggedIn(true);
         navigate('/');
         })
-      .catch(err => console.log(err));  
+      .then(() => {
+        api.getActivities()
+          .then((data) => {
+            setBackendData(data);
+          })
+      })  
+      .catch(err => console.log(err));
   }
 
   function logout() {
@@ -80,7 +79,7 @@ function App() {
 
         <Route
           exact path='*' 
-          element={ loggedIn ? <Main test={testRequest} /> : <Navigate to='/signin' />}
+          element={ loggedIn ? <Main activities={backendData} /> : <Navigate to='/signin' />}
         />
 
         <Route

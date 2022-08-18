@@ -1,0 +1,8 @@
+.activities__current-slots {
+    width: 100%;
+    height: 100%;
+    grid-row-start: 10;
+    grid-row-end: 11;
+    box-sizing: border-box;
+    border-top: 2px solid #1f252e;
+}

@@ -7,7 +7,7 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ test }) {
+function Main({ activities }) {
 
   return (
     <div className="main">
@@ -18,7 +18,7 @@ function Main({ test }) {
         <Route 
           path="/activities"
           element={
-            <Activities />
+            <Activities data={ activities } />
           }
         />
 

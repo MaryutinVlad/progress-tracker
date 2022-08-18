@@ -33,13 +33,7 @@ class ApiAuth {
   validate(token) {
     delete this.options.body;
     this.options.headers['x-access-token'] = token;
-    return this._request('/test', 'GET');
-  }
-
-  test(token) {
-    delete this.options.body;
-    this.options.headers['x-access-token'] = token;
-    return this._request('/test', 'GET');
+    return this._request('/validate', 'GET');
   }
 }
 
