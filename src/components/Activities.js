@@ -1,11 +1,22 @@
 import React, { useState } from "react";
+import ActivityItem from './ActivityItem';
 
 function Activities({ data }) {
 
   const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [cost, setCost] = useState('');
 
-  function viewDescription(e) {
-    setDescription(e.target.name + '\n' + e.target.value);
+  function handleMousingOverItem(param) {
+    setDescription(param.description);
+    setTitle(param.name);
+    setCost(param.cost);
+  }
+
+  function handleMousingOut() {
+    setDescription('');
+    setTitle('');
+    setCost('');
   }
 
   return (
@@ -21,12 +32,22 @@ function Activities({ data }) {
 
       <div className="activities__available">
         {data.map(item => {
-          return (<img key={item._id} alt={item.name} name={item.description} value={item.cost} onMouseOver={viewDescription} />)
+          return (
+            <ActivityItem
+              key={item._id}
+              name={item.name}
+              description={item.description}
+              cost={item.cost}
+              mouseOver={handleMousingOverItem}
+              mouseOut={handleMousingOut} />
+          )
         })}
       </div>
 
       <div className="activities__description">
-        {description}
+        {title ? `Title: ${title}` : ''}<br/>
+        {description ? `Description: ${description}` : ''}<br/>
+        {cost ? `Cost: ${cost}` : ''}
       </div>
 
     </div>

@@ -19,6 +19,7 @@
 
 @import url('./blocks/activities/activities.css');
 @import url('./blocks/activities/__available/activities__available.css');
+@import url('./blocks/activities/_item/activities__item.css');
 @import url('./blocks/activities/__current/activities__current.css');
 @import url('./blocks/activities/__current-slots/activities__current-slots.css');
 @import url('./blocks/activities/__slots-number/activities__slots-number.css');
