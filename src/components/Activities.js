@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ActivityItem from './ActivityItem';
 
-function Activities({ data }) {
+function Activities({ data, handleActivityClick }) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
+  const [slots, setSlots] = useState(1);
 
   function handleMousingOverItem(param) {
     setDescription(param.description);
@@ -19,19 +20,23 @@ function Activities({ data }) {
     setCost('');
   }
 
+  function handleClick(id) {
+    handleActivityClick(id);
+  }
+
   return (
     <div className="activities">
 
       <div className="activities__current">
         <div className="activities__current-slots">
           <h2 className="activities__slots-number">
-            Slots: 
+            Slots: {slots}
           </h2>
         </div>
       </div>
 
       <div className="activities__available">
-        {data.map(item => {
+      {data.availableActivities.map(item => {
           return (
             <ActivityItem
               key={item._id}
@@ -39,7 +44,10 @@ function Activities({ data }) {
               description={item.description}
               cost={item.cost}
               mouseOver={handleMousingOverItem}
-              mouseOut={handleMousingOut} />
+              mouseOut={handleMousingOut}
+              click={handleClick}
+              id={item._id}
+              />
           )
         })}
       </div>

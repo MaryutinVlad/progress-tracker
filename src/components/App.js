@@ -67,6 +67,11 @@ function App() {
     navigate('/signin');
   }
 
+  function handleClickEvent(e) {
+    console.log(e);
+    //the function to send a request that results with adding clicked activity to current and deleting it from available
+  }
+
   useEffect(() => {
     handleAuthorize();
   }, []);
@@ -79,7 +84,7 @@ function App() {
 
         <Route
           exact path='*' 
-          element={ loggedIn ? <Main activities={backendData} /> : <Navigate to='/signin' />}
+          element={ loggedIn ? <Main activities={backendData} onClickEvent={handleClickEvent} /> : <Navigate to='/signin' />}
         />
 
         <Route
