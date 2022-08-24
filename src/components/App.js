@@ -67,9 +67,12 @@ function App() {
     navigate('/signin');
   }
 
-  function handleClickEvent(e) {
-    console.log(e);
-    //the function to send a request that results with adding clicked activity to current and deleting it from available
+  function handleClickEvent(id) {
+    console.log(id);
+    api.makeCurrent(id)
+      .then((res) => {
+        console.log(res);
+      })
   }
 
   useEffect(() => {

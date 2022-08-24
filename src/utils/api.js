@@ -17,6 +17,10 @@ class Api {
   getActivities() {
     return this._request('/activities', 'GET');
   }
+
+  makeCurrent(activityId) {
+    return this._request(`/activities/${activityId}`, 'POST');
+  }
 }
 
 const api = new Api({
