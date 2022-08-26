@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function ActivityItem({ name, description, cost, mouseOver, mouseOut, click, id }) {
+function ActivityItem({ name, description, cost, mouseOver, mouseOut, click, id, source }) {
 
   function handleMouseOver() {
     mouseOver({ name, description, cost });
@@ -15,7 +15,7 @@ function ActivityItem({ name, description, cost, mouseOver, mouseOut, click, id 
   }
 
   return (
-    <img className="activities__item" alt={name} src="" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleActivityClick} />
+    <img className="activities__item" alt={name} src={require(`../images/${source}`)} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={handleActivityClick} />
   )
 }
 

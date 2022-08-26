@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ActivityItem from './ActivityItem';
+import CurrentActivityItem from "./curActivityItem";
 
-function Activities({ data, handleActivityClick }) {
+function Activities({ availableActivities, currentActivities, handleActivityClick }) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -28,17 +29,16 @@ function Activities({ data, handleActivityClick }) {
     <div className="activities">
 
       <div className="activities__current">
-        {data.response.map(item => {
+        {currentActivities.map(item => {
           return (
-            <ActivityItem
+            <CurrentActivityItem
               key={item._id}
               name={item.name}
               description={item.description}
-              cost={item.cost}
               mouseOver={handleMousingOverItem}
               mouseOut={handleMousingOut}
-              click={handleClick}
               id={item._id}
+              source={item.src}
               />
           )
         })}
@@ -50,7 +50,7 @@ function Activities({ data, handleActivityClick }) {
       </div>
 
       <div className="activities__available">
-        {data.availableActivities.map(item => {
+        {availableActivities.map(item => {
           return (
             <ActivityItem
               key={item._id}
@@ -61,6 +61,7 @@ function Activities({ data, handleActivityClick }) {
               mouseOut={handleMousingOut}
               click={handleClick}
               id={item._id}
+              source={item.src}
               />
           )
         })}

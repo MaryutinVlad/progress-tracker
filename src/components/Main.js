@@ -7,7 +7,7 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ activities, onClickEvent }) {
+function Main({ currentActivities, availableActivities, onClickEvent }) {
 
   return (
     <div className="main">
@@ -18,7 +18,7 @@ function Main({ activities, onClickEvent }) {
         <Route 
           path="/activities"
           element={
-            <Activities data={ activities } handleActivityClick={ onClickEvent } />
+            <Activities currentActivities={currentActivities} availableActivities={availableActivities} handleActivityClick={ onClickEvent } />
           }
         />
 

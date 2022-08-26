@@ -11,7 +11,8 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
-  const [backendData, setBackendData] = useState([{}]); 
+  const [currentActivities, setCurrentActivities] = useState([]);
+  const [availableActivities, setAvailableActivities] = useState([]);
   const [userEmail, setUserEmail] = useState('');
 
   const navigate = useNavigate();
@@ -45,16 +46,18 @@ function App() {
     }
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
-      .then((res) => {
-        console.log(res);
-        setUserEmail(res.email);
+      .then((user) => {
+        console.log(user);
+        setUserEmail(user.email);
         setLoggedIn(true);
         navigate('/');
         })
       .then(() => {
         api.getActivities()
-          .then((data) => {
-            setBackendData(data);
+          .then((activities) => {
+            setCurrentActivities(activities.currentActivities);
+            setAvailableActivities(activities.availableActivities);
+            console.log(activities);
           })
       })  
       .catch(err => console.log(err));
@@ -70,8 +73,11 @@ function App() {
   function handleClickEvent(id) {
     console.log(id);
     api.makeCurrent(id)
-      .then((res) => {
-        console.log(res);
+      .then((curActList) => {
+        setCurrentActivities(curActList);
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 
@@ -81,13 +87,23 @@ function App() {
 
   return (
     <div className='page'>
-      <Header logout={logout} loggedIn={loggedIn} email={userEmail} />
+      <Header
+        logout={logout}
+        loggedIn={loggedIn}
+        email={userEmail}
+      />
             
       <Routes>
 
         <Route
           exact path='*' 
-          element={ loggedIn ? <Main activities={backendData} onClickEvent={handleClickEvent} /> : <Navigate to='/signin' />}
+          element={ loggedIn ?
+            <Main
+              currentActivities={currentActivities}
+              availableActivities={availableActivities}
+              onClickEvent={handleClickEvent}
+            /> :
+            <Navigate to='/signin' />}
         />
 
         <Route
