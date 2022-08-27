@@ -19,8 +19,15 @@
 
 @import url('./blocks/activities/activities.css');
 @import url('./blocks/activities/__available/activities__available.css');
-@import url('./blocks/activities/_item/activities__item.css');
+@import url('./blocks/activities/__item/activities__item.css');
 @import url('./blocks/activities/__current/activities__current.css');
+@import url('./blocks/activities/__current-item/activities__current-item.css');
+@import url('./blocks/activities/__current-image/activities__current-image.css');
+@import url('./blocks/activities/__info/activities__info.css');
+@import url('./blocks/activities/__info-title/activities__info-title.css');
+@import url('./blocks/activities/__info-rank/activities__info-rank.css');
+@import url('./blocks/activities/__progress-bar/activities__progress-bar.css');
+@import url('./blocks/activities/__progress-info/activities__progress-info.css');
 @import url('./blocks/activities/__current-slots/activities__current-slots.css');
 @import url('./blocks/activities/__slots-number/activities__slots-number.css');
 @import url('./blocks/activities/__description/activities__description.css');

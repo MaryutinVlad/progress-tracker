@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ActivityItem from './ActivityItem';
-import CurrentActivityItem from "./curActivityItem";
+import CurrentActivityItem from "./CurrentActivityItem";
 
 function Activities({ availableActivities, currentActivities, handleActivityClick }) {
 
@@ -39,6 +39,7 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               mouseOut={handleMousingOut}
               id={item._id}
               source={item.src}
+              rank={item.rank}
               />
           )
         })}
