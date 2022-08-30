@@ -7,4 +7,7 @@
     grid-column-end: 3;
     box-sizing: border-box;
     border-top: 2px solid #1f252e;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

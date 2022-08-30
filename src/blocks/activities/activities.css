@@ -1,9 +1,9 @@
 .activities {
-    width: 100%;
+    width: 1152px;
     height: 90%;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 4fr 3fr;
     gap: 10px;
-    margin: 10px 0;
+    margin: 10px auto;
 }

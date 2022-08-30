@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import ActivityItem from './ActivityItem';
+import React, { useState } from "react";
+import AvailableActivityItem from './AvailableActivityItem';
 import CurrentActivityItem from "./CurrentActivityItem";
 
-function Activities({ availableActivities, currentActivities, handleActivityClick }) {
+function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots }) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
-  const [slots, setSlots] = useState(1);
 
-  function handleMousingOverItem(param) {
-    setDescription(param.description);
-    setTitle(param.name);
-    setCost(param.cost);
+  function handleMousingOverItem(item) {
+    setDescription(item.description);
+    setTitle(item.name);
+    setCost(item.cost);
   }
 
   function handleMousingOut() {
@@ -40,20 +39,23 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               id={item._id}
               source={item.src}
               rank={item.rank}
-              />
+            />
           )
         })}
         <div className="activities__current-slots">
-          <h2 className="activities__slots-number">
-            Slots: {slots}
-          </h2>
+          <span className="activities__slots-number">
+            WP: {wp}
+          </span>
+          <span className="activities__slots-number">
+          Slots: {slots}
+          </span>
         </div>
       </div>
 
       <div className="activities__available">
         {availableActivities.map(item => {
           return (
-            <ActivityItem
+            <AvailableActivityItem
               key={item._id}
               name={item.name}
               description={item.description}
@@ -63,7 +65,7 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               click={handleClick}
               id={item._id}
               source={item.src}
-              />
+            />
           )
         })}
       </div>

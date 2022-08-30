@@ -15,10 +15,16 @@ class Api {
   }
 
   getActivities() {
+    delete this.options.body;
     return this._request('/activities', 'GET');
   }
 
-  makeCurrent(activityId) {
+  purchaseActivity(activityId, wp, slots) {
+    this.options.body = JSON.stringify({
+      wp: wp,
+      slots: slots
+    });
+
     return this._request(`/activities/${activityId}`, 'POST');
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
+import { ResourceContext } from '../contexts/ResourceContext';
 import Header from './Header';
 import Main from './Main';
 import Auth from './Auth';
@@ -14,6 +15,8 @@ function App() {
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
   const [userEmail, setUserEmail] = useState('');
+  const [wp, setWp] = useState(0);
+  const [slots, setSlots] = useState(0);
 
   const navigate = useNavigate();
 
@@ -50,6 +53,8 @@ function App() {
         console.log(user);
         setUserEmail(user.email);
         setLoggedIn(true);
+        setWp(user.wp);
+        setSlots(user.slots);
         navigate('/');
         })
       .then(() => {
@@ -71,14 +76,14 @@ function App() {
   }
 
   function handleClickEvent(id) {
-    console.log(id);
-    api.makeCurrent(id)
-      .then((curActList) => {
-        setCurrentActivities(curActList);
+    console.log(wp, slots);
+    api.purchaseActivity(id, wp, slots)
+      .then((data) => {
+        setCurrentActivities(data.activities);
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   useEffect(() => {
@@ -86,53 +91,57 @@ function App() {
   }, []);
 
   return (
-    <div className='page'>
-      <Header
-        logout={logout}
-        loggedIn={loggedIn}
-        email={userEmail}
-      />
+    <ResourceContext.Provider value={{wp, slots}}>
+      <div className='page'>
+        <Header
+          logout={logout}
+          loggedIn={loggedIn}
+          email={userEmail}
+        />
             
-      <Routes>
+        <Routes>
 
-        <Route
-          exact path='*' 
-          element={ loggedIn ?
-            <Main
-              currentActivities={currentActivities}
-              availableActivities={availableActivities}
-              onClickEvent={handleClickEvent}
-            /> :
-            <Navigate to='/signin' />}
-        />
+          <Route
+            exact path='*' 
+            element={ loggedIn ?
+              <Main
+                currentActivities={currentActivities}
+                availableActivities={availableActivities}
+                onClickEvent={handleClickEvent}
+                wp={wp}
+                slots={slots}
+              /> :
+              <Navigate to='/signin' />}
+          />
 
-        <Route
-          path='/signin'
-          element={
-            <Auth
-              title='Sign in'
-              formName='login'
-              onEvent={handleSignIn}
-              redirectTo='/signup'
-            />
-          }
-        />
+          <Route
+            path='/signin'
+            element={
+              <Auth
+                title='Sign in'
+                formName='login'
+                onEvent={handleSignIn}
+                redirectTo='/signup'
+              />
+            }
+          />
 
-        <Route
-          path='/signup'
-          element={
-            <Auth
-              title='Sign up'
-              formName='register'
-              onEvent={handleSignUp}
-              redirectTo='/signin'
-            />
-          }
-        />
+          <Route
+            path='/signup'
+            element={
+              <Auth
+                title='Sign up'
+                formName='register'
+                onEvent={handleSignUp}
+                redirectTo='/signin'
+              />
+            }
+          />
 
-      </Routes>
+        </Routes>
 
-    </div>
+      </div>
+    </ResourceContext.Provider>
   )
 }
 

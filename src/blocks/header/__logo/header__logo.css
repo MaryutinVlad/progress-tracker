@@ -1,8 +1,5 @@
 .header__logo {
-    width: 65%;
-    height: 100%;
-    background-image: url('../../../images/logo-test.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: .2;
+    width: 700px;
+    height: 128px;
+    background-color: aqua;
 }

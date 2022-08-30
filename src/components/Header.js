@@ -1,11 +1,10 @@
 import React from "react";
+import logo from '../images/logo.png';
 
 function Header({ logout, email }) {
   return (
     <header className="header">
-      <h1 className="header__title">
-        Header
-      </h1>
+      <img className="header__logo" src={logo} alt="Progress tracker"/>
       <div className="header__profile-info">
         { email && 
           <>

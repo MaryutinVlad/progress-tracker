@@ -1,9 +1,8 @@
 .header {
-    width: 90%;
-    height: 15%;
+    width: 1152px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
+    margin: 10px auto;
+    background-color: aliceblue;
 }
