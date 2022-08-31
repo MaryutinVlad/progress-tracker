@@ -2,7 +2,6 @@
     width: 1152px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     margin: 10px auto;
-    background-color: aliceblue;
+    background-color: rgba(44, 52, 65, .2);
 }

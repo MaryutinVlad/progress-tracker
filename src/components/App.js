@@ -50,7 +50,6 @@ function App() {
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
       .then((user) => {
-        console.log(user);
         setUserEmail(user.email);
         setLoggedIn(true);
         setWp(user.wp);
@@ -62,7 +61,6 @@ function App() {
           .then((activities) => {
             setCurrentActivities(activities.currentActivities);
             setAvailableActivities(activities.availableActivities);
-            console.log(activities);
           })
       })  
       .catch(err => console.log(err));
@@ -80,6 +78,8 @@ function App() {
     api.purchaseActivity(id, wp, slots)
       .then((data) => {
         setCurrentActivities(data.activities);
+        setWp(data.user.wp);
+        setSlots(data.user.slots);
       })
       .catch((err) => {
         console.log(err);

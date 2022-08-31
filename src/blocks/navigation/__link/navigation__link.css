@@ -5,9 +5,8 @@
   font-size: 24px;
   padding: 10px;
   color: antiquewhite;
-  background-color: #2c3441;
 }
 
 .navigation__link:hover {
-  background-color: #404d60;
+  background-color: rgba(64, 77, 96, .2);
 }

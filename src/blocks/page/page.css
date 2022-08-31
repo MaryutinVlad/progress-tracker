@@ -3,5 +3,6 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #1f252e;
+    background-image: url('../../images/background.png');
+    font-family: 'Yoster-Island';
 }

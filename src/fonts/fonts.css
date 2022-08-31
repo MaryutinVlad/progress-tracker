@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Press-Start';
+    src: url("../fonts/prstart.ttf") format("truetype");
+    font-weight: 400;     
+}
+
+@font-face {
+    font-family: 'Press-Start-K';
+    src: url("../fonts/prstartk.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Dotty';
+    src: url("../fonts/dotty.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Yoster-Island';
+    src: url("../fonts/yoster.ttf") format("truetype");
+    font-weight: 400;
+}
