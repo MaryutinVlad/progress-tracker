@@ -1,3 +1,5 @@
 .navigation__link_active {
-    background-color: rgba(44, 52, 65, .4);
+    background-color: rgba(116, 64, 98, 0.5);
+    color: rgb(176, 115, 183);
+    text-shadow: 0 0 10px rgb(95, 125, 213);
 }

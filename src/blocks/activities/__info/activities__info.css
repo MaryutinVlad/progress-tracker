@@ -1,7 +1,8 @@
 .activities__info {
     color: rgb(188, 197, 206);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr 4fr;
     width: 100%;
-    gap: 5px;
+    height: 100px;
 }

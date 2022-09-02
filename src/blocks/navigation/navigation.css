@@ -1,7 +1,8 @@
 .navigation {
   height: 8%;
   width: 1152px;
-  background-color: rgba(44, 52, 65, .2);
+  background-color: rgba(44, 52, 65, .3);
   display: flex;
   flex-direction: row;
+  border-radius: 20px;
 }

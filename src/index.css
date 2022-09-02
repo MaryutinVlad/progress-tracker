@@ -21,8 +21,8 @@
 
 @import url('./blocks/activities/activities.css');
 @import url('./blocks/activities/__available/activities__available.css');
-@import url('./blocks/activities/__item/activities__item.css');
-@import url('./blocks/activities/__item/_paled/activities__item_paled.css');
+@import url('./blocks/activities/__available-item/activities__available-item.css');
+@import url('./blocks/activities/__available-item/_paled/activities__available-item_paled.css');
 @import url('./blocks/activities/__current/activities__current.css');
 @import url('./blocks/activities/__current-item/activities__current-item.css');
 @import url('./blocks/activities/__current-image/activities__current-image.css');
@@ -30,7 +30,10 @@
 @import url('./blocks/activities/__info-title/activities__info-title.css');
 @import url('./blocks/activities/__info-rank/activities__info-rank.css');
 @import url('./blocks/activities/__progress-bar/activities__progress-bar.css');
-@import url('./blocks/activities/__progress-info/activities__progress-info.css');
+@import url('./blocks/activities/__progress-bar/_completed/activities__progress-bar_completed.css');
+@import url('./blocks/activities/__progress-input/activities__progress-input.css');
+@import url('./blocks/activities/__progress-value/activities__progress-value.css');
+@import url('./blocks/activities/__global-buttons/activities__global-buttons.css');
 @import url('./blocks/activities/__current-slots/activities__current-slots.css');
 @import url('./blocks/activities/__slots-number/activities__slots-number.css');
 @import url('./blocks/activities/__description/activities__description.css');
@@ -40,5 +43,10 @@
 @import url('./blocks/auth/__input-field/auth__input-field.css');
 @import url('./blocks/auth/__link/auth__link.css');
 @import url('./blocks/auth/__submit-button/auth__submit-button.css');
+
+@import url('./blocks/buttons/__arrow/buttons__arrow.css');
+@import url('./blocks/buttons/__arrow/_down/buttons__arrow_down.css');
+@import url('./blocks/buttons/__end-day/buttons__end-day.css');
+@import url('./blocks/buttons/__restart/buttons__restart.css');
 
 @import url('./blocks/test/__item/test__item.css');

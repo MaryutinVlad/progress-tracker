@@ -1,12 +1,28 @@
 .navigation__link {
+  transition-property: color, background-color;
+  transition-duration: .4s;
   width: 100%;
   text-align: center;
   text-decoration: none;
   font-size: 24px;
+  font-family: 'Yoster-Island';
+  letter-spacing: 1.7px;
   padding: 10px;
   color: antiquewhite;
 }
 
+.navigation__link:first-child {
+  border-radius: 20px 0 0 20px;
+}
+
+.navigation__link:last-child {
+  border-radius: 0 20px 20px 0;
+}
+
 .navigation__link:hover {
-  background-color: rgba(64, 77, 96, .2);
+  transition-property: color, background-color;
+  transition-duration: .4s;
+  background-color: rgba(95, 125, 213, .2);
+  color: rgb(95, 125, 213);
+  text-shadow: 0 0 10px rgb(95, 125, 213);
 }

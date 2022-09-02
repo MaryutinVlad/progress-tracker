@@ -4,6 +4,6 @@
     box-sizing: border-box;
     border: 1px solid #1f252e;
     margin-left: 10px;
-    background: linear-gradient(to right, rgb(200, 38, 38) 15%, #2c3441 15%);
+    margin-top: 8px;
     border-radius: 90px;
 }

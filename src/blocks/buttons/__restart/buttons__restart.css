@@ -1,0 +1,18 @@
+.buttons__restart {
+    width: 35%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: transparent;
+    transition-property: color, text-shadow;
+    transition-duration: .4s;
+    color: rgb(193, 202, 212);
+}
+
+.buttons__restart:hover {
+    transition-property: color, text-shadow;
+    transition-duration: .4s;
+    color: rgb(190, 69, 69);
+    text-shadow: 0 0 35px rosybrown;
+}

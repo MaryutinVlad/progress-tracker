@@ -1,10 +1,13 @@
 .activities__description {
     height: 100%;
     width: 100%;
-    background-color: rgba(44, 52, 65, .2);
-    color: rgb(169, 188, 204);
+    background-color: rgba(44, 52, 65, .3);
+    color: rgb(193, 202, 212);
     margin: 0;
-    text-align: center;
-    line-height: 40px;
+    font-size: 18px;
+    line-height: 33px;
     box-sizing: border-box;
+    padding: 5px 10px;
+    letter-spacing: .8px;
+    border-radius: 0 0 20px 0;
 }

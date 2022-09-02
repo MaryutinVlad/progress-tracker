@@ -6,7 +6,7 @@ function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, c
 
   const wpCount = useContext(ResourceContext);
 
-  const classList = "activities__item" + (wpCount.wp < cost ? " activities__item_paled" : "");
+  const classList = "activities__available-item" + (wpCount.wp < cost ? " activities__available-item_paled" : "");
 
   function handleMouseOver() {
     mouseOver({ name, description, cost });

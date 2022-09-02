@@ -1,10 +1,11 @@
 .activities__available {
     height: 100%;
     width: 100%;
-    background-color: rgba(44, 52, 65, .2);
+    background-color: rgba(44, 52, 65, .3);
     display: grid;
-    grid-template-rows: repeat(2, 150px);
-    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(2, 3fr) 1fr;
+    grid-template-columns: repeat(4, 128px);
     grid-row-start: 1;
     grid-row-end: 3;
+    border-radius: 0 20px 0 0;
 }

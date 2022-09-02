@@ -24,6 +24,10 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
     handleActivityClick(id);
   }
 
+  function endDay(param) {
+    console.log(param);
+  }
+
   return (
     <div className="activities">
 
@@ -39,6 +43,7 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               id={item._id}
               source={item.src}
               rank={item.rank}
+              gatherValue={endDay}
             />
           )
         })}
@@ -68,6 +73,10 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
             />
           )
         })}
+        <div className="activities__global-buttons">
+          <button className="buttons__end-day">End day</button>
+          <button className="buttons__restart">Erase map</button>
+        </div>
       </div>
 
       <div className="activities__description">
