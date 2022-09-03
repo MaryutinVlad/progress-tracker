@@ -27,6 +27,12 @@ class Api {
 
     return this._request(`/activities/${activityId}`, 'POST');
   }
+
+  endDay(values) {
+    this.options.body = JSON.stringify(values);
+
+    return this._request('/activities', 'POST');
+  }
 }
 
 const api = new Api({

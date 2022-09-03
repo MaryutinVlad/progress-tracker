@@ -20,14 +20,14 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
 
   function increaseValue() {
     setInputValue(inputValue + 1);
-    gatherValue(inputValue);
+    gatherValue({ [name]: inputValue });
   }
 
   function decreseValue() {
     if (inputValue) {
       setInputValue(inputValue - 1);
     }
-    gatherValue(inputValue);
+    gatherValue({ [name]: inputValue });
   }
 
   return (

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import AvailableActivityItem from './AvailableActivityItem';
 import CurrentActivityItem from "./CurrentActivityItem";
 
-function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots }) {
+function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots, onEndDay }) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
+  const [values, setValues] = useState({});
 
   function handleMousingOverItem(item) {
     setDescription(item.description);
@@ -24,8 +25,12 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
     handleActivityClick(id);
   }
 
-  function endDay(param) {
-    console.log(param);
+  function gatherValue(data) {
+    setValues(Object.assign(values, data));
+  }
+
+  function endDay() {
+    onEndDay(values);
   }
 
   return (
@@ -43,7 +48,7 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               id={item._id}
               source={item.src}
               rank={item.rank}
-              gatherValue={endDay}
+              gatherValue={gatherValue}
             />
           )
         })}
@@ -74,7 +79,7 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
           )
         })}
         <div className="activities__global-buttons">
-          <button className="buttons__end-day">End day</button>
+          <button className="buttons__end-day" onClick={endDay} >End day</button>
           <button className="buttons__restart">Erase map</button>
         </div>
       </div>

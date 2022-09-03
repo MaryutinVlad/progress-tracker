@@ -86,6 +86,10 @@ function App() {
       });
   }
 
+  function handleEndDay(values) {
+    api.endDay(values);
+  }
+
   useEffect(() => {
     handleAuthorize();
   }, []);
@@ -110,6 +114,7 @@ function App() {
                 onClickEvent={handleClickEvent}
                 wp={wp}
                 slots={slots}
+                onEndDay={handleEndDay}
               /> :
               <Navigate to='/signin' />}
           />

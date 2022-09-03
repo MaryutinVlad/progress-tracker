@@ -7,7 +7,7 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ currentActivities, availableActivities, onClickEvent, wp, slots }) {
+function Main({ currentActivities, availableActivities, onClickEvent, wp, slots, onEndDay }) {
 
   return (
     <div className="main">
@@ -24,6 +24,7 @@ function Main({ currentActivities, availableActivities, onClickEvent, wp, slots 
               handleActivityClick={ onClickEvent }
               wp={wp}
               slots={slots}
+              onEndDay={onEndDay}
             />
           }
         />
