@@ -5,4 +5,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: rgba(44, 52, 65, .3);
+    border-radius: 20px;
 }

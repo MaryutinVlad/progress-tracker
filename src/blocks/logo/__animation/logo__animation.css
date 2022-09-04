@@ -1,0 +1,29 @@
+@keyframes colorChangeFirstLine {
+    from {
+        color: rgb(95, 125, 213);
+        text-shadow: 0 0 55px rosybrown;
+    }
+    to {
+        color: rgb(49, 55, 75);
+        text-shadow: 0 0 90px rosybrown;
+    }
+}
+
+@keyframes colorChangeSecondLine {
+    from {
+        color: rgb(176, 115, 183);
+        text-shadow: 0 0 55px rosybrown;
+    }
+    to {
+        color: rgb(30, 33, 42);
+        text-shadow: 0 0 90px rosybrown;
+    }
+}
+
+.logo__animation-first-line {
+    animation: colorChangeFirstLine 100s linear 0s infinite alternate;
+}
+
+.logo__animation-second-line {
+    animation: colorChangeSecondLine 100s linear 0s infinite alternate;
+}

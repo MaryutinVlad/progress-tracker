@@ -12,6 +12,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
+  const [isDataSent, setIsDataSent] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
   const [userEmail, setUserEmail] = useState('');
@@ -87,7 +88,14 @@ function App() {
   }
 
   function handleEndDay(values) {
-    api.endDay(values);
+    console.log(values);
+    setIsDataSent(true);
+    api.endDay(values)
+      .then((updatedActivities) => {
+        console.log(updatedActivities);
+        setIsDataSent(false);
+        setCurrentActivities(updatedActivities);
+      })
   }
 
   useEffect(() => {
@@ -115,6 +123,7 @@ function App() {
                 wp={wp}
                 slots={slots}
                 onEndDay={handleEndDay}
+                isDataSent={isDataSent}
               /> :
               <Navigate to='/signin' />}
           />

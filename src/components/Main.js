@@ -7,7 +7,7 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ currentActivities, availableActivities, onClickEvent, wp, slots, onEndDay }) {
+function Main({ currentActivities, availableActivities, onClickEvent, wp, slots, onEndDay, isDataSent }) {
 
   return (
     <div className="main">
@@ -25,6 +25,7 @@ function Main({ currentActivities, availableActivities, onClickEvent, wp, slots,
               wp={wp}
               slots={slots}
               onEndDay={onEndDay}
+              isDataSent={isDataSent}
             />
           }
         />

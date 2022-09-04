@@ -3,9 +3,13 @@
 
 @import url('./blocks/page/page.css');
 
+@import url('./blocks/logo/logo.css');
+@import url('./blocks/logo/__first-line/logo__first-line.css');
+@import url('./blocks/logo/__second-line/logo__second-line.css');
+@import url('./blocks/logo/__animation/logo__animation.css');
+
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__title/header__title.css');
-@import url('./blocks/header/__logo/header__logo.css');
 @import url('./blocks/header/__profile-info/header__profile-info.css');
 @import url('./blocks/header/__profile-email/header__profile-email.css');
 @import url('./blocks/header/__logout-button/header__logout-button.css');

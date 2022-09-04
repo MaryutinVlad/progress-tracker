@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import arrow from '../images/arrow-button.png';
 
-function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, rank, gatherValue }) {
+function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, rank, gatherValue, completed, isDataSent }) {
 
-  const [progress, setProgress] = useState(0);
   const [inputValue, setInputValue] = useState(0);
 
   function handleMouseOver() {
@@ -14,21 +13,21 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
     mouseOut();
   }
 
-  function handleProgressClick() {
-    setProgress((progress + 1) % 100);
-  }
-
   function increaseValue() {
     setInputValue(inputValue + 1);
-    gatherValue({ [name]: inputValue });
+    gatherValue({ [name]: inputValue + 1 + completed });
   }
 
-  function decreseValue() {
+  function decreaseValue() {
     if (inputValue) {
       setInputValue(inputValue - 1);
+      gatherValue({ [name]: inputValue - 1 + completed });
     }
-    gatherValue({ [name]: inputValue });
   }
+
+  useEffect(() => {
+    setInputValue(0);
+  }, [isDataSent])
 
   return (
     <div className="activities__current-item">
@@ -44,15 +43,14 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
           <span className="activities__progress-value">
             {inputValue}
           </span>
-          <img className="buttons__arrow buttons__arrow_down" src={arrow} alt="down" onClick={decreseValue} />
+          <img className="buttons__arrow buttons__arrow_down" src={arrow} alt="down" onClick={decreaseValue} />
         </div>
 
         <div className="activities__progress-bar"
-          onClick={handleProgressClick}
-          style={{ "background": `linear-gradient(to right, rgb(200, 38, 38) ${progress}%, #2c3441 ${progress}%)`}}
+          style={{ "background": `linear-gradient(to right, rgb(200, 38, 38) ${completed}%, #2c3441 ${completed}%)`}}
         >
           <div className="activities__progress-bar_completed">
-            {progress}%
+            {completed}%
           </div>
         </div>
 

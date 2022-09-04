@@ -1,0 +1,8 @@
+.logo__first-line {
+    box-sizing: border-box;
+    padding: 10px 0 0 15px;
+    margin: 0;
+    font-size: 48px;
+    letter-spacing: 2px;
+    height: 50%;
+}

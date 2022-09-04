@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AvailableActivityItem from './AvailableActivityItem';
 import CurrentActivityItem from "./CurrentActivityItem";
 
-function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots, onEndDay }) {
+function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots, onEndDay, isDataSent }) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -49,6 +49,8 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
               source={item.src}
               rank={item.rank}
               gatherValue={gatherValue}
+              completed={item.completed}
+              isDataSent={isDataSent}
             />
           )
         })}
