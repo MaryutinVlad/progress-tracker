@@ -6,7 +6,7 @@ function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, c
 
   const wpCount = useContext(ResourceContext);
 
-  const classList = "activities__available-item" + (wpCount.wp < cost ? " activities__available-item_paled" : "");
+  const classList = "activities__available-item" + ((wpCount.wp < cost || wpCount.slots < 1) ? " activities__available-item_paled" : "");
 
   function handleMouseOver() {
     mouseOver({ name, description, cost });
@@ -17,7 +17,11 @@ function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, c
   }
 
   function handleActivityClick() {
-    click(id);
+    if (wpCount.wp >= cost && wpCount.slots > 0) {
+      return click(id);
+    }
+
+    console.log(wpCount.wp < cost ? 'Not enough WP' : 'No slots available');
   }
 
   return (

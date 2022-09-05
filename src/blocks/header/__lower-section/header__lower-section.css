@@ -1,0 +1,7 @@
+.header__lower-section {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

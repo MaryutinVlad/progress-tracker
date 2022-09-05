@@ -7,6 +7,7 @@ import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
+import levelTab from '../utils/userLevelTab';
 
 function App() {
 
@@ -15,9 +16,13 @@ function App() {
   const [isDataSent, setIsDataSent] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
+  const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [wp, setWp] = useState(0);
   const [slots, setSlots] = useState(0);
+  const [userLevel, setUserLevel] = useState(1);
+  const [levelProgress, setLevelProgress] = useState('0/20');
+  const [day, setDay] = useState(0);
 
   const navigate = useNavigate();
 
@@ -51,10 +56,13 @@ function App() {
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
       .then((user) => {
+        setUserName(user.name);
         setUserEmail(user.email);
         setLoggedIn(true);
         setWp(user.wp);
         setSlots(user.slots);
+        setUserLevel(user.level);
+        setDay(user.daysPassed);
         navigate('/');
         })
       .then(() => {
@@ -62,6 +70,13 @@ function App() {
           .then((activities) => {
             setCurrentActivities(activities.currentActivities);
             setAvailableActivities(activities.availableActivities);
+
+            if (activities.currentActivities.length > 1) {
+              const totalProgress = activities.currentActivities.reduce((prev, cur) => prev + cur);
+              return setLevelProgress(`${totalProgress}/${levelTab[userLevel]}`);
+            }
+
+            setLevelProgress(`${activities.currentActivities[0].completed}/${levelTab[userLevel]}`);
           })
       })  
       .catch(err => console.log(err));
@@ -75,10 +90,10 @@ function App() {
   }
 
   function handleClickEvent(id) {
-    console.log(wp, slots);
     api.purchaseActivity(id, wp, slots)
       .then((data) => {
-        setCurrentActivities(data.activities);
+        setCurrentActivities(data.currentActivities);
+        setAvailableActivities(data.availableActivities);
         setWp(data.user.wp);
         setSlots(data.user.slots);
       })
@@ -88,11 +103,9 @@ function App() {
   }
 
   function handleEndDay(values) {
-    console.log(values);
     setIsDataSent(true);
     api.endDay(values)
       .then((updatedActivities) => {
-        console.log(updatedActivities);
         setIsDataSent(false);
         setCurrentActivities(updatedActivities);
       })
@@ -108,7 +121,11 @@ function App() {
         <Header
           logout={logout}
           loggedIn={loggedIn}
+          name={userName}
           email={userEmail}
+          level={userLevel}
+          levelProgress={levelProgress}
+          days={day}
         />
             
         <Routes>

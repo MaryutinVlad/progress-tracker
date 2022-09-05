@@ -1,0 +1,10 @@
+.header__profile-level {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px 0 0;
+    margin: 0;
+}

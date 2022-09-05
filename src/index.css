@@ -11,7 +11,13 @@
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__title/header__title.css');
 @import url('./blocks/header/__profile-info/header__profile-info.css');
+@import url('./blocks/header/__profile-name/header__profile-name.css');
 @import url('./blocks/header/__profile-email/header__profile-email.css');
+@import url('./blocks/header/__profile-level/header__profile-level.css');
+@import url('./blocks/header/__level-current/header__level-current.css');
+@import url('./blocks/header/__level-progress/header__level-progress.css');
+@import url('./blocks/header/__lower-section/header__lower-section.css');
+@import url('./blocks/header/__day-counter/header__day-counter.css');
 @import url('./blocks/header/__logout-button/header__logout-button.css');
 
 @import url('./blocks/form/form.css');

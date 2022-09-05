@@ -1,0 +1,9 @@
+.header__profile-name {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 15px 0 0;
+    margin: 0;
+    font-size: 16px;
+}
