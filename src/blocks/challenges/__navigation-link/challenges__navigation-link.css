@@ -1,0 +1,29 @@
+.challenges__navigation-link {
+    width: 100%;
+    background-color: transparent;
+    color: aliceblue;
+    box-sizing: border-box;
+    padding: 10px 0;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+    letter-spacing: 1.5px;
+}
+
+.challenges__navigation-link:last-child {
+    border-radius: 0 20px 0 0;
+    border-left: 1px solid black;
+}
+
+.challenges__navigation-link:last-child {
+    border-right: 1px solid black;
+}
+
+.challenges__navigation-link:hover {
+    transition-property: background-color;
+    transition-duration: .7s;
+    color: lightblue;
+    text-shadow: 0 0 10px antiquewhite;
+    background-color: rgba(108, 103, 196, 0.1);
+}

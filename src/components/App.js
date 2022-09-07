@@ -75,8 +75,10 @@ function App() {
               const totalProgress = activities.currentActivities.reduce((prev, cur) => prev + cur);
               return setLevelProgress(`${totalProgress}/${levelTab[userLevel]}`);
             }
-
-            setLevelProgress(`${activities.currentActivities[0].completed}/${levelTab[userLevel]}`);
+            
+            if (activities.currentActivities[0]) {
+              setLevelProgress(`${activities.currentActivities[0].completed}/${levelTab[userLevel]}`);
+            }
           })
       })  
       .catch(err => console.log(err));
@@ -131,7 +133,7 @@ function App() {
         <Routes>
 
           <Route
-            exact path='*' 
+            exact path='*'
             element={ loggedIn ?
               <Main
                 currentActivities={currentActivities}

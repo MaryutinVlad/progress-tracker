@@ -15,20 +15,7 @@ function Main({ currentActivities, availableActivities, onClickEvent, wp, slots,
 
       <Routes>
 
-        <Route 
-          path="/activities"
-          element={
-            <Activities
-              currentActivities={currentActivities}
-              availableActivities={availableActivities}
-              handleActivityClick={ onClickEvent }
-              wp={wp}
-              slots={slots}
-              onEndDay={onEndDay}
-              isDataSent={isDataSent}
-            />
-          }
-        />
+        
 
         <Route 
           path="/trials"
@@ -48,6 +35,21 @@ function Main({ currentActivities, availableActivities, onClickEvent, wp, slots,
           path="/statistics"
           element={
             <Statistics />
+          }      
+        />
+
+        <Route 
+          path='/activities'
+          element={
+            <Activities
+              currentActivities={currentActivities}
+              availableActivities={availableActivities}
+              handleActivityClick={ onClickEvent }
+              wp={wp}
+              slots={slots}
+              onEndDay={onEndDay}
+              isDataSent={isDataSent}
+            />
           }
         />
 
