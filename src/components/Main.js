@@ -7,7 +7,18 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ currentActivities, availableActivities, onClickEvent, wp, slots, onEndDay, isDataSent }) {
+function Main({ 
+  currentActivities, 
+  availableActivities, 
+  onClickEvent, 
+  wp, 
+  slots, 
+  onEndDay, 
+  isDataSent, 
+  availableTrials,
+  availableChallenges, 
+  availableActions 
+}) {
 
   return (
     <div className="main">
@@ -20,7 +31,11 @@ function Main({ currentActivities, availableActivities, onClickEvent, wp, slots,
         <Route 
           path="/trials"
           element={
-            <Trials />
+            <Trials
+              availableTrials={availableTrials}
+              availableChallenges={availableChallenges}
+              availableActions={availableActions}
+            />
           }
         />
 

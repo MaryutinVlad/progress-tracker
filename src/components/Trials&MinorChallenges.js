@@ -1,6 +1,6 @@
 import React from "react";
 
-function TrialsAndMinorChallenges() {
+function TrialsAndMinorChallenges({ availableTrials }) {
   return (
 		<div className="trials-tab">
 			<h3 className="trials-tab__title">
@@ -8,7 +8,11 @@ function TrialsAndMinorChallenges() {
 			</h3>
 
 			<div className="trials-tab__sets">
-
+				{availableTrials.map((trial) => {
+					return (
+						<div key={trial._id} className="trialItem"></div>
+					)
+				})}
 			</div>
 		</div>
 	)

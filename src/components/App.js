@@ -16,6 +16,9 @@ function App() {
   const [isDataSent, setIsDataSent] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
+  const [availableTrials, setAvailableTrials] = useState([]);
+  const [availableChallenges, setAvailableChallenges] = useState([]);
+  const [availableActions, setAvailableActions] = useState([]);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [wp, setWp] = useState(0);
@@ -66,6 +69,15 @@ function App() {
         navigate('/');
         })
       .then(() => {
+        api.getTrials()
+          .then((data) => {
+            setAvailableChallenges(data.challenges);
+            setAvailableActions(data.actions);
+            setAvailableTrials(data.trials);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
         api.getActivities()
           .then((activities) => {
             setCurrentActivities(activities.currentActivities);
@@ -138,6 +150,9 @@ function App() {
               <Main
                 currentActivities={currentActivities}
                 availableActivities={availableActivities}
+                availableTrials={availableTrials}
+                availableChallenges={availableChallenges}
+                availableActions={availableActions}
                 onClickEvent={handleClickEvent}
                 wp={wp}
                 slots={slots}

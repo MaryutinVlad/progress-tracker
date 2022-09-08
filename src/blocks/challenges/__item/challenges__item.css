@@ -1,0 +1,7 @@
+.challenges__item {
+    width: 100%;
+    height: 218px;
+    background-color: aliceblue;
+    box-sizing: border-box;
+    border: 1px solid rosybrown;
+}

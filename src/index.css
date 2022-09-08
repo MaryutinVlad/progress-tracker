@@ -52,10 +52,12 @@
 @import url('./blocks/trials-tab/trials-tab.css');
 @import url('./blocks/trials-tab/__title/trials-tab__title.css');
 @import url('./blocks/trials-tab/__sets/trials-tab__sets.css');
+@import url('./blocks/trialItem/trialItem.css');
 @import url('./blocks/challenges/challenges.css');
 @import url('./blocks/challenges/__navigation/challenges__navigation.css');
 @import url('./blocks/challenges/__navigation-link/challenges__navigation-link.css');
 @import url('./blocks/challenges/__container/challenges__container.css');
+@import url('./blocks/challenges/__item/challenges__item.css');
 
 @import url('./blocks/auth/auth.css');
 @import url('./blocks/auth/__header/auth__header.css');

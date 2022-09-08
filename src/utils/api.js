@@ -33,6 +33,11 @@ class Api {
 
     return this._request('/activities', 'POST');
   }
+
+  getTrials() {
+    delete this.options.body;
+    return this._request('/trials', 'GET');
+  }
 }
 
 const api = new Api({
