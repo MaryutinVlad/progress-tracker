@@ -55,11 +55,31 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
           )
         })}
         <div className="activities__current-slots">
-          <span className="activities__slots-number">
+          <span
+            className="activities__slots-number"
+            onMouseOver={() => {
+              setTitle('Willpower');
+              setDescription('Main resource for purchasing activities, upgrades and many other things');
+            }} 
+            onMouseOut={() => {
+              setTitle('');
+              setDescription('');
+            }}
+          >
             WP: {wp}
           </span>
-          <span className="activities__slots-number">
-          Slots: {slots}
+          <span
+            className="activities__slots-number"
+            onMouseOver={() => {
+              setTitle('Slots');
+              setDescription('Amount of activities you can add');
+            }} 
+            onMouseOut={() => {
+              setTitle('');
+              setDescription('');
+            }}
+          >
+            Slots: {slots}
           </span>
         </div>
       </div>
@@ -81,15 +101,38 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
           )
         })}
         <div className="activities__global-buttons">
-          <button className="buttons__end-day" onClick={endDay} >End day</button>
-          <button className="buttons__restart">Erase map</button>
+          <button
+            className="buttons__end-day"
+            onClick={endDay}
+            onMouseOver={() => {
+              setDescription('Submit completed activities to get WP');
+            }} 
+            onMouseOut={() => {
+              setDescription('');
+            }}
+          >
+            End day
+          </button>
+          <button
+            className="buttons__restart"
+            onMouseOver={() => {
+              setTitle('Restart map');
+              setDescription('You will lose all your current progress and start with 1 slot and 10 WP');
+            }} 
+            onMouseOut={() => {
+              setTitle('');
+              setDescription('');
+            }}
+          >
+            Erase map
+          </button>
         </div>
       </div>
 
       <div className="activities__description">
-        {title ? `Title: ${title}` : ''}<br/>
-        {description ? `Description: ${description}` : ''}<br/>
-        {cost ? `Cost: ${cost}` : ''}
+        <span>{title ? `${title}` : ''}</span>
+        <span>{description ? `${description}` : ''}</span>
+        <span>{cost ? `${cost} WP` : ''}</span>
       </div>
 
     </div>

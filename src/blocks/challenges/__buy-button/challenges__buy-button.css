@@ -1,0 +1,19 @@
+.challenges__buy-button {
+    background: none;
+    border: none;
+    color: aliceblue;
+    margin-left: 40px;
+    transition-property: text-shadow;
+    transition-duration: .5s;
+    width: fit-content;
+    height: fit-content;
+    letter-spacing: 1.5px;
+    font-size: 18px;
+}
+
+.challenges__buy-button:hover {
+    transition-property: text-shadow, color;
+    transition-duration: .5s;
+    text-shadow: 0 0 30px aliceblue;
+    color: rgb(185, 100, 100);
+}

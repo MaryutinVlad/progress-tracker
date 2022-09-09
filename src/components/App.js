@@ -9,6 +9,11 @@ import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
 import levelTab from '../utils/userLevelTab';
 
+//info for drawing
+//challenge's image size 380x158 px
+//trial's image size 250x128 px
+//activity's image size 128x128 px
+
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -74,6 +79,7 @@ function App() {
             setAvailableChallenges(data.challenges);
             setAvailableActions(data.actions);
             setAvailableTrials(data.trials);
+            console.log(data);
           })
           .catch((err) => {
             console.log(err);

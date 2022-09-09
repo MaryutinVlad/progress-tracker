@@ -6,13 +6,14 @@
 }
 
 .challenges__container::-webkit-scrollbar {
-    width: 30px;
+    width: 20px;
+    background-image: url('../../../images/scroll-bar.png');
 }
 
 .challenges__container::-webkit-scrollbar-thumb {
-    background: rgba(103, 53, 53, .6);
+    background: radial-gradient(circle at center, rgba(63, 63, 127, 0.5), transparent 100%) ;
+    border-radius: 30px;
 }
 
 .challenges__container::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
 }

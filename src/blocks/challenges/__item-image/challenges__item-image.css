@@ -1,0 +1,7 @@
+.challenges__item-image {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    color: rosybrown;
+    font-family: 'Press-Start';
+    font-style: italic;
+}

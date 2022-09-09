@@ -1,0 +1,9 @@
+.challenges__popup_opened {
+    transition-property: opacity;
+    transition-duration: 1.5s;
+    opacity: 1;
+    visibility: visible;
+    width: 100px;
+    height: 50px;
+    position: absolute;
+}
