@@ -1,0 +1,8 @@
+.trialItem__image {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    width: 100%;
+    height: 100%;
+    color: rosybrown;
+    font-style: italic;
+}

@@ -1,6 +1,6 @@
 .activities__info-rank {
     margin-top: 10px;
-    text-align: right;
-    box-sizing: border-box;
-    padding-right: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

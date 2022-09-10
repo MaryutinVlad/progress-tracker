@@ -30,6 +30,7 @@
 @import url('./blocks/navigation/__link/_active/navigation__link_active.css');
 
 @import url('./blocks/activities/activities.css');
+
 @import url('./blocks/activities/__available/activities__available.css');
 @import url('./blocks/activities/__available-item/activities__available-item.css');
 @import url('./blocks/activities/__available-item/_paled/activities__available-item_paled.css');
@@ -43,16 +44,22 @@
 @import url('./blocks/activities/__progress-bar/_completed/activities__progress-bar_completed.css');
 @import url('./blocks/activities/__progress-input/activities__progress-input.css');
 @import url('./blocks/activities/__progress-value/activities__progress-value.css');
+@import url('./blocks/activities/__upgrade-button/activities__upgrade-button.css');
 @import url('./blocks/activities/__global-buttons/activities__global-buttons.css');
 @import url('./blocks/activities/__current-slots/activities__current-slots.css');
 @import url('./blocks/activities/__slots-number/activities__slots-number.css');
 @import url('./blocks/activities/__description/activities__description.css');
 
 @import url('./blocks/trials/trials.css');
+
 @import url('./blocks/trials-tab/trials-tab.css');
 @import url('./blocks/trials-tab/__title/trials-tab__title.css');
 @import url('./blocks/trials-tab/__sets/trials-tab__sets.css');
 @import url('./blocks/trialItem/trialItem.css');
+@import url('./blocks/trialItem/__image/trialItem__image.css');
+@import url('./blocks/trialItem/__unlock-button/trialItem__unlock-button.css');
+@import url('./blocks/trialItem/__complete-button/trialItem__complete-button.css');
+
 @import url('./blocks/challenges/challenges.css');
 @import url('./blocks/challenges/__navigation/challenges__navigation.css');
 @import url('./blocks/challenges/__navigation-link/challenges__navigation-link.css');

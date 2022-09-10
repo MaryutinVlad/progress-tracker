@@ -54,9 +54,14 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
           </div>
         </div>
 
-        <p className="activities__info-rank">
-          {rank}
-        </p>
+        <div className="activities__info-rank">
+          <button className="activities__upgrade-button">
+            upgrade
+          </button>
+          <span>
+            {rank}
+          </span>
+        </div>
         
       </div>
     </div>

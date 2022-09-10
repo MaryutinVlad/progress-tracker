@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function TrialsAndMinorChallenges({ availableTrials }) {
+import TrialItem from './TrialItem';
+
+function TrialsAndMinorChallenges({ availableTrials, mouseOver, mouseMove, mouseOut }) {
+
+	useEffect(() => {
+		console.log(availableTrials);
+	}, []);
+
   return (
 		<div className="trials-tab">
 			<h3 className="trials-tab__title">
@@ -8,9 +15,17 @@ function TrialsAndMinorChallenges({ availableTrials }) {
 			</h3>
 
 			<div className="trials-tab__sets">
-				{availableTrials.map((trial) => {
+				{availableTrials.map((item) => {
 					return (
-						<div key={trial._id} className="trialItem"></div>
+						<TrialItem
+						  key={item._id}
+							name={item.name}
+							description={item.description}
+							baseReward={item.baseReward}
+							mouseOver={mouseOver}
+							mouseMove={mouseMove}
+							mouseOut={mouseOut}
+						/>
 					)
 				})}
 			</div>

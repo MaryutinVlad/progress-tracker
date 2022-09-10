@@ -1,0 +1,16 @@
+.trialItem__unlock-button {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border: none;
+    transition-property: color, text-shadow;
+    transition-duration: 1s;
+    background-color: transparent;
+    color: rgb(167, 149, 149, .5);
+}
+
+.trialItem__unlock-button:hover {
+    transition-property: color, text-shadow;
+    transition-duration: 1s;
+    color: rosybrown;
+    text-shadow: 0 0 20px rgba(250, 235, 215, .3);
+}

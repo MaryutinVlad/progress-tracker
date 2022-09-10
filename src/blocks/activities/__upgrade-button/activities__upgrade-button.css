@@ -1,0 +1,16 @@
+.activities__upgrade-button {
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding-bottom: 12px;
+    transition-property: color, text-shadow;
+    transition-duration: .4s;
+    color: rgb(205, 156, 203);
+}
+
+.activities__upgrade-button:hover {
+    transition-property: color, text-shadow;
+    transition-duration: .4s;
+    color: rgb(207, 177, 206);
+    text-shadow: 0 0 35px rosybrown;
+}

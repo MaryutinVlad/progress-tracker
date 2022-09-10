@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-function ActionsAndMajorChallenges({ availableChallenges, availableActions }) {
+import ChallengeActionItem from './ChallengeActionItem';
+
+function ActionsAndMajorChallenges({ availableChallenges, availableActions, mouseOver, mouseMove, mouseOut }) {
 
   const [switchInfo, setSwitchInfo] = useState([]);
-  const [popupClassList, setPopupClassList] = useState('challenges__popup');
-  const [coordinates, setCoordinates] = useState([]);
 
   function switchToChallenges() {
     setSwitchInfo(availableChallenges);
   }
 
-  function switchToActions(e) {
+  function switchToActions() {
     setSwitchInfo(availableActions);
-  }
-
-  function openPopup(e) {
-    setPopupClassList(popupClassList + ' challenges__popup_opened');
-  }
-
-  function getCoordinates(e) {
-    const newCoordinates = [e.pageX + 10, e.pageY - 50];
-    setCoordinates(newCoordinates);
-  }
-
-  function closePopup() {
-    setPopupClassList('challenges__popup');
   }
 
   useEffect(() => {
@@ -40,16 +27,18 @@ function ActionsAndMajorChallenges({ availableChallenges, availableActions }) {
 			<div className="challenges__container">
         {switchInfo.map((item) => {
           return (
-            <div key={item._id} className="challenges__item">
-              <img className="challenges__item-image" alt={item.name}  onMouseOver={openPopup} onMouseMove={getCoordinates} onMouseOut={closePopup} />
-              <button className="challenges__buy-button">Complete</button>
-            </div>
+            <ChallengeActionItem 
+              key={item._id}
+              name={item.name}
+              description={item.description}
+              reward={item.reward}
+              mouseOver={mouseOver}
+              mouseMove={mouseMove}
+              mouseOut={mouseOut}
+            />
           )
         })}
 			</div>
-      <div className={popupClassList} style={{top: coordinates[1], left: coordinates[0]}}>
-        ok
-      </div>
     </div>
 	)
 }

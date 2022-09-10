@@ -1,7 +1,7 @@
 .challenges__buy-button {
     background: none;
     border: none;
-    color: aliceblue;
+    color: rgb(83, 109, 94);
     margin-left: 40px;
     transition-property: text-shadow;
     transition-duration: .5s;
@@ -14,6 +14,6 @@
 .challenges__buy-button:hover {
     transition-property: text-shadow, color;
     transition-duration: .5s;
-    text-shadow: 0 0 30px aliceblue;
-    color: rgb(185, 100, 100);
+    text-shadow: 0 0 30px rgba(240, 248, 255, .5);
+    color: rgb(92, 136, 110);
 }

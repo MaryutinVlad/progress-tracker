@@ -1,8 +1,14 @@
 .challenges__popup {
+    position: absolute;
     visibility: hidden;
+    overflow: hidden;
     width: 0;
     height: 0;
     opacity: 0;
-    background-color: aqua;
+    padding: 0;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: rgb(0, 255, 255);
     user-select: none;
 }
