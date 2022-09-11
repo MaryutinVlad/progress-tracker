@@ -122,13 +122,21 @@ function App() {
       });
   }
 
+  function handleUpgradeClick(data) {
+    api.upgradeActivity(data)
+      .then((updatedActivities) => {
+        setCurrentActivities(updatedActivities);
+      })
+  }
+
   function handleEndDay(values) {
-    setIsDataSent(true);
+    console.log(values);
+    /*setIsDataSent(true);
     api.endDay(values)
       .then((updatedActivities) => {
         setIsDataSent(false);
         setCurrentActivities(updatedActivities);
-      })
+      })*/
   }
 
   useEffect(() => {
@@ -164,6 +172,7 @@ function App() {
                 slots={slots}
                 onEndDay={handleEndDay}
                 isDataSent={isDataSent}
+                onClick={handleUpgradeClick}
               /> :
               <Navigate to='/signin' />}
           />

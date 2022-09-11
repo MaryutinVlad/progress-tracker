@@ -17,7 +17,8 @@ function Main({
   isDataSent, 
   availableTrials,
   availableChallenges, 
-  availableActions 
+  availableActions,
+  onClick
 }) {
 
   return (
@@ -25,8 +26,6 @@ function Main({
       <Navigation />
 
       <Routes>
-
-        
 
         <Route 
           path="/trials"
@@ -64,6 +63,7 @@ function Main({
               slots={slots}
               onEndDay={onEndDay}
               isDataSent={isDataSent}
+              onClick={onClick}
             />
           }
         />

@@ -28,6 +28,14 @@ class Api {
     return this._request(`/activities/${activityId}`, 'POST');
   }
 
+  upgradeActivity(data) {
+    this.options.body = JSON.stringify({
+      rank: data.rank
+    })
+
+    return this._request(`/activities/${data.id}`, 'PUT');
+  }
+
   endDay(values) {
     this.options.body = JSON.stringify(values);
 

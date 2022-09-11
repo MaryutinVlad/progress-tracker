@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from "react";
 import arrow from '../images/arrow-button.png';
 
-function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, rank, gatherValue, completed, isDataSent }) {
+function CurrentActivityItem({
+  id,
+  name,
+  description,
+  mouseOver,
+  mouseOut,
+  source,
+  rank,
+  gatherValue,
+  completed,
+  isDataSent,
+  onClick
+}) {
 
   const [inputValue, setInputValue] = useState(0);
 
@@ -15,7 +27,11 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
 
   function increaseValue() {
     setInputValue(inputValue + 1);
-    gatherValue({ [name]: inputValue + 1 + completed });
+    gatherValue({ [name]: inputValue + 1 + completed, rank });
+  }
+
+  function onUpgradeClick() {
+    onClick({ id, rank: rank + 1 });
   }
 
   function decreaseValue() {
@@ -55,7 +71,7 @@ function CurrentActivityItem({ name, description, mouseOver, mouseOut, source, r
         </div>
 
         <div className="activities__info-rank">
-          <button className="activities__upgrade-button">
+          <button className="activities__upgrade-button" onClick={onUpgradeClick} disabled={rank >= 3 ? true : false}>
             upgrade
           </button>
           <span>
