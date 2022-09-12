@@ -24,13 +24,12 @@ function App() {
   const [availableTrials, setAvailableTrials] = useState([]);
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [availableActions, setAvailableActions] = useState([]);
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
   const [wp, setWp] = useState(0);
   const [slots, setSlots] = useState(0);
   const [userLevel, setUserLevel] = useState(1);
   const [levelProgress, setLevelProgress] = useState('0/20');
   const [day, setDay] = useState(0);
+  const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
 
@@ -41,7 +40,6 @@ function App() {
         const { token } = response;
         if (token) {
           localStorage.setItem('jwt', token);
-          setUserEmail(data.email);
           setLoggedIn(true);
           navigate('/');
         }
@@ -64,13 +62,12 @@ function App() {
     const token = localStorage.getItem('jwt');
     apiAuth.validate(token)
       .then((user) => {
-        setUserName(user.name);
-        setUserEmail(user.email);
         setLoggedIn(true);
         setWp(user.wp);
         setSlots(user.slots);
         setUserLevel(user.level);
         setDay(user.daysPassed);
+        setUserData(user);
         navigate('/');
         })
       .then(() => {
@@ -79,7 +76,6 @@ function App() {
             setAvailableChallenges(data.challenges);
             setAvailableActions(data.actions);
             setAvailableTrials(data.trials);
-            console.log(data);
           })
           .catch((err) => {
             console.log(err);
@@ -90,7 +86,7 @@ function App() {
             setAvailableActivities(activities.availableActivities);
 
             if (activities.currentActivities.length > 1) {
-              const totalProgress = activities.currentActivities.reduce((prev, cur) => prev + cur);
+              const totalProgress = activities.currentActivities.reduce((prev, cur) => prev.completed + cur.completed);
               return setLevelProgress(`${totalProgress}/${levelTab[userLevel]}`);
             }
             
@@ -104,13 +100,13 @@ function App() {
 
   function logout() {
     localStorage.removeItem('jwt');
-    setUserEmail('');
+    setUserData({});
     setLoggedIn(false);
     navigate('/signin');
   }
 
   function handleClickEvent(id) {
-    api.purchaseActivity(id, wp, slots)
+    api.purchaseActivity(id, userData.wp, userData.slots)
       .then((data) => {
         setCurrentActivities(data.currentActivities);
         setAvailableActivities(data.availableActivities);
@@ -123,20 +119,21 @@ function App() {
   }
 
   function handleUpgradeClick(data) {
-    api.upgradeActivity(data)
+    console.log(data);
+    /*api.upgradeActivity(data)
       .then((updatedActivities) => {
         setCurrentActivities(updatedActivities);
-      })
+      })*/
   }
 
   function handleEndDay(values) {
-    console.log(values);
-    /*setIsDataSent(true);
+    
+    setIsDataSent(true);
     api.endDay(values)
       .then((updatedActivities) => {
         setIsDataSent(false);
         setCurrentActivities(updatedActivities);
-      })*/
+      })
   }
 
   useEffect(() => {
@@ -147,11 +144,9 @@ function App() {
     <ResourceContext.Provider value={{wp, slots}}>
       <div className='page'>
         <Header
+          userData={userData}
           logout={logout}
           loggedIn={loggedIn}
-          name={userName}
-          email={userEmail}
-          level={userLevel}
           levelProgress={levelProgress}
           days={day}
         />
@@ -168,8 +163,8 @@ function App() {
                 availableChallenges={availableChallenges}
                 availableActions={availableActions}
                 onClickEvent={handleClickEvent}
-                wp={wp}
-                slots={slots}
+                wp={userData.wp}
+                slots={userData.slots}
                 onEndDay={handleEndDay}
                 isDataSent={isDataSent}
                 onClick={handleUpgradeClick}

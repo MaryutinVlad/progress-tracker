@@ -58,7 +58,7 @@ function Main({
             <Activities
               currentActivities={currentActivities}
               availableActivities={availableActivities}
-              handleActivityClick={ onClickEvent }
+              handleActivityClick={onClickEvent}
               wp={wp}
               slots={slots}
               onEndDay={onEndDay}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import arrow from '../images/arrow-button.png';
+import max from '../images/max-button.png';
 
 function CurrentActivityItem({
   id,
@@ -71,9 +72,12 @@ function CurrentActivityItem({
         </div>
 
         <div className="activities__info-rank">
-          <button className="activities__upgrade-button" onClick={onUpgradeClick} disabled={rank >= 3 ? true : false}>
-            upgrade
-          </button>
+          <button
+           className="activities__upgrade-button"
+           onClick={onUpgradeClick}
+           disabled={rank >= 3 ? true : false}
+           style={ rank >= 3 ? {"background": `url(${max})`} : {"cursor": "pointer"}}
+          />
           <span>
             {rank}
           </span>

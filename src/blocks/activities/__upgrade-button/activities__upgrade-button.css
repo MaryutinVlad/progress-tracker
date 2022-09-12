@@ -6,6 +6,9 @@
     transition-property: color, text-shadow;
     transition-duration: .4s;
     color: rgb(205, 156, 203);
+    height: 30px;
+    width: 85px;
+    background-image: url('../../../images/upgrade-button.png');
 }
 
 .activities__upgrade-button:hover {
