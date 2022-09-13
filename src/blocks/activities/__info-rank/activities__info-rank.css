@@ -1,6 +1,10 @@
 .activities__info-rank {
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.activities__info-rank:last-child {
+    box-sizing: border-box;
+    margin-right: 15px;
 }

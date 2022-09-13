@@ -2,7 +2,17 @@ import React, { useState } from "react";
 import AvailableActivityItem from './AvailableActivityItem';
 import CurrentActivityItem from "./CurrentActivityItem";
 
-function Activities({ availableActivities, currentActivities, handleActivityClick, wp, slots, onEndDay, isDataSent, onClick }) {
+function Activities({
+  availableActivities,
+  currentActivities,
+  handleActivityClick,
+  availableZones,
+  wp,
+  slots,
+  onEndDay,
+  isDataSent,
+  onClick
+}) {
 
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -86,7 +96,21 @@ function Activities({ availableActivities, currentActivities, handleActivityClic
       </div>
 
       <div className="activities__available">
-        {availableActivities.map(item => {
+        {!slots ? availableActivities.map(item => {
+          return (
+            <AvailableActivityItem
+              key={item._id}
+              name={item.name}
+              description={item.description}
+              cost={item.cost}
+              mouseOver={handleMousingOverItem}
+              mouseOut={handleMousingOut}
+              click={handleClick}
+              id={item._id}
+              source={item.src}
+            />
+          )
+        }) : availableZones.map(item => {
           return (
             <AvailableActivityItem
               key={item._id}

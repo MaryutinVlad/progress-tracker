@@ -8,15 +8,16 @@ import Trials from './Trials';
 import Statistics from './Statistics';
 
 function Main({ 
-  currentActivities, 
-  availableActivities, 
-  onClickEvent, 
-  wp, 
-  slots, 
-  onEndDay, 
-  isDataSent, 
+  currentActivities,
+  availableActivities,
+  availableZones,
+  onClickEvent,
+  wp,
+  slots,
+  onEndDay,
+  isDataSent,
   availableTrials,
-  availableChallenges, 
+  availableChallenges,
   availableActions,
   onClick
 }) {
@@ -58,6 +59,7 @@ function Main({
             <Activities
               currentActivities={currentActivities}
               availableActivities={availableActivities}
+              availableZones={availableZones}
               handleActivityClick={onClickEvent}
               wp={wp}
               slots={slots}

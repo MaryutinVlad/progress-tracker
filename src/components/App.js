@@ -24,6 +24,7 @@ function App() {
   const [availableTrials, setAvailableTrials] = useState([]);
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [availableActions, setAvailableActions] = useState([]);
+  const [availableZones, setAvailableZones] = useState([]);
   const [wp, setWp] = useState(0);
   const [slots, setSlots] = useState(0);
   const [userLevel, setUserLevel] = useState(1);
@@ -84,6 +85,7 @@ function App() {
           .then((activities) => {
             setCurrentActivities(activities.currentActivities);
             setAvailableActivities(activities.availableActivities);
+            setAvailableZones(activities.availableZones);
 
             if (activities.currentActivities.length > 1) {
               const totalProgress = activities.currentActivities.reduce((prev, cur) => prev.completed + cur.completed);
@@ -162,6 +164,7 @@ function App() {
                 availableTrials={availableTrials}
                 availableChallenges={availableChallenges}
                 availableActions={availableActions}
+                availableZones={availableZones}
                 onClickEvent={handleClickEvent}
                 wp={userData.wp}
                 slots={userData.slots}

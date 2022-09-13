@@ -45,6 +45,7 @@
 @import url('./blocks/activities/__progress-input/activities__progress-input.css');
 @import url('./blocks/activities/__progress-value/activities__progress-value.css');
 @import url('./blocks/activities/__upgrade-button/activities__upgrade-button.css');
+@import url('./blocks/activities/__upgrade-button/_disabled/activities__upgrade-button_disabled.css');
 @import url('./blocks/activities/__global-buttons/activities__global-buttons.css');
 @import url('./blocks/activities/__current-slots/activities__current-slots.css');
 @import url('./blocks/activities/__slots-number/activities__slots-number.css');

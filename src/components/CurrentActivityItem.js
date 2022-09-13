@@ -73,10 +73,9 @@ function CurrentActivityItem({
 
         <div className="activities__info-rank">
           <button
-           className="activities__upgrade-button"
+           className={`activities__upgrade-button ${rank >= 3 ? 'activities__upgrade-button_disabled' : ''}`}
            onClick={onUpgradeClick}
            disabled={rank >= 3 ? true : false}
-           style={ rank >= 3 ? {"background": `url(${max})`} : {"cursor": "pointer"}}
           />
           <span>
             {rank}

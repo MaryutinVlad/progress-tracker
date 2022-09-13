@@ -6,12 +6,16 @@
     transition-property: color, text-shadow;
     transition-duration: .4s;
     color: rgb(205, 156, 203);
-    height: 30px;
-    width: 85px;
+    height: 25px;
+    width: 80px;
     background-image: url('../../../images/upgrade-button.png');
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .activities__upgrade-button:hover {
+    transform: scale(1.1);
     transition-property: color, text-shadow;
     transition-duration: .4s;
     color: rgb(207, 177, 206);

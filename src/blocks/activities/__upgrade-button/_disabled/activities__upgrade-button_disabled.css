@@ -1,0 +1,8 @@
+.activities__upgrade-button_disabled {
+    background-image: url('../../../../images/max-button.png');
+    cursor: auto;
+}
+
+.activities__upgrade-button_disabled:hover {
+    transform: none;
+}
