@@ -11,7 +11,7 @@ function Main({
   currentActivities,
   availableActivities,
   availableZones,
-  onClickEvent,
+  onPurchaseActivity,
   wp,
   slots,
   onEndDay,
@@ -19,7 +19,8 @@ function Main({
   availableTrials,
   availableChallenges,
   availableActions,
-  onClick
+  onClick,
+  onPurchaseZone
 }) {
 
   return (
@@ -60,12 +61,13 @@ function Main({
               currentActivities={currentActivities}
               availableActivities={availableActivities}
               availableZones={availableZones}
-              handleActivityClick={onClickEvent}
+              onPurchaseActivity={onPurchaseActivity}
               wp={wp}
               slots={slots}
               onEndDay={onEndDay}
               isDataSent={isDataSent}
               onClick={onClick}
+              onPurchaseZone={onPurchaseZone}
             />
           }
         />

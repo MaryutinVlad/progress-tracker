@@ -5,13 +5,14 @@ import CurrentActivityItem from "./CurrentActivityItem";
 function Activities({
   availableActivities,
   currentActivities,
-  handleActivityClick,
+  onPurchaseActivity,
   availableZones,
   wp,
   slots,
   onEndDay,
   isDataSent,
-  onClick
+  onClick,
+  onPurchaseZone
 }) {
 
   const [description, setDescription] = useState('');
@@ -31,8 +32,8 @@ function Activities({
     setCost('');
   }
 
-  function handleClick(data) {
-    handleActivityClick(data);
+  function handlePurchaseActivity(data) {
+    onPurchaseActivity(data);
   }
 
   function gatherValue(data) {
@@ -61,7 +62,7 @@ function Activities({
               gatherValue={gatherValue}
               completed={item.completed}
               isDataSent={isDataSent}
-              onClick={onClick}
+              onClick={onPurchaseZone}
             />
           )
         })}
@@ -96,7 +97,7 @@ function Activities({
       </div>
 
       <div className="activities__available">
-        {!slots ? availableActivities.map(item => {
+        {slots ? availableActivities.map(item => {
           return (
             <AvailableActivityItem
               key={item._id}
@@ -105,9 +106,10 @@ function Activities({
               cost={item.cost}
               mouseOver={handleMousingOverItem}
               mouseOut={handleMousingOut}
-              click={handleClick}
+              click={handlePurchaseActivity}
               id={item._id}
               source={item.src}
+              zone={false}
             />
           )
         }) : availableZones.map(item => {
@@ -119,9 +121,10 @@ function Activities({
               cost={item.cost}
               mouseOver={handleMousingOverItem}
               mouseOut={handleMousingOut}
-              click={handleClick}
+              click={onPurchaseZone}
               id={item._id}
               source={item.src}
+              zone={true}
             />
           )
         })}

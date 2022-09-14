@@ -28,10 +28,18 @@ class Api {
     return this._request(`/activities/${activityId}`, 'POST');
   }
 
+  purchaseZone(zoneId, wp) {
+    this.options.body = JSON.stringify({
+      wp: wp
+    });
+
+    return this._request(`/activities/zones/${zoneId}`, 'PUT');
+  }
+
   upgradeActivity(data) {
     this.options.body = JSON.stringify({
       rank: data.rank
-    })
+    });
 
     return this._request(`/activities/${data.id}`, 'PUT');
   }

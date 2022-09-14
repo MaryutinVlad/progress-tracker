@@ -1,10 +1,8 @@
 .activities__progress-bar {
-    width: 85%;
+    width: 83%;
     height: 15px;
     box-sizing: border-box;
     border: 1px solid #1f252e;
-    margin-left: 10px;
-    margin-top: 8px;
-    border-radius: 90px;
+    margin-left: 15px;
     margin-top: 5px;
 }

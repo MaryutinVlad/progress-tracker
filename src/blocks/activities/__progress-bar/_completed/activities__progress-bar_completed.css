@@ -1,7 +1,8 @@
 .activities__progress-bar_completed {
     color: rgb(73, 103, 193);
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
     box-sizing: border-box;
+    letter-spacing: 2px;
 }

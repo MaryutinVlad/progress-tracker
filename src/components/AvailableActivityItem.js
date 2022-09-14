@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import { ResourceContext } from '../contexts/ResourceContext';
 
-function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, click, id, source }) {
+function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, click, id, source, zone }) {
 
   const wpCount = useContext(ResourceContext);
 
@@ -17,7 +17,11 @@ function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, c
   }
 
   function handleActivityClick() {
-    if (wpCount.wp >= cost && wpCount.slots > 0) {
+    if (zone && wpCount.wp >= cost) {
+      return click(id);
+    }
+
+    if (wpCount.slots) {
       return click(id);
     }
 

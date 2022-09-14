@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import arrow from '../images/arrow-button.png';
-import max from '../images/max-button.png';
 
 function CurrentActivityItem({
   id,
@@ -17,6 +16,7 @@ function CurrentActivityItem({
 }) {
 
   const [inputValue, setInputValue] = useState(0);
+  const rankList = ['', 'novice', 'advanced', 'pro'];
 
   function handleMouseOver() {
     mouseOver({ name, description});
@@ -28,7 +28,7 @@ function CurrentActivityItem({
 
   function increaseValue() {
     setInputValue(inputValue + 1);
-    gatherValue({ [name]: inputValue + 1 + completed, rank });
+    gatherValue({ [name]: { value: inputValue + 1 + completed, rank, input: inputValue + 1 } });
   }
 
   function onUpgradeClick() {
@@ -38,7 +38,7 @@ function CurrentActivityItem({
   function decreaseValue() {
     if (inputValue) {
       setInputValue(inputValue - 1);
-      gatherValue({ [name]: inputValue - 1 + completed });
+      gatherValue({ [name]: { value: inputValue - 1 + completed, rank, input: inputValue + 1 } });
     }
   }
 
@@ -64,7 +64,7 @@ function CurrentActivityItem({
         </div>
 
         <div className="activities__progress-bar"
-          style={{ "background": `linear-gradient(to right, rgb(200, 38, 38) ${completed}%, #2c3441 ${completed}%)`}}
+          style={{ "background": `linear-gradient(to right, rgb(176, 66, 32) ${completed}%, transparent ${completed}%)`}}
         >
           <div className="activities__progress-bar_completed">
             {completed}%
@@ -78,7 +78,7 @@ function CurrentActivityItem({
            disabled={rank >= 3 ? true : false}
           />
           <span>
-            {rank}
+            {rankList[rank]}
           </span>
         </div>
         

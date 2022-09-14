@@ -107,8 +107,9 @@ function App() {
     navigate('/signin');
   }
 
-  function handleClickEvent(id) {
-    api.purchaseActivity(id, userData.wp, userData.slots)
+  function handlePurchaseActivity(activityId) {
+    console.log('purchasing activity...', activityId);
+    api.purchaseActivity(activityId, wp, slots)
       .then((data) => {
         setCurrentActivities(data.currentActivities);
         setAvailableActivities(data.availableActivities);
@@ -120,6 +121,18 @@ function App() {
       });
   }
 
+  function handlePurchaseZone(zoneId) {
+    console.log('purchasing zone...', zoneId);
+    api.purchaseZone(zoneId, wp)
+      .then((updatedUser) => {
+        setWp(wp);
+        setSlots(slots);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   function handleUpgradeClick(data) {
     console.log(data);
     /*api.upgradeActivity(data)
@@ -127,14 +140,14 @@ function App() {
         setCurrentActivities(updatedActivities);
       })*/
   }
-
+//finish reward calculation and updating rewarded wp 
   function handleEndDay(values) {
-    
     setIsDataSent(true);
     api.endDay(values)
       .then((updatedActivities) => {
         setIsDataSent(false);
-        setCurrentActivities(updatedActivities);
+        setCurrentActivities(updatedActivities.activities);
+        setWp(updatedActivities.reward);
       })
   }
 
@@ -165,9 +178,10 @@ function App() {
                 availableChallenges={availableChallenges}
                 availableActions={availableActions}
                 availableZones={availableZones}
-                onClickEvent={handleClickEvent}
-                wp={userData.wp}
-                slots={userData.slots}
+                onPurchaseActivity={handlePurchaseActivity}
+                onPurchaseZone={handlePurchaseZone}
+                wp={wp}
+                slots={slots}
                 onEndDay={handleEndDay}
                 isDataSent={isDataSent}
                 onClick={handleUpgradeClick}
