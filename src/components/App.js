@@ -25,42 +25,17 @@ function App() {
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [availableActions, setAvailableActions] = useState([]);
   const [availableZones, setAvailableZones] = useState([]);
+  const [nextLevelAt, setNextLevelAt] = useState(20);
   const [wp, setWp] = useState(0);
   const [slots, setSlots] = useState(0);
+  const [levelProgress, setLevelProgress] = useState(0);
   const [userLevel, setUserLevel] = useState(1);
-  const [levelProgress, setLevelProgress] = useState('0/20');
   const [day, setDay] = useState(0);
   const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
 
-
-  function handleSignIn(data) {
-    apiAuth.login(data)
-      .then((response) => {
-        const { token } = response;
-        if (token) {
-          localStorage.setItem('jwt', token);
-          setLoggedIn(true);
-          navigate('/');
-        }
-      })
-  }
-
-  function handleSignUp(data) {
-    apiAuth.register(data)
-      .then(() => {
-        setSignedUp(true);
-        navigate('/signin');
-      })
-      .catch(err => console.log(err));
-  }
-  
-  function handleAuthorize() {
-    if (!localStorage.getItem('jwt')) {
-      return;
-    }
-    const token = localStorage.getItem('jwt');
+  function retrieveProfileInfo(token) {
     apiAuth.validate(token)
       .then((user) => {
         setLoggedIn(true);
@@ -70,6 +45,7 @@ function App() {
         setDay(user.daysPassed);
         setUserData(user);
         navigate('/');
+        console.log(user);
         })
       .then(() => {
         api.getTrials()
@@ -87,17 +63,49 @@ function App() {
             setAvailableActivities(activities.availableActivities);
             setAvailableZones(activities.availableZones);
 
-            if (activities.currentActivities.length > 1) {
-              const totalProgress = activities.currentActivities.reduce((prev, cur) => prev.completed + cur.completed);
-              return setLevelProgress(`${totalProgress}/${levelTab[userLevel]}`);
+            let totalCompleted = 0;
+            for (let item of activities.currentActivities) {
+              totalCompleted += item.completed;
             }
-            
-            if (activities.currentActivities[0]) {
-              setLevelProgress(`${activities.currentActivities[0].completed}/${levelTab[userLevel]}`);
-            }
+
+            setLevelProgress(totalCompleted)
+            console.log(totalCompleted, userLevel);
+            console.log(levelTab);
           })
       })  
       .catch(err => console.log(err));
+  }
+
+  function handleSignIn(data) {
+    apiAuth.login(data)
+      .then((response) => {
+        const { token } = response;
+        if (token) {
+          localStorage.setItem('jwt', token);
+          setLoggedIn(true);
+          window.location.reload();
+          retrieveProfileInfo(token);
+        }
+      })
+  }
+
+  function handleSignUp(data) {
+    apiAuth.register(data)
+      .then(() => {
+        setSignedUp(true);
+        navigate('/signin');
+      })
+      .catch(err => console.log(err));
+  }
+  
+  function handleAuthorize() {
+    if (!localStorage.getItem('jwt')) {
+      return;
+    }
+
+    const token = localStorage.getItem('jwt');
+
+    retrieveProfileInfo(token);
   }
 
   function logout() {
@@ -124,7 +132,7 @@ function App() {
   function handlePurchaseZone(zoneId) {
     console.log('purchasing zone...', zoneId);
     api.purchaseZone(zoneId, wp)
-      .then((updatedUser) => {
+      .then(() => {
         setWp(wp);
         setSlots(slots);
       })
@@ -134,20 +142,20 @@ function App() {
   }
 
   function handleUpgradeClick(data) {
-    console.log(data);
-    /*api.upgradeActivity(data)
+    api.upgradeActivity(data)
       .then((updatedActivities) => {
         setCurrentActivities(updatedActivities);
-      })*/
+      })
   }
 //finish reward calculation and updating rewarded wp 
   function handleEndDay(values) {
     setIsDataSent(true);
-    api.endDay(values)
+    api.endDay({ values, userLevel, levelProgress, nextLevelAt })
       .then((updatedActivities) => {
-        setIsDataSent(false);
+        console.log(updatedActivities);
+        /*setIsDataSent(false);
         setCurrentActivities(updatedActivities.activities);
-        setWp(updatedActivities.reward);
+        setWp(updatedActivities.reward);*/
       })
   }
 
@@ -162,7 +170,7 @@ function App() {
           userData={userData}
           logout={logout}
           loggedIn={loggedIn}
-          levelProgress={levelProgress}
+          levelProgress={`${levelProgress} / ${nextLevelAt}`}
           days={day}
         />
             
