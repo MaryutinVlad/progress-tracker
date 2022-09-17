@@ -45,7 +45,6 @@ function App() {
         setDay(user.daysPassed);
         setUserData(user);
         navigate('/');
-        console.log(user);
         })
       .then(() => {
         api.getTrials()
@@ -62,15 +61,14 @@ function App() {
             setCurrentActivities(activities.currentActivities);
             setAvailableActivities(activities.availableActivities);
             setAvailableZones(activities.availableZones);
+            console.log(activities);
 
             let totalCompleted = 0;
             for (let item of activities.currentActivities) {
               totalCompleted += item.completed;
             }
 
-            setLevelProgress(totalCompleted)
-            console.log(totalCompleted, userLevel);
-            console.log(levelTab);
+            setLevelProgress(totalCompleted);
           })
       })  
       .catch(err => console.log(err));
@@ -147,15 +145,15 @@ function App() {
         setCurrentActivities(updatedActivities);
       })
   }
-//finish reward calculation and updating rewarded wp 
+  
   function handleEndDay(values) {
     setIsDataSent(true);
     api.endDay({ values, userLevel, levelProgress, nextLevelAt })
       .then((updatedActivities) => {
         console.log(updatedActivities);
-        /*setIsDataSent(false);
+        setIsDataSent(false);
         setCurrentActivities(updatedActivities.activities);
-        setWp(updatedActivities.reward);*/
+        setWp(updatedActivities.reward + wp);
       })
   }
 
