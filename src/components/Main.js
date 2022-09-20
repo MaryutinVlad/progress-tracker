@@ -20,7 +20,8 @@ function Main({
   availableChallenges,
   availableActions,
   onClick,
-  onPurchaseZone
+  onPurchaseZone,
+  onMapRestart
 }) {
 
   return (
@@ -68,6 +69,7 @@ function Main({
               isDataSent={isDataSent}
               onClick={onClick}
               onPurchaseZone={onPurchaseZone}
+              onMapRestart={onMapRestart}
             />
           }
         />

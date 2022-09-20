@@ -11,7 +11,7 @@ function Activities({
   slots,
   onEndDay,
   isDataSent,
-  onClick,
+  onMapRestart,
   onPurchaseZone
 }) {
 
@@ -143,6 +143,7 @@ function Activities({
           </button>
           <button
             className="buttons__restart"
+            onClick={onMapRestart}
             onMouseOver={() => {
               setTitle('Restart map');
               setDescription('You will lose all your current progress and start with 1 slot and 10 WP');

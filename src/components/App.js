@@ -45,6 +45,8 @@ function App() {
         setDay(user.daysPassed);
         setUserData(user);
         navigate('/');
+        setNextLevelAt(levelTab[user.level])
+        console.log(user);
         })
       .then(() => {
         api.getTrials()
@@ -61,7 +63,6 @@ function App() {
             setCurrentActivities(activities.currentActivities);
             setAvailableActivities(activities.availableActivities);
             setAvailableZones(activities.availableZones);
-            console.log(activities);
 
             let totalCompleted = 0;
             for (let item of activities.currentActivities) {
@@ -127,6 +128,13 @@ function App() {
       });
   }
 
+  function handleMapRestart() {
+    api.restartMap()
+      .then((data) => {
+        console.log(data);
+      })
+  }
+
   function handlePurchaseZone(zoneId) {
     console.log('purchasing zone...', zoneId);
     api.purchaseZone(zoneId, wp)
@@ -148,12 +156,16 @@ function App() {
   
   function handleEndDay(values) {
     setIsDataSent(true);
-    api.endDay({ values, userLevel, levelProgress, nextLevelAt })
+    console.log({ values, userLevel, levelProgress, nextLevelAt, wp });
+    api.endDay({ values, userLevel, levelProgress, nextLevelAt, wp })
       .then((updatedActivities) => {
         console.log(updatedActivities);
         setIsDataSent(false);
         setCurrentActivities(updatedActivities.activities);
         setWp(updatedActivities.reward + wp);
+        setLevelProgress(updatedActivities.reward + levelProgress);
+        setNextLevelAt(levelTab[updatedActivities.userLevel]);
+        setUserLevel(updatedActivities.userLevel);
       })
   }
 
@@ -166,6 +178,7 @@ function App() {
       <div className='page'>
         <Header
           userData={userData}
+          level= {userLevel}
           logout={logout}
           loggedIn={loggedIn}
           levelProgress={`${levelProgress} / ${nextLevelAt}`}
@@ -186,6 +199,7 @@ function App() {
                 availableZones={availableZones}
                 onPurchaseActivity={handlePurchaseActivity}
                 onPurchaseZone={handlePurchaseZone}
+                onMapRestart={handleMapRestart}
                 wp={wp}
                 slots={slots}
                 onEndDay={handleEndDay}

@@ -36,6 +36,10 @@ class Api {
     return this._request(`/activities/zones/${zoneId}`, 'PUT');
   }
 
+  restartMap() {
+    return this._request('/activities', 'DELETE');
+  }
+
   upgradeActivity(data) {
     this.options.body = JSON.stringify({
       rank: data.rank

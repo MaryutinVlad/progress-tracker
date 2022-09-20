@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header({ logout, levelProgress, days, userData }) {
+function Header({ logout, levelProgress, days, userData, level }) {
   return (
     <header className="header">
       <div className="logo">
@@ -14,7 +14,7 @@ function Header({ logout, levelProgress, days, userData }) {
               {userData.name}
             </p>
             <p className="header__profile-level">
-              <span className="header__level-current">Lvl: {userData.level}</span>
+              <span className="header__level-current">Lvl: {level}</span>
               <span className="header__level-progress">{levelProgress}</span>
             </p>
             <div className="header__lower-section">
