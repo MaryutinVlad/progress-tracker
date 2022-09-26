@@ -1,12 +1,13 @@
 import React from "react";
 
-function Header({ logout, levelProgress, days, userData, level }) {
+function Header({ logout, levelProgress, days, userData, level, loggedIn }) {
   return (
     <header className="header">
       <div className="logo">
         <p className="logo__first-line logo__animation-first-line">Progress</p>
         <p className="logo__second-line logo__animation-second-line">tracker</p>
       </div>
+      { loggedIn && 
       <div className="header__profile-info">
         { userData.email && 
           <>
@@ -28,6 +29,7 @@ function Header({ logout, levelProgress, days, userData, level }) {
           </>
         }
       </div>
+      }
     </header>
     )
 }

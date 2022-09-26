@@ -48,7 +48,7 @@ function Activities({
     <div className="activities">
 
       <div className="activities__current">
-        {currentActivities.map(item => {
+        {availableActivities.filter((item) => item.bought === true).map(item => {
           return (
             <CurrentActivityItem
               key={item._id}
@@ -97,7 +97,7 @@ function Activities({
       </div>
 
       <div className="activities__available">
-        {slots ? availableActivities.map(item => {
+        {slots ? availableActivities.filter((item) => item.bought === false).map(item => {
           return (
             <AvailableActivityItem
               key={item._id}

@@ -59,14 +59,16 @@ function App() {
             console.log(err);
           })
         api.getActivities()
-          .then((activities) => {
-            setCurrentActivities(activities.currentActivities);
-            setAvailableActivities(activities.availableActivities);
-            setAvailableZones(activities.availableZones);
+          .then((data) => {
+            console.log(data);
+            setAvailableActivities(data.activities);
+            setAvailableZones(data.zones);
 
             let totalCompleted = 0;
-            for (let item of activities.currentActivities) {
-              totalCompleted += item.completed;
+            for (let item of data.activities) {
+              if (item.bought) {
+                totalCompleted += item.completed;
+              }
             }
 
             setLevelProgress(totalCompleted);
@@ -118,10 +120,11 @@ function App() {
     console.log('purchasing activity...', activityId);
     api.purchaseActivity(activityId, wp, slots)
       .then((data) => {
-        setCurrentActivities(data.currentActivities);
+        console.log(data);
+        /*setCurrentActivities(data.currentActivities);
         setAvailableActivities(data.availableActivities);
         setWp(data.user.wp);
-        setSlots(data.user.slots);
+        setSlots(data.user.slots);*/
       })
       .catch((err) => {
         console.log(err);
