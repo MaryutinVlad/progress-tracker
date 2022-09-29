@@ -7,8 +7,7 @@ import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
 
-function Main({ 
-  currentActivities,
+function Main({
   availableActivities,
   availableZones,
   onPurchaseActivity,
@@ -19,9 +18,10 @@ function Main({
   availableTrials,
   availableChallenges,
   availableActions,
-  onClick,
   onPurchaseZone,
-  onMapRestart
+  onMapRestart,
+  onUpgradeClick,
+  upgradeCost
 }) {
 
   return (
@@ -59,17 +59,17 @@ function Main({
           path='/activities'
           element={
             <Activities
-              currentActivities={currentActivities}
               availableActivities={availableActivities}
               availableZones={availableZones}
               onPurchaseActivity={onPurchaseActivity}
+              onUpgradeClick={onUpgradeClick}
               wp={wp}
               slots={slots}
               onEndDay={onEndDay}
               isDataSent={isDataSent}
-              onClick={onClick}
               onPurchaseZone={onPurchaseZone}
               onMapRestart={onMapRestart}
+              upgradeCost={upgradeCost}
             />
           }
         />

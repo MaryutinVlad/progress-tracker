@@ -4,7 +4,6 @@ import CurrentActivityItem from "./CurrentActivityItem";
 
 function Activities({
   availableActivities,
-  currentActivities,
   onPurchaseActivity,
   availableZones,
   wp,
@@ -12,7 +11,9 @@ function Activities({
   onEndDay,
   isDataSent,
   onMapRestart,
-  onPurchaseZone
+  onPurchaseZone,
+  onUpgradeClick,
+  upgradeCost
 }) {
 
   const [description, setDescription] = useState('');
@@ -62,7 +63,8 @@ function Activities({
               gatherValue={gatherValue}
               completed={item.completed}
               isDataSent={isDataSent}
-              onClick={onPurchaseZone}
+              onUpgradeClick={onUpgradeClick}
+              upgradeCost={upgradeCost}
             />
           )
         })}
@@ -112,7 +114,7 @@ function Activities({
               zone={false}
             />
           )
-        }) : availableZones.map(item => {
+        }) : availableZones.filter((item) => item.bought === false).map(item => {
           return (
             <AvailableActivityItem
               key={item._id}
@@ -146,14 +148,14 @@ function Activities({
             onClick={onMapRestart}
             onMouseOver={() => {
               setTitle('Restart map');
-              setDescription('You will lose all your current progress and start with 1 slot and 10 WP');
+              setDescription('You will lose all your current progress and start with 10 WP');
             }} 
             onMouseOut={() => {
               setTitle('');
               setDescription('');
             }}
           >
-            Erase map
+            Restart map
           </button>
         </div>
       </div>

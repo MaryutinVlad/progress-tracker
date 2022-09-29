@@ -40,12 +40,12 @@ class Api {
     return this._request('/activities', 'DELETE');
   }
 
-  upgradeActivity(data) {
+  upgradeActivity(activityId, rank) {
     this.options.body = JSON.stringify({
-      rank: data.rank
+      rank: rank
     });
 
-    return this._request(`/activities/${data.id}`, 'PUT');
+    return this._request(`/activities/${activityId}`, 'PUT');
   }
 
   endDay(values) {

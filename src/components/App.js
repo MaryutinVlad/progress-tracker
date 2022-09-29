@@ -7,7 +7,7 @@ import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
-import levelTab from '../utils/userLevelTab';
+import { levelTab, upgradeCostTab } from '../utils/userLevelTab';
 
 //info for drawing
 //challenge's image size 380x158 px
@@ -15,7 +15,7 @@ import levelTab from '../utils/userLevelTab';
 //activity's image size 128x128 px
 
 function App() {
-
+  
   const [loggedIn, setLoggedIn] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
   const [isDataSent, setIsDataSent] = useState(false);
@@ -32,6 +32,7 @@ function App() {
   const [userLevel, setUserLevel] = useState(1);
   const [day, setDay] = useState(0);
   const [userData, setUserData] = useState({});
+  const [upgradeCost, setUpgradeCost] = useState(0);
 
   const navigate = useNavigate();
 
@@ -45,27 +46,28 @@ function App() {
         setDay(user.daysPassed);
         setUserData(user);
         navigate('/');
-        setNextLevelAt(levelTab[user.level])
-        console.log(user);
+        setNextLevelAt(levelTab[user.level]);
         })
       .then(() => {
         api.getTrials()
-          .then((data) => {
-            setAvailableChallenges(data.challenges);
-            setAvailableActions(data.actions);
-            setAvailableTrials(data.trials);
+          .then((trials) => {
+            setAvailableChallenges(trials.challenges);
+            setAvailableActions(trials.actions);
+            setAvailableTrials(trials.trials);
           })
           .catch((err) => {
             console.log(err);
           })
         api.getActivities()
-          .then((data) => {
-            console.log(data);
-            setAvailableActivities(data.activities);
-            setAvailableZones(data.zones);
+          .then((activities) => {
+            const upgradeCostTier = activities.zones.filter((zone) => zone.bought === true).length;
+
+            setAvailableActivities(activities.activities);
+            setAvailableZones(activities.zones);
+            setUpgradeCost(upgradeCostTab[upgradeCostTier]);
 
             let totalCompleted = 0;
-            for (let item of data.activities) {
+            for (let item of activities.activities) {
               if (item.bought) {
                 totalCompleted += item.completed;
               }
@@ -119,12 +121,11 @@ function App() {
   function handlePurchaseActivity(activityId) {
     console.log('purchasing activity...', activityId);
     api.purchaseActivity(activityId, wp, slots)
-      .then((data) => {
-        console.log(data);
-        /*setCurrentActivities(data.currentActivities);
-        setAvailableActivities(data.availableActivities);
-        setWp(data.user.wp);
-        setSlots(data.user.slots);*/
+      .then(({ boughtActivity, updatedUser }) => {
+        const boughtItemIndex = findBoughtItem(availableActivities, boughtActivity.name);
+        availableActivities[boughtItemIndex] = boughtActivity;
+        setAvailableActivities(availableActivities);
+        setSlots(updatedUser.slots);
       })
       .catch((err) => {
         console.log(err);
@@ -133,27 +134,47 @@ function App() {
 
   function handleMapRestart() {
     api.restartMap()
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        window.location.reload();
       })
+  }
+
+  function findBoughtItem(list, target) {
+    let counter = 0;
+    for (let item of list) {
+      if (item.name === target) {
+        return counter;
+      }
+      counter++;
+    }
   }
 
   function handlePurchaseZone(zoneId) {
     console.log('purchasing zone...', zoneId);
     api.purchaseZone(zoneId, wp)
-      .then(() => {
-        setWp(wp);
-        setSlots(slots);
+      .then(({ purchasedZone, updatedUser }) => {
+        console.log(purchasedZone, updatedUser);
+        const boughtItemIndex = findBoughtItem(availableZones, purchasedZone.name);
+        availableZones[boughtItemIndex] = purchasedZone;
+        setAvailableZones(availableZones);
+        setWp(updatedUser.wp);
+        setSlots(updatedUser.slots);
+
+        const upgradeCostTier = availableZones.filter((zone) => zone.bought === true).length;
+        setUpgradeCost(upgradeCostTab[upgradeCostTier]);
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  function handleUpgradeClick(data) {
-    api.upgradeActivity(data)
-      .then((updatedActivities) => {
-        setCurrentActivities(updatedActivities);
+  function handleUpgradeClick(activityId, rank) {
+    api.upgradeActivity(activityId, rank)
+      .then((upgradedActivity) => {
+        console.log(upgradedActivity);
+        const upgradedItemIndex = findBoughtItem(availableActivities, upgradedActivity.name);
+        availableActivities[upgradedItemIndex] = upgradedActivity;
+        setAvailableActivities(availableActivities);
       })
   }
   
@@ -162,7 +183,6 @@ function App() {
     console.log({ values, userLevel, levelProgress, nextLevelAt, wp });
     api.endDay({ values, userLevel, levelProgress, nextLevelAt, wp })
       .then((updatedActivities) => {
-        console.log(updatedActivities);
         setIsDataSent(false);
         setCurrentActivities(updatedActivities.activities);
         setWp(updatedActivities.reward + wp);
@@ -194,7 +214,6 @@ function App() {
             exact path='*'
             element={ loggedIn ?
               <Main
-                currentActivities={currentActivities}
                 availableActivities={availableActivities}
                 availableTrials={availableTrials}
                 availableChallenges={availableChallenges}
@@ -207,7 +226,8 @@ function App() {
                 slots={slots}
                 onEndDay={handleEndDay}
                 isDataSent={isDataSent}
-                onClick={handleUpgradeClick}
+                onUpgradeClick={handleUpgradeClick}
+                upgradeCost={upgradeCost}
               /> :
               <Navigate to='/signin' />}
           />
