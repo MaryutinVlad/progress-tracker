@@ -5,4 +5,5 @@
     flex-direction: column;
     background-image: url('../../images/background.png');
     font-family: 'Yoster-Island';
+    user-select: none;
 }

@@ -16,7 +16,8 @@ function CurrentActivityItem({
   completed,
   isDataSent,
   onUpgradeClick,
-  upgradeCost
+  upgradeCost,
+  step
 }) {
 
   const [inputValue, setInputValue] = useState(0);
@@ -37,8 +38,8 @@ function CurrentActivityItem({
   }
 
   function increaseValue() {
-    setInputValue(inputValue + 1);
-    gatherValue({ [name]: { value: inputValue + 1 + completed, rank, input: inputValue + 1 } });
+    setInputValue(inputValue + step);
+    gatherValue({ [name]: { value: inputValue + step + completed, rank, input: inputValue + step } });
   }
 
   function handleUpgradeClick() {
@@ -52,14 +53,14 @@ function CurrentActivityItem({
 
   function decreaseValue() {
     if (inputValue) {
-      setInputValue(inputValue - 1);
-      gatherValue({ [name]: { value: inputValue - 1 + completed, rank, input: inputValue + 1 } });
+      setInputValue(inputValue - step);
+      gatherValue({ [name]: { value: inputValue - step + completed, rank, input: inputValue + step } });
     }
   }
 
   useEffect(() => {
     setInputValue(0);
-  }, [isDataSent])
+  }, [isDataSent]);
 
   return (
     <div className="activities__current-item">

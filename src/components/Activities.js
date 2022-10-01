@@ -73,6 +73,7 @@ function Activities({
               isDataSent={isDataSent}
               onUpgradeClick={onUpgradeClick}
               upgradeCost={upgradeCost}
+              step={item.step}
             />
           )
         })}

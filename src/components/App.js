@@ -25,9 +25,6 @@ function App() {
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [availableActions, setAvailableActions] = useState([]);
   const [availableZones, setAvailableZones] = useState([]);
-  const [nextLevelAt, setNextLevelAt] = useState(20);
-  const [wp, setWp] = useState(0);
-  const [slots, setSlots] = useState(0);
   const [levelProgress, setLevelProgress] = useState(0);
   const [userData, setUserData] = useState({});
   const [upgradeCost, setUpgradeCost] = useState(0);
@@ -38,34 +35,31 @@ function App() {
     apiAuth.validate(token)
       .then((user) => {
         setLoggedIn(true);
-        setWp(user.wp);
-        setSlots(user.slots);
         setUserData(user);
         navigate('/');
-        setNextLevelAt(levelTab[user.level]);
         console.log(user);
         })
       .then(() => {
         api.getTrials()
-          .then((trials) => {
-            setAvailableChallenges(trials.challenges);
-            setAvailableActions(trials.actions);
-            setAvailableTrials(trials.trials);
+          .then(({ trials, challenges, actions }) => {
+            setAvailableChallenges(challenges);
+            setAvailableActions(actions);
+            setAvailableTrials(trials);
           })
           .catch((err) => {
             console.log(err);
           })
         api.getActivities()
-          .then((activities) => {
-            const upgradeCostTier = activities.zones.filter((zone) => zone.bought === true).length;
+          .then(({ activities, zones }) => {
+            const upgradeCostTier = zones.filter((zone) => zone.bought === true).length;
 
-            setAvailableActivities(activities.activities.filter((activity) => activity.bought === false));
-            setCurrentActivities(activities.activities.filter((activity) => activity.bought === true));
-            setAvailableZones(activities.zones);
+            setAvailableActivities(activities.filter((activity) => activity.bought === false));
+            setCurrentActivities(activities.filter((activity) => activity.bought === true));
+            setAvailableZones(zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
 
             let totalCompleted = 0;
-            for (let item of activities.activities) {
+            for (let item of activities) {
               if (item.bought) {
                 totalCompleted += item.completed;
               }
@@ -117,12 +111,12 @@ function App() {
 
   function handlePurchaseActivity(activityId) {
     console.log('purchasing activity...', activityId);
-    api.purchaseActivity(activityId, userData.wp, slots)
+    api.purchaseActivity(activityId, userData.wp, userData.slots)
       .then(({ boughtActivity, updatedUser }) => {
         const boughtItemIndex = findBoughtItem(availableActivities, boughtActivity.name);
         availableActivities.splice(boughtItemIndex, 1);
         currentActivities.push(boughtActivity);
-        setSlots(updatedUser.slots);
+        setUserData({ ...userData, slots: updatedUser.slots });
       })
       .catch((err) => {
         console.log(err);
@@ -166,17 +160,28 @@ function App() {
       })
   }
 
+  function calculateRewards(values) {
+
+    let reward = 0;
+
+    for (let value in values) {
+      reward += (value.input * value.rank);
+    }
+
+    return reward;
+  }
+
   function handleEndDay(values) {
-    setIsDataSent(true);
-    api.endDay({ values, level: userData.level, levelProgress, nextLevelAt, wp: userData.wp })
+    console.log(values);
+    /*setIsDataSent(true);
+    api.endDay({ values, level: userData.level, levelProgress, nextLevelAt: levelTab[userData.level], wp: userData.wp })
       .then(({ reward, user }) => {
         setIsDataSent(false);
         setUserData({ ...userData, wp: userData.wp + reward });
         setLevelProgress(reward + levelProgress);
-        setNextLevelAt(levelTab[user.level]);
         userData.nextLevelAt = levelTab[user.level];
         userData.level = user.level;
-      })
+      })*/
   }
 
   useEffect(() => {
@@ -190,7 +195,7 @@ function App() {
           userData={userData}
           logout={logout}
           loggedIn={loggedIn}
-          levelProgress={`${levelProgress} / ${userData.nextLevelAt}`}
+          levelProgress={`${levelProgress} / ${levelTab[userData.level]}`}
         />
             
         <Routes>
