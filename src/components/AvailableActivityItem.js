@@ -9,7 +9,11 @@ function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, c
   const classList = "activities__available-item" + (((wpCount.wp < cost && zone) || (wpCount.slots < 1 && !zone)) ? " activities__available-item_paled" : "");
 
   function handleMouseOver() {
-    mouseOver({ name, description, cost });
+    if (zone) {
+      mouseOver({ name, description, cost: `${cost} WP` });
+    } else {
+      mouseOver({ name, description });
+    }
   }
 
   function handleMouseOut() {

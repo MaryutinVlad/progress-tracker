@@ -9,10 +9,9 @@ import Statistics from './Statistics';
 
 function Main({
   availableActivities,
+  currentActivities,
   availableZones,
   onPurchaseActivity,
-  wp,
-  slots,
   onEndDay,
   isDataSent,
   availableTrials,
@@ -60,11 +59,10 @@ function Main({
           element={
             <Activities
               availableActivities={availableActivities}
+              currentActivities={currentActivities}
               availableZones={availableZones}
               onPurchaseActivity={onPurchaseActivity}
               onUpgradeClick={onUpgradeClick}
-              wp={wp}
-              slots={slots}
               onEndDay={onEndDay}
               isDataSent={isDataSent}
               onPurchaseZone={onPurchaseZone}

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { ResourceContext } from "../contexts/ResourceContext";
 import arrow from '../images/arrow-button.png';
-import { rankList } from '../utils/userLevelTab';
+import { rankList } from '../utils/tabs';
 
 function CurrentActivityItem({
   id,
@@ -18,9 +20,16 @@ function CurrentActivityItem({
 }) {
 
   const [inputValue, setInputValue] = useState(0);
+  const [activityRank, setActivityRank] = useState(rank);
+
+  const wpCount = useContext(ResourceContext);
 
   function handleMouseOver() {
-    mouseOver({ name, description});
+    mouseOver({ name, description });
+  }
+
+  function handleMouseOverUpButton() {
+    mouseOver({ upgradeCost, rank, rankTitle: rankList[rank] });
   }
 
   function handleMouseOut() {
@@ -33,7 +42,12 @@ function CurrentActivityItem({
   }
 
   function handleUpgradeClick() {
-    onUpgradeClick(id, rank + 1 );
+    if (wpCount.wp >= upgradeCost) {
+      onUpgradeClick(id, rank + 1 );
+      setActivityRank(rank + 1);
+    } else {
+      console.log('Not enough WP');
+    }
   }
 
   function decreaseValue() {
@@ -76,10 +90,12 @@ function CurrentActivityItem({
           <button
            className={`activities__upgrade-button ${rank >= 3 ? 'activities__upgrade-button_disabled' : ''}`}
            onClick={handleUpgradeClick}
+           onMouseOver={handleMouseOverUpButton}
+           onMouseOut={handleMouseOut}
            disabled={rank >= 3 ? true : false}
           />
           <span>
-            {rankList[rank]}
+            {rankList[activityRank]}
           </span>
         </div>
         

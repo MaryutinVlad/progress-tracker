@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import { ResourceContext } from '../contexts/ResourceContext';
 import Header from './Header';
 import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
-import { levelTab, upgradeCostTab } from '../utils/userLevelTab';
+import { ResourceContext } from '../contexts/ResourceContext';
+import { levelTab, upgradeCostTab } from '../utils/tabs';
+import { findBoughtItem } from '../utils/functions';
 
-//info for drawing
+//info for drawing (default size)
 //challenge's image size 380x158 px
 //trial's image size 250x128 px
 //activity's image size 128x128 px
@@ -17,7 +18,6 @@ import { levelTab, upgradeCostTab } from '../utils/userLevelTab';
 function App() {
   
   const [loggedIn, setLoggedIn] = useState(false);
-  const [signedUp, setSignedUp] = useState(false);
   const [isDataSent, setIsDataSent] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
@@ -29,8 +29,6 @@ function App() {
   const [wp, setWp] = useState(0);
   const [slots, setSlots] = useState(0);
   const [levelProgress, setLevelProgress] = useState(0);
-  const [userLevel, setUserLevel] = useState(1);
-  const [day, setDay] = useState(0);
   const [userData, setUserData] = useState({});
   const [upgradeCost, setUpgradeCost] = useState(0);
 
@@ -42,11 +40,10 @@ function App() {
         setLoggedIn(true);
         setWp(user.wp);
         setSlots(user.slots);
-        setUserLevel(user.level);
-        setDay(user.daysPassed);
         setUserData(user);
         navigate('/');
         setNextLevelAt(levelTab[user.level]);
+        console.log(user);
         })
       .then(() => {
         api.getTrials()
@@ -62,7 +59,8 @@ function App() {
           .then((activities) => {
             const upgradeCostTier = activities.zones.filter((zone) => zone.bought === true).length;
 
-            setAvailableActivities(activities.activities);
+            setAvailableActivities(activities.activities.filter((activity) => activity.bought === false));
+            setCurrentActivities(activities.activities.filter((activity) => activity.bought === true));
             setAvailableZones(activities.zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
 
@@ -95,7 +93,6 @@ function App() {
   function handleSignUp(data) {
     apiAuth.register(data)
       .then(() => {
-        setSignedUp(true);
         navigate('/signin');
       })
       .catch(err => console.log(err));
@@ -120,11 +117,11 @@ function App() {
 
   function handlePurchaseActivity(activityId) {
     console.log('purchasing activity...', activityId);
-    api.purchaseActivity(activityId, wp, slots)
+    api.purchaseActivity(activityId, userData.wp, slots)
       .then(({ boughtActivity, updatedUser }) => {
         const boughtItemIndex = findBoughtItem(availableActivities, boughtActivity.name);
-        availableActivities[boughtItemIndex] = boughtActivity;
-        setAvailableActivities(availableActivities);
+        availableActivities.splice(boughtItemIndex, 1);
+        currentActivities.push(boughtActivity);
         setSlots(updatedUser.slots);
       })
       .catch((err) => {
@@ -139,26 +136,14 @@ function App() {
       })
   }
 
-  function findBoughtItem(list, target) {
-    let counter = 0;
-    for (let item of list) {
-      if (item.name === target) {
-        return counter;
-      }
-      counter++;
-    }
-  }
-
   function handlePurchaseZone(zoneId) {
     console.log('purchasing zone...', zoneId);
-    api.purchaseZone(zoneId, wp)
+    api.purchaseZone(zoneId, userData.wp)
       .then(({ purchasedZone, updatedUser }) => {
         console.log(purchasedZone, updatedUser);
         const boughtItemIndex = findBoughtItem(availableZones, purchasedZone.name);
         availableZones[boughtItemIndex] = purchasedZone;
-        setAvailableZones(availableZones);
-        setWp(updatedUser.wp);
-        setSlots(updatedUser.slots);
+        setUserData({...userData, wp: updatedUser.wp, slots: updatedUser.slots});
 
         const upgradeCostTier = availableZones.filter((zone) => zone.bought === true).length;
         setUpgradeCost(upgradeCostTab[upgradeCostTier]);
@@ -169,26 +154,28 @@ function App() {
   }
 
   function handleUpgradeClick(activityId, rank) {
-    api.upgradeActivity(activityId, rank)
-      .then((upgradedActivity) => {
-        console.log(upgradedActivity);
-        const upgradedItemIndex = findBoughtItem(availableActivities, upgradedActivity.name);
-        availableActivities[upgradedItemIndex] = upgradedActivity;
-        setAvailableActivities(availableActivities);
+
+    const wpAfterPurchase = userData.wp - upgradeCost;
+
+    api.upgradeActivity(activityId, rank, wpAfterPurchase)
+      .then(({ upgradedActivity, updatedUser }) => {
+        console.log({ upgradedActivity, updatedUser });
+        const upgradedItemIndex = findBoughtItem(currentActivities, upgradedActivity.name);
+        currentActivities[upgradedItemIndex] = upgradedActivity;
+        setUserData({ ...userData, wp: updatedUser.wp });
       })
   }
-  
+
   function handleEndDay(values) {
     setIsDataSent(true);
-    console.log({ values, userLevel, levelProgress, nextLevelAt, wp });
-    api.endDay({ values, userLevel, levelProgress, nextLevelAt, wp })
-      .then((updatedActivities) => {
+    api.endDay({ values, level: userData.level, levelProgress, nextLevelAt, wp: userData.wp })
+      .then(({ reward, user }) => {
         setIsDataSent(false);
-        setCurrentActivities(updatedActivities.activities);
-        setWp(updatedActivities.reward + wp);
-        setLevelProgress(updatedActivities.reward + levelProgress);
-        setNextLevelAt(levelTab[updatedActivities.userLevel]);
-        setUserLevel(updatedActivities.userLevel);
+        setUserData({ ...userData, wp: userData.wp + reward });
+        setLevelProgress(reward + levelProgress);
+        setNextLevelAt(levelTab[user.level]);
+        userData.nextLevelAt = levelTab[user.level];
+        userData.level = user.level;
       })
   }
 
@@ -197,15 +184,13 @@ function App() {
   }, []);
 
   return (
-    <ResourceContext.Provider value={{wp, slots}}>
+    <ResourceContext.Provider value={{wp: userData.wp, slots: userData.slots }}>
       <div className='page'>
         <Header
           userData={userData}
-          level= {userLevel}
           logout={logout}
           loggedIn={loggedIn}
-          levelProgress={`${levelProgress} / ${nextLevelAt}`}
-          days={day}
+          levelProgress={`${levelProgress} / ${userData.nextLevelAt}`}
         />
             
         <Routes>
@@ -215,6 +200,7 @@ function App() {
             element={ loggedIn ?
               <Main
                 availableActivities={availableActivities}
+                currentActivities={currentActivities}
                 availableTrials={availableTrials}
                 availableChallenges={availableChallenges}
                 availableActions={availableActions}
@@ -222,11 +208,9 @@ function App() {
                 onPurchaseActivity={handlePurchaseActivity}
                 onPurchaseZone={handlePurchaseZone}
                 onMapRestart={handleMapRestart}
-                wp={wp}
-                slots={slots}
+                onUpgradeClick={handleUpgradeClick}
                 onEndDay={handleEndDay}
                 isDataSent={isDataSent}
-                onUpgradeClick={handleUpgradeClick}
                 upgradeCost={upgradeCost}
               /> :
               <Navigate to='/signin' />}

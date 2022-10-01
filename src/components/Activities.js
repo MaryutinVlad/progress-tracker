@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AvailableActivityItem from './AvailableActivityItem';
 import CurrentActivityItem from "./CurrentActivityItem";
 
+import { ResourceContext } from '../contexts/ResourceContext';
+
 function Activities({
   availableActivities,
+  currentActivities,
   onPurchaseActivity,
   availableZones,
-  wp,
-  slots,
   onEndDay,
   isDataSent,
   onMapRestart,
@@ -15,13 +16,20 @@ function Activities({
   onUpgradeClick,
   upgradeCost
 }) {
-
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [values, setValues] = useState({});
 
+  const { wp, slots } = useContext(ResourceContext);
+
   function handleMousingOverItem(item) {
+    if (item.upgradeCost) {
+      setTitle(`Rank: ${item.rank} / 3 (${item.rankTitle})`)
+      setDescription(`Upgrade cost: ${item.upgradeCost} WP`);
+      setCost(`Effect: ${item.rank + 1} WP per unit, ${item.rank + 1} units available for common reward`);
+      return
+    }
     setDescription(item.description);
     setTitle(item.name);
     setCost(item.cost);
@@ -49,7 +57,7 @@ function Activities({
     <div className="activities">
 
       <div className="activities__current">
-        {availableActivities.filter((item) => item.bought === true).map(item => {
+        {currentActivities.map(item => {
           return (
             <CurrentActivityItem
               key={item._id}
@@ -99,7 +107,7 @@ function Activities({
       </div>
 
       <div className="activities__available">
-        {slots ? availableActivities.filter((item) => item.bought === false).map(item => {
+        {slots ? availableActivities.map(item => {
           return (
             <AvailableActivityItem
               key={item._id}
@@ -163,7 +171,7 @@ function Activities({
       <div className="activities__description">
         <span>{title ? `${title}` : ''}</span>
         <span>{description ? `${description}` : ''}</span>
-        <span>{cost ? `${cost} WP` : ''}</span>
+        <span>{cost ? `${cost}` : ''}</span>
       </div>
 
     </div>

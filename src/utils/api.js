@@ -40,9 +40,10 @@ class Api {
     return this._request('/activities', 'DELETE');
   }
 
-  upgradeActivity(activityId, rank) {
+  upgradeActivity(activityId, rank, wpAfterPurchase) {
     this.options.body = JSON.stringify({
-      rank: rank
+      rank: rank,
+      wp: wpAfterPurchase
     });
 
     return this._request(`/activities/${activityId}`, 'PUT');
