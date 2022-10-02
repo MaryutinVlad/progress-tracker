@@ -6,4 +6,8 @@
     background-image: url('../../images/background.png');
     font-family: 'Yoster-Island';
     user-select: none;
+    transition-property: opacity;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(0.575, 0.285, 0.32, 0.275);
+    opacity: 1;
 }

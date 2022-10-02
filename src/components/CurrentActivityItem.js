@@ -17,7 +17,8 @@ function CurrentActivityItem({
   isDataSent,
   onUpgradeClick,
   upgradeCost,
-  step
+  step,
+  rankTab
 }) {
 
   const [inputValue, setInputValue] = useState(0);
@@ -37,9 +38,13 @@ function CurrentActivityItem({
     mouseOut();
   }
 
+  function calculatePercentage(minor, major) {
+    return Math.round((minor / major) * 100)
+  }
+
   function increaseValue() {
     setInputValue(inputValue + step);
-    gatherValue({ [name]: { value: inputValue + step + completed, rank, input: inputValue + step } });
+    gatherValue({ [name]: { totalValue: (inputValue + step) * rank + completed, currentValue: (inputValue + step) * rank } });
   }
 
   function handleUpgradeClick() {
@@ -54,7 +59,7 @@ function CurrentActivityItem({
   function decreaseValue() {
     if (inputValue) {
       setInputValue(inputValue - step);
-      gatherValue({ [name]: { value: inputValue - step + completed, rank, input: inputValue + step } });
+      gatherValue({ [name]: { totalValue: (inputValue - step) * rank + completed, currentValue: (inputValue - step) * rank } });
     }
   }
 
@@ -80,10 +85,14 @@ function CurrentActivityItem({
         </div>
 
         <div className="activities__progress-bar"
-          style={{ "background": `linear-gradient(to right, rgb(176, 66, 32) ${completed}%, transparent ${completed}%)`}}
+          style={
+            { "background": `linear-gradient(to right, rgb(176, 66, 32) 
+            ${calculatePercentage(completed, rankTab[rank - 1])}%,
+             transparent ${calculatePercentage(completed, rankTab[rank - 1])}%)`}
+            }
         >
           <div className="activities__progress-bar_completed">
-            {completed}%
+            {calculatePercentage(completed, rankTab[rank - 1])} %
           </div>
         </div>
 

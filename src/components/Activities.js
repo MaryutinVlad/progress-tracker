@@ -68,6 +68,7 @@ function Activities({
               id={item._id}
               source={item.src}
               rank={item.rank}
+              rankTab={item.rankTab}
               gatherValue={gatherValue}
               completed={item.completed}
               isDataSent={isDataSent}

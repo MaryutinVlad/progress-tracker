@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 import Header from './Header';
 import Main from './Main';
@@ -8,7 +9,7 @@ import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
 import { ResourceContext } from '../contexts/ResourceContext';
 import { levelTab, upgradeCostTab } from '../utils/tabs';
-import { findBoughtItem } from '../utils/functions';
+import { findBoughtItem, calculateRewards, distributeResults } from '../utils/functions';
 
 //info for drawing (default size)
 //challenge's image size 380x158 px
@@ -25,9 +26,10 @@ function App() {
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [availableActions, setAvailableActions] = useState([]);
   const [availableZones, setAvailableZones] = useState([]);
-  const [levelProgress, setLevelProgress] = useState(0);
   const [userData, setUserData] = useState({});
   const [upgradeCost, setUpgradeCost] = useState(0);
+  const [nextLevelAt, setNextLevelAt] = useState(20);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ function App() {
       .then((user) => {
         setLoggedIn(true);
         setUserData(user);
+        setNextLevelAt(levelTab[user.level]);
         navigate('/');
         console.log(user);
         })
@@ -57,15 +60,7 @@ function App() {
             setCurrentActivities(activities.filter((activity) => activity.bought === true));
             setAvailableZones(zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
-
-            let totalCompleted = 0;
-            for (let item of activities) {
-              if (item.bought) {
-                totalCompleted += item.completed;
-              }
-            }
-
-            setLevelProgress(totalCompleted);
+            setIsLoading(false);
           })
       })  
       .catch(err => console.log(err));
@@ -160,28 +155,20 @@ function App() {
       })
   }
 
-  function calculateRewards(values) {
-
-    let reward = 0;
-
-    for (let value in values) {
-      reward += (value.input * value.rank);
-    }
-
-    return reward;
-  }
-
   function handleEndDay(values) {
-    console.log(values);
-    /*setIsDataSent(true);
-    api.endDay({ values, level: userData.level, levelProgress, nextLevelAt: levelTab[userData.level], wp: userData.wp })
-      .then(({ reward, user }) => {
+
+    const wpToEarn = calculateRewards(values, 'currentValue');
+    console.log({ values, wpToEarn, nextLevelAt, userData });
+
+    setIsDataSent(true);
+    api.endDay({ values, wpToEarn, nextLevelAt, userData })
+      .then(({ user, updatedActivities }) => {
+        console.log({ user, updatedActivities });
+        setCurrentActivities(distributeResults(updatedActivities, currentActivities));
         setIsDataSent(false);
-        setUserData({ ...userData, wp: userData.wp + reward });
-        setLevelProgress(reward + levelProgress);
-        userData.nextLevelAt = levelTab[user.level];
-        userData.level = user.level;
-      })*/
+        setUserData(user);
+        setNextLevelAt(levelTab[user.level]);
+      })
   }
 
   useEffect(() => {
@@ -190,12 +177,12 @@ function App() {
 
   return (
     <ResourceContext.Provider value={{wp: userData.wp, slots: userData.slots }}>
-      <div className='page'>
+      <div className={`page ${isLoading ? 'page_loading' : ''}`}>
         <Header
           userData={userData}
           logout={logout}
           loggedIn={loggedIn}
-          levelProgress={`${levelProgress} / ${levelTab[userData.level]}`}
+          levelProgress={`${userData.xp} / ${levelTab[userData.level]}`}
         />
             
         <Routes>
