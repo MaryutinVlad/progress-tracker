@@ -2,31 +2,41 @@ import React, { useContext } from "react";
 
 import { ResourceContext } from '../contexts/ResourceContext';
 
-function AvailableActivityItem({ name, description, cost, mouseOver, mouseOut, click, id, source, zone }) {
+function AvailableActivityItem({
+  id,
+  name,
+  description,
+  cost,
+  source,
+  onMouseOver,
+  onMouseOut,
+  onMouseClick,
+  isZone
+}) {
 
   const wpCount = useContext(ResourceContext);
 
-  const classList = "activities__available-item" + (((wpCount.wp < cost && zone) || (wpCount.slots < 1 && !zone)) ? " activities__available-item_paled" : "");
+  const classList = "activities__available-item" + (((wpCount.wp < cost && isZone) || (wpCount.slots < 1 && !isZone)) ? " activities__available-item_paled" : "");
 
   function handleMouseOver() {
-    if (zone) {
-      mouseOver({ name, description, cost: `${cost} WP` });
+    if (isZone) {
+      onMouseOver({ name, description, cost: `${cost} WP` });
     } else {
-      mouseOver({ name, description });
+      onMouseOver({ name, description });
     }
   }
 
   function handleMouseOut() {
-    mouseOut();
+    onMouseOut();
   }
 
   function handleActivityClick() {
-    if (zone && wpCount.wp >= cost) {
-      return click(id);
+    if (isZone && wpCount.wp >= cost) {
+      return onMouseClick(id);
     }
 
     if (wpCount.slots) {
-      return click(id);
+      return onMouseClick(id);
     }
 
     console.log(wpCount.wp < cost ? 'Not enough WP' : 'No slots available');

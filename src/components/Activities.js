@@ -8,12 +8,12 @@ function Activities({
   availableActivities,
   currentActivities,
   onPurchaseActivity,
-  availableZones,
-  onEndDay,
-  isDataSent,
-  onMapRestart,
   onPurchaseZone,
-  onUpgradeClick,
+  onUpgradeActivity,
+  onMapRestart,
+  onEndDay,
+  zones,
+  isDataSent,
   upgradeCost
 }) {
   const [description, setDescription] = useState('');
@@ -72,7 +72,7 @@ function Activities({
               gatherValue={gatherValue}
               completed={item.completed}
               isDataSent={isDataSent}
-              onUpgradeClick={onUpgradeClick}
+              onUpgradeActivity={onUpgradeActivity}
               upgradeCost={upgradeCost}
               step={item.step}
             />
@@ -124,7 +124,7 @@ function Activities({
               zone={false}
             />
           )
-        }) : availableZones.filter((item) => item.bought === false).map(item => {
+        }) : zones.filter((item) => item.bought === false).map(item => {
           return (
             <AvailableActivityItem
               key={item._id}

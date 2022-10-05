@@ -10,16 +10,16 @@ import Statistics from './Statistics';
 function Main({
   availableActivities,
   currentActivities,
-  availableZones,
+  zones,
+  trials,
+  challenges,
+  actions,
   onPurchaseActivity,
   onEndDay,
-  isDataSent,
-  availableTrials,
-  availableChallenges,
-  availableActions,
   onPurchaseZone,
   onMapRestart,
-  onUpgradeClick,
+  onUpgradeActivity,
+  isDataSent,
   upgradeCost
 }) {
 
@@ -33,9 +33,9 @@ function Main({
           path="/trials"
           element={
             <Trials
-              availableTrials={availableTrials}
-              availableChallenges={availableChallenges}
-              availableActions={availableActions}
+              trials={trials}
+              challenges={challenges}
+              actions={actions}
             />
           }
         />
@@ -60,9 +60,9 @@ function Main({
             <Activities
               availableActivities={availableActivities}
               currentActivities={currentActivities}
-              availableZones={availableZones}
+              zones={zones}
               onPurchaseActivity={onPurchaseActivity}
-              onUpgradeClick={onUpgradeClick}
+              onUpgradeActivity={onUpgradeActivity}
               onEndDay={onEndDay}
               isDataSent={isDataSent}
               onPurchaseZone={onPurchaseZone}

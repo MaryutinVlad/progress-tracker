@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 
 import Header from './Header';
 import Main from './Main';
@@ -22,10 +21,10 @@ function App() {
   const [isDataSent, setIsDataSent] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
-  const [availableTrials, setAvailableTrials] = useState([]);
-  const [availableChallenges, setAvailableChallenges] = useState([]);
-  const [availableActions, setAvailableActions] = useState([]);
-  const [availableZones, setAvailableZones] = useState([]);
+  const [trials, setTrials] = useState([]);
+  const [challenges, setChallenges] = useState([]);
+  const [actions, setActions] = useState([]);
+  const [zones, setZones] = useState([]);
   const [userData, setUserData] = useState({});
   const [upgradeCost, setUpgradeCost] = useState(0);
   const [nextLevelAt, setNextLevelAt] = useState(20);
@@ -40,14 +39,13 @@ function App() {
         setUserData(user);
         setNextLevelAt(levelTab[user.level]);
         navigate('/');
-        console.log(user);
         })
       .then(() => {
         api.getTrials()
           .then(({ trials, challenges, actions }) => {
-            setAvailableChallenges(challenges);
-            setAvailableActions(actions);
-            setAvailableTrials(trials);
+            setChallenges(challenges);
+            setActions(actions);
+            setTrials(trials);
           })
           .catch((err) => {
             console.log(err);
@@ -58,7 +56,7 @@ function App() {
 
             setAvailableActivities(activities.filter((activity) => activity.bought === false));
             setCurrentActivities(activities.filter((activity) => activity.bought === true));
-            setAvailableZones(zones);
+            setZones(zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
             setIsLoading(false);
           })
@@ -129,12 +127,11 @@ function App() {
     console.log('purchasing zone...', zoneId);
     api.purchaseZone(zoneId, userData.wp)
       .then(({ purchasedZone, updatedUser }) => {
-        console.log(purchasedZone, updatedUser);
-        const boughtItemIndex = findBoughtItem(availableZones, purchasedZone.name);
-        availableZones[boughtItemIndex] = purchasedZone;
+        const boughtItemIndex = findBoughtItem(zones, purchasedZone.name);
+        zones[boughtItemIndex] = purchasedZone;
         setUserData({...userData, wp: updatedUser.wp, slots: updatedUser.slots});
 
-        const upgradeCostTier = availableZones.filter((zone) => zone.bought === true).length;
+        const upgradeCostTier = zones.filter((zone) => zone.bought === true).length;
         setUpgradeCost(upgradeCostTab[upgradeCostTier]);
       })
       .catch((err) => {
@@ -193,10 +190,10 @@ function App() {
               <Main
                 availableActivities={availableActivities}
                 currentActivities={currentActivities}
-                availableTrials={availableTrials}
-                availableChallenges={availableChallenges}
-                availableActions={availableActions}
-                availableZones={availableZones}
+                trials={trials}
+                challenges={challenges}
+                actions={actions}
+                zones={zones}
                 onPurchaseActivity={handlePurchaseActivity}
                 onPurchaseZone={handlePurchaseZone}
                 onMapRestart={handleMapRestart}
