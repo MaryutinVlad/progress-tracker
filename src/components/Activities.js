@@ -69,10 +69,10 @@ function Activities({
               source={item.src}
               rank={item.rank}
               rankTab={item.rankTab}
-              gatherValue={gatherValue}
+              arrowClick={gatherValue}
               completed={item.completed}
               isDataSent={isDataSent}
-              onUpgradeActivity={onUpgradeActivity}
+              upgradeClick={onUpgradeActivity}
               upgradeCost={upgradeCost}
               step={item.step}
             />
@@ -121,7 +121,7 @@ function Activities({
               click={handlePurchaseActivity}
               id={item._id}
               source={item.src}
-              zone={false}
+              isZone={false}
             />
           )
         }) : zones.filter((item) => item.bought === false).map(item => {
@@ -136,7 +136,7 @@ function Activities({
               click={onPurchaseZone}
               id={item._id}
               source={item.src}
-              zone={true}
+              isZone={true}
             />
           )
         })}

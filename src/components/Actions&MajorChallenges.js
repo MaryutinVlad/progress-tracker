@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 
 import ChallengeActionItem from './ChallengeActionItem';
 
-function ActionsAndMajorChallenges({ availableChallenges, availableActions, mouseOver, mouseMove, mouseOut }) {
+function ActionsAndMajorChallenges({ challenges, actions, mouseOver, mouseMove, mouseOut }) {
 
   const [switchInfo, setSwitchInfo] = useState([]);
 
   function switchToChallenges() {
-    setSwitchInfo(availableChallenges);
+    setSwitchInfo(challenges);
   }
 
   function switchToActions() {
-    setSwitchInfo(availableActions);
+    setSwitchInfo(actions);
   }
 
   useEffect(() => {
-    setSwitchInfo(availableChallenges);
+    setSwitchInfo(challenges);
   }, []);
 
   return (

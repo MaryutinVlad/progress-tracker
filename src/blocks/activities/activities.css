@@ -1,9 +1,18 @@
+@keyframes poping {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .activities {
-    width: 1152px;
     height: 90%;
     display: grid;
     grid-template-columns: 4fr 3fr;
     grid-template-rows: repeat(3, 1fr);
     gap: 10px;
     margin: 10px auto;
+    animation: poping .3s linear 0s forwards;
 }

@@ -8,9 +8,9 @@ function AvailableActivityItem({
   description,
   cost,
   source,
-  onMouseOver,
-  onMouseOut,
-  onMouseClick,
+  mouseOver,
+  mouseOut,
+  click,
   isZone
 }) {
 
@@ -20,23 +20,23 @@ function AvailableActivityItem({
 
   function handleMouseOver() {
     if (isZone) {
-      onMouseOver({ name, description, cost: `${cost} WP` });
+      mouseOver({ name, description, cost: `${cost} WP` });
     } else {
-      onMouseOver({ name, description });
+      mouseOver({ name, description });
     }
   }
 
   function handleMouseOut() {
-    onMouseOut();
+    mouseOut();
   }
 
   function handleActivityClick() {
     if (isZone && wpCount.wp >= cost) {
-      return onMouseClick(id);
+      return click(id);
     }
 
     if (wpCount.slots) {
-      return onMouseClick(id);
+      return click(id);
     }
 
     console.log(wpCount.wp < cost ? 'Not enough WP' : 'No slots available');

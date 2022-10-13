@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TrialsAndMinorChallenges from './Trials&MinorChallenges';
 import ActionsAndMajorChallenges from './Actions&MajorChallenges';
 
-function Trials({ availableTrials, availableChallenges, availableActions }) {
+function Trials({ trials, challenges, actions }) {
 
   const [popupClassList, setPopupClassList] = useState('challenges__popup');
   const [coordinates, setCoordinates] = useState([]);
@@ -26,14 +26,14 @@ function Trials({ availableTrials, availableChallenges, availableActions }) {
   return (
     <div className="trials">
       <TrialsAndMinorChallenges
-       availableTrials={availableTrials}
+       trials={trials}
        mouseOver={openPopup}
        mouseMove={getCoordinates}
        mouseOut={closePopup}
       />
       <ActionsAndMajorChallenges
-        availableActions={availableActions}
-        availableChallenges={availableChallenges}
+        actions={actions}
+        challenges={challenges}
         mouseOver={openPopup}
         mouseMove={getCoordinates}
         mouseOut={closePopup}

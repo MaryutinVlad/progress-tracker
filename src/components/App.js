@@ -39,6 +39,7 @@ function App() {
         setUserData(user);
         setNextLevelAt(levelTab[user.level]);
         navigate('/');
+        console.log(user);
         })
       .then(() => {
         api.getTrials()
@@ -46,6 +47,7 @@ function App() {
             setChallenges(challenges);
             setActions(actions);
             setTrials(trials);
+            console.log({ trials, challenges, actions })
           })
           .catch((err) => {
             console.log(err);
@@ -61,7 +63,10 @@ function App() {
             setIsLoading(false);
           })
       })  
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setIsLoading(false);
+      });
   }
 
   function handleSignIn(data) {

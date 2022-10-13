@@ -13,10 +13,10 @@ function CurrentActivityItem({
   completed,
   step,
   rankTab,
-  onMouseOver,
-  onMouseOut,
-  onArrowClick,
-  onUpgradeClick,
+  mouseOver,
+  mouseOut,
+  arrowClick,
+  upgradeClick,
   isDataSent,
   upgradeCost
 }) {
@@ -27,15 +27,15 @@ function CurrentActivityItem({
   const wpCount = useContext(ResourceContext);
 
   function handleMouseOver() {
-    onMouseOver({ name, description });
+    mouseOver({ name, description });
   }
 
   function handleMouseOverUpButton() {
-    onMouseOver({ upgradeCost, rank, rankTitle: rankList[rank] });
+    mouseOver({ upgradeCost, rank, rankTitle: rankList[rank] });
   }
 
   function handleMouseOut() {
-    onMouseOut();
+    mouseOut();
   }
 
   function calculatePercentage(minor, major) {
@@ -44,12 +44,12 @@ function CurrentActivityItem({
 
   function increaseValue() {
     setInputValue(inputValue + step);
-    onArrowClick({ [name]: { totalValue: (inputValue + step) * rank + completed, currentValue: (inputValue + step) * rank } });
+    arrowClick({ [name]: { totalValue: (inputValue + step) * rank + completed, currentValue: (inputValue + step) * rank } });
   }
 
   function handleUpgradeClick() {
     if (wpCount.wp >= upgradeCost) {
-      onUpgradeClick(id, rank + 1 );
+      upgradeClick(id, rank + 1 );
       setActivityRank(rank + 1);
     } else {
       console.log('Not enough WP');
@@ -59,7 +59,7 @@ function CurrentActivityItem({
   function decreaseValue() {
     if (inputValue) {
       setInputValue(inputValue - step);
-      onArrowClick({ [name]: { totalValue: (inputValue - step) * rank + completed, currentValue: (inputValue - step) * rank } });
+      arrowClick({ [name]: { totalValue: (inputValue - step) * rank + completed, currentValue: (inputValue - step) * rank } });
     }
   }
 
@@ -69,7 +69,7 @@ function CurrentActivityItem({
 
   return (
     <div className="activities__current-item">
-      <img className="activities__current-image" alt={name} src={require(`../images/${source}`)} onMouseOver={handleMouseOver} ononMouseOut={handleMouseOut} />
+      <img className="activities__current-image" alt={name} src={require(`../images/${source}`)} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
       <div className="activities__info">
 
         <h3 className="activities__info-title">
