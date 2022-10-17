@@ -1,0 +1,7 @@
+.achievementItem__image {
+	position: relative;
+    color: antiquewhite;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}

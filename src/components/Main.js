@@ -14,6 +14,7 @@ function Main({
   trials,
   challenges,
   actions,
+  achievements,
   onPurchaseActivity,
   onEndDay,
   onPurchaseZone,
@@ -43,7 +44,9 @@ function Main({
         <Route 
           path="/achievements"
           element={
-            <Achievements />
+            <Achievements
+              achievements={achievements}
+            />
           }
         />
 

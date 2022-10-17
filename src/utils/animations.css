@@ -1,0 +1,68 @@
+@keyframes opening {
+    from {
+        width: 0;
+        background-color: red;
+    }
+    to {
+        width: 100%;
+        background-color: rgba(44, 52, 65, .3);
+    }
+}
+
+@keyframes rotateInfo {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes rotateImage {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(-180deg);
+    }
+}
+
+@keyframes popingImage {
+    from {
+        transform: scale(0.3);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes poping {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes colorChangeFirstLine {
+    from {
+        color: rgb(95, 125, 213);
+        text-shadow: 0 0 55px rosybrown;
+    }
+    to {
+        color: rgb(49, 55, 75);
+        text-shadow: 0 0 90px rosybrown;
+    }
+}
+
+@keyframes colorChangeSecondLine {
+    from {
+        color: rgb(176, 115, 183);
+        text-shadow: 0 0 55px rosybrown;
+    }
+    to {
+        color: rgb(30, 33, 42);
+        text-shadow: 0 0 90px rosybrown;
+    }
+}

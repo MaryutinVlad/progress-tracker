@@ -1,0 +1,6 @@
+.achievements__info-title {
+    margin: 10px auto 0;
+    color: rgb(163, 48, 48);
+    text-shadow: 0 0 20px rgba(170, 179, 137, 0.3);
+    letter-spacing: 1px;
+}

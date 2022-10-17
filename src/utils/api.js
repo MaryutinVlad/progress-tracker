@@ -59,6 +59,11 @@ class Api {
     delete this.options.body;
     return this._request('/trials', 'GET');
   }
+
+  getAchievements() {
+    delete this.options.body;
+    return this._request('/achievements', 'GET');
+  }
 }
 
 const api = new Api({

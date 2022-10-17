@@ -24,11 +24,11 @@ function App() {
   const [trials, setTrials] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [actions, setActions] = useState([]);
+  const [achievements, setAchievements] = useState([]);
   const [zones, setZones] = useState([]);
   const [userData, setUserData] = useState({});
   const [upgradeCost, setUpgradeCost] = useState(0);
   const [nextLevelAt, setNextLevelAt] = useState(20);
-  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -60,12 +60,15 @@ function App() {
             setCurrentActivities(activities.filter((activity) => activity.bought === true));
             setZones(zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
-            setIsLoading(false);
+            api.getAchievements()
+              .then((achievements) => {
+                setAchievements(achievements);
+                console.log(achievements);
+              })
           })
       })  
       .catch(err => {
         console.log(err);
-        setIsLoading(false);
       });
   }
 
@@ -179,7 +182,7 @@ function App() {
 
   return (
     <ResourceContext.Provider value={{wp: userData.wp, slots: userData.slots }}>
-      <div className={`page ${isLoading ? 'page_loading' : ''}`}>
+      <div className='page'>
         <Header
           userData={userData}
           logout={logout}
@@ -199,6 +202,7 @@ function App() {
                 challenges={challenges}
                 actions={actions}
                 zones={zones}
+                achievements={achievements}
                 onPurchaseActivity={handlePurchaseActivity}
                 onPurchaseZone={handlePurchaseZone}
                 onMapRestart={handleMapRestart}

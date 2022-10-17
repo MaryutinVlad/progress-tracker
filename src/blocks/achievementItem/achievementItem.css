@@ -1,0 +1,7 @@
+.achievementItem {
+    width: 25%;
+    height: 33.3%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}

@@ -2,7 +2,7 @@
 @import url('./fonts/fonts.css');
 
 @import url('./blocks/page/page.css');
-@import url('./blocks/page/_loading/page_loading.css');
+@import url('./utils/animations.css');
 
 @import url('./blocks/logo/logo.css');
 @import url('./blocks/logo/__first-line/logo__first-line.css');
@@ -74,6 +74,13 @@
 @import url('./blocks/challenges/__popup/_opened/challenges__popup_opened.css');
 
 @import url('./blocks/achievements/achievements.css');
+@import url('./blocks/achievements/__info/achievements__info.css');
+@import url('./blocks/achievements/__info-title/achievements__info-title.css');
+@import url('./blocks/achievements/__info-text/achievements__info-text.css');
+@import url('./blocks/achievements/__info-numbers/achievements__info-numbers.css');
+@import url('./blocks/achievementItem/achievementItem.css');
+@import url('./blocks/achievementItem/__image/achievementItem__image.css');
+@import url('./blocks/achievementItem/__image/_paled/achievementItem__image_paled.css');
 
 @import url('./blocks/auth/auth.css');
 @import url('./blocks/auth/__header/auth__header.css');
