@@ -7,3 +7,9 @@
     margin: 10px auto;
     animation: poping .4s linear 0s forwards;
 }
+
+@media screen and (max-width: 950px) {
+ .activities {
+    grid-template-columns: 1fr 1fr;
+ }
+}

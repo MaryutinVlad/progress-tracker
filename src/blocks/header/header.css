@@ -6,3 +6,10 @@
     font-family: 'Press-Start-K';
     color: aliceblue;
 }
+
+@media screen and (max-width: 1175px) {
+   .header {
+      width: calc(100% - 30px);
+      margin: 10px 15px;
+   } 
+}

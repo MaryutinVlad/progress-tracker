@@ -11,3 +11,17 @@
     border-radius: 20px;
     font-size: 14px;
 }
+
+@media screen and (max-width: 1175px) {
+    .header__profile-info {
+        font-size: 12px;
+        width: 50%;
+    }  
+}
+
+@media screen and (max-width: 880px) {
+    .header__profile-info {
+        font-size: 14px;
+        width: 50%;
+    }
+}

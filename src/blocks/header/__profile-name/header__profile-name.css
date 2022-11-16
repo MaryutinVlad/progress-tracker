@@ -7,3 +7,16 @@
     margin: 0;
     font-size: 16px;
 }
+
+
+@media screen and (max-width: 1175px) {
+ .header__profile-name {
+    font-size: 14px;
+ } 
+}
+
+@media screen and (max-width: 880px) {
+ .header__profile-name {
+    font-size: 14px;
+ }
+}

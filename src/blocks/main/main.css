@@ -1,7 +1,13 @@
 .main {
   height: 80%;
-  width: 1152px;
+  max-width: 1152px;
   display: flex;
   flex-direction: column;
   margin: 0 auto 0 auto;
+}
+
+@media screen and (max-width: 1175px) {
+  .main {
+    width: calc(100% - 30px);
+  }  
 }

@@ -1,5 +1,5 @@
 .header__logout-button {
-    width: 150px;
+    max-width: 150px;
     height: 35px;
     border: none;
     background-color: rgb(212, 176, 78);

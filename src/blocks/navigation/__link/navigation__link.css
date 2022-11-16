@@ -26,3 +26,10 @@
   color: rgb(95, 125, 213);
   text-shadow: 0 0 10px rgb(95, 125, 213);
 }
+
+@media screen and (max-width: 1175px) {
+  .navigation__link {
+    font-size: 20px;
+    padding: 8px;
+  }
+}

@@ -13,12 +13,12 @@ function Navigation() {
   }, [location.pathname]);
 
   return (
-    <div className="navigation">
+    <nav className="navigation">
       <NavLink className={activitiesClassList} to='/activities'>Activities</NavLink>
       <NavLink className={trialsClassList} to='/trials'>Trials</NavLink>
       <NavLink className={achievementsClassList} to='/achievements'>Achievements</NavLink>
       <NavLink className={statisticsClassList} to='/statistics'>Statistics</NavLink>
-    </div>
+    </nav>
   )
 }
 

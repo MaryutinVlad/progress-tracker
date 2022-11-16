@@ -1,8 +1,14 @@
 .navigation {
   height: 8%;
-  width: 1152px;
+  max-width: 1152px;
   background-color: rgba(44, 52, 65, .3);
   display: flex;
   flex-direction: row;
   border-radius: 20px;
+}
+
+@media screen and (max-width: 1175px) {
+ .navigation {
+  height: 6.5%;
+ } 
 }

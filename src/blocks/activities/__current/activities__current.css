@@ -8,3 +8,11 @@
     gap: 2px 0;
     border-radius: 20px 0 0 20px;
 }
+
+@media screen and (max-width: 1130px) {
+  .activities__current {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}

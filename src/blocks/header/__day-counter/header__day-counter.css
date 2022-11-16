@@ -4,3 +4,21 @@
     font-size: 15px;
     letter-spacing: 1.5px;
 }
+
+@media screen and (max-width: 1175px) {
+ .header__day-counter {
+    font-size: 13px;
+ } 
+}
+
+@media screen and (max-width: 910px) {
+ .header__day-counter {
+    font-size: 11px;
+ }
+}
+
+@media screen and (max-width: 880px) {
+ .header__day-counter {
+    font-size: 14px;
+ }
+}

@@ -9,3 +9,10 @@
     color: rgb(176, 115, 183);
     text-shadow: 0 0 55px rosybrown;
 }
+
+@media screen and (max-width: 880px) {
+ .logo__second-line {
+    text-align: center;
+    padding: 5px 0 0 10px;
+ }
+}
