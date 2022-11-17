@@ -33,3 +33,9 @@
     padding: 8px;
   }
 }
+
+@media screen and (max-width: 855px) {
+  .navigation__link {
+    font-size: 18px;
+  }   
+}

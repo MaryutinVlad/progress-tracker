@@ -6,6 +6,7 @@ import Activities from './Activities';
 import Achievements from './Achievements';
 import Trials from './Trials';
 import Statistics from './Statistics';
+import FrontPage from './FrontPage';
 
 function Main({
   availableActivities,
@@ -72,6 +73,13 @@ function Main({
               onMapRestart={onMapRestart}
               upgradeCost={upgradeCost}
             />
+          }
+        />
+
+        <Route
+          path="*"
+          element= {
+            <FrontPage />
           }
         />
 

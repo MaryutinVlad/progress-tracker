@@ -14,3 +14,15 @@
     width: 50%;
   }
 }
+
+@media screen and (max-width: 855px) {
+  .logo {
+    height: 85px;
+    gap: 0 10px;
+    flex-direction: row;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    justify-content: center;
+    align-items: center;
+  } 
+}

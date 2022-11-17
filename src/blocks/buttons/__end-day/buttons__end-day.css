@@ -16,3 +16,9 @@
     color: rgb(95, 125, 213);
     text-shadow: 0 0 35px rosybrown;
 }
+
+@media screen and (max-width: 880px) {
+    .buttons__end-day {
+        width: 50%;
+    }
+}

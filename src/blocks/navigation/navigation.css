@@ -1,6 +1,7 @@
 .navigation {
   height: 8%;
   max-width: 1152px;
+  width: calc(100vw - 30px);
   background-color: rgba(44, 52, 65, .3);
   display: flex;
   flex-direction: row;
@@ -8,7 +9,18 @@
 }
 
 @media screen and (max-width: 1175px) {
- .navigation {
-  height: 6.5%;
- } 
+  .navigation {
+    height: 6.5%;
+    width: 100%;
+  } 
+}
+
+@media screen and (max-width: 855px) {
+  .navigation {
+    position: sticky;
+    top: 2px;
+    left: 0;
+    background-color: #101414;
+    z-index: 1;
+  }
 }

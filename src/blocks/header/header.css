@@ -13,3 +13,10 @@
       margin: 10px 15px;
    } 
 }
+
+@media screen and (max-width: 855px) {
+   .header {
+      min-width: 330px;
+      flex-direction: column;
+   }  
+}

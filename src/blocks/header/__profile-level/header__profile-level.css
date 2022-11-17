@@ -8,3 +8,12 @@
     padding: 10px 0 0;
     margin: 0;
 }
+
+@media screen and (max-width: 855px) {
+    .header__profile-level {
+        grid-column-start: 2;
+        grid-column-end: 4;
+        padding: 17px 0 0;
+        justify-content: space-around;
+    } 
+}

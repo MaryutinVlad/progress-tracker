@@ -10,13 +10,15 @@
 
 
 @media screen and (max-width: 1175px) {
- .header__profile-name {
-    font-size: 14px;
- } 
+  .header__profile-name {
+     font-size: 14px;
+  } 
 }
 
-@media screen and (max-width: 880px) {
- .header__profile-name {
-    font-size: 14px;
- }
+@media screen and (max-width: 855px) {
+   .header__profile-name {
+      font-size: 16px;
+      grid-column-start: 1;
+      grid-column-end: 2;
+   } 
 }

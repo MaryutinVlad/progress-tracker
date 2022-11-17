@@ -16,3 +16,11 @@
     padding: 5px 0 0 10px;
  }
 }
+
+@media screen and (max-width: 855px) {
+ .logo__second-line {
+    text-transform: capitalize;
+    font-size: 40px;
+    padding: 0;
+ } 
+}
