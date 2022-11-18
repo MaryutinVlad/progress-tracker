@@ -1,0 +1,13 @@
+.activities__available-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 15px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    background-color: rgba(44, 52, 65, .3);
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    border-radius: 0 20px 0 0;
+}

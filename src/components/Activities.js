@@ -108,38 +108,40 @@ function Activities({
         </div>
       </div>
 
-      <div className="activities__available">
-        {slots ? availableActivities.map(item => {
-          return (
-            <AvailableActivityItem
-              key={item._id}
-              name={item.name}
-              description={item.description}
-              cost={item.cost}
-              mouseOver={handleMousingOverItem}
-              mouseOut={handleMousingOut}
-              click={handlePurchaseActivity}
-              id={item._id}
-              source={item.src}
-              isZone={false}
-            />
-          )
-        }) : zones.filter((item) => item.bought === false).map(item => {
-          return (
-            <AvailableActivityItem
-              key={item._id}
-              name={item.name}
-              description={item.description}
-              cost={item.cost}
-              mouseOver={handleMousingOverItem}
-              mouseOut={handleMousingOut}
-              click={onPurchaseZone}
-              id={item._id}
-              source={item.src}
-              isZone={true}
-            />
-          )
-        })}
+      <div className="activities__available-container">
+        <div className="activities__available">
+          {slots ? availableActivities.map(item => {
+            return (
+              <AvailableActivityItem
+                key={item._id}
+                name={item.name}
+                description={item.description}
+                cost={item.cost}
+                mouseOver={handleMousingOverItem}
+                mouseOut={handleMousingOut}
+                click={handlePurchaseActivity}
+                id={item._id}
+                source={item.src}
+                isZone={false}
+              />
+            )
+          }) : zones.filter((item) => item.bought === false).map(item => {
+            return (
+              <AvailableActivityItem
+                key={item._id}
+                name={item.name}
+                description={item.description}
+                cost={item.cost}
+                mouseOver={handleMousingOverItem}
+                mouseOut={handleMousingOut}
+                click={onPurchaseZone}
+                id={item._id}
+                source={item.src}
+                isZone={true}
+              />
+            )
+          })}
+        </div>
         <div className="activities__global-buttons">
           <button
             className="buttons__end-day"

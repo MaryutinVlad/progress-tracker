@@ -1,7 +1,7 @@
 .activities {
     height: 90%;
     display: grid;
-    grid-template-columns: 4fr 3fr;
+    grid-template-columns: 5fr 4fr;
     grid-template-rows: repeat(3, 1fr);
     gap: 10px;
     margin: 10px auto;

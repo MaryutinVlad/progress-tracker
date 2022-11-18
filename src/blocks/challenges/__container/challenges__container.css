@@ -14,6 +14,3 @@
     background: radial-gradient(circle at center, rgba(63, 63, 127, 0.5), transparent 100%) ;
     border-radius: 30px;
 }
-
-.challenges__container::-webkit-scrollbar-track {
-}

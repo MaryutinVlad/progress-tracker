@@ -5,3 +5,10 @@
     margin: 10px 40px;
     letter-spacing: 2px;
 }
+
+@media screen and (max-width: 1150px) {
+    .activities__slots-number {
+        font-size: 22px;
+        margin: 5px auto;
+    }
+}

@@ -14,3 +14,14 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 855px) {
+    .activities__description {
+        position: sticky;
+        height: auto;
+        font-size: 23px;
+        padding: 0 10px;
+        bottom: 0;
+        background-color: rgba(31, 38, 48, 0.8);
+    }
+}

@@ -1,5 +1,5 @@
 .activities__available-item {
-    width: 128px;
-    height: 128px;
+    width: 25%;
+    max-height: 40%;
     opacity: .8;
 }

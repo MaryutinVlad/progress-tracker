@@ -35,6 +35,7 @@
 @import url('./blocks/activities/activities.css');
 
 @import url('./blocks/activities/__available/activities__available.css');
+@import url('./blocks/activities/__available-container/activities__available-container.css');
 @import url('./blocks/activities/__available-item/activities__available-item.css');
 @import url('./blocks/activities/__available-item/_paled/activities__available-item_paled.css');
 @import url('./blocks/activities/__current/activities__current.css');
