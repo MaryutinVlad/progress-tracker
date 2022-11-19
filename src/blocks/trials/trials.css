@@ -7,3 +7,10 @@
     gap: 0 10px;
     animation: poping .4s linear 0s forwards;
 }
+
+@media screen and (max-width: 835px) {
+    .trials {
+        flex-direction: column;
+        gap: 15px 0;
+    }
+}

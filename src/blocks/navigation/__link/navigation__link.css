@@ -9,6 +9,7 @@
   letter-spacing: 1.7px;
   padding: 10px;
   color: antiquewhite;
+  box-sizing: border-box;
 }
 
 .navigation__link:first-child {
@@ -37,5 +38,11 @@
 @media screen and (max-width: 855px) {
   .navigation__link {
     font-size: 18px;
-  }   
+  }
+  .navigation__link:first-child {
+    border-radius: 0;
+  }
+  .navigation__link:last-child {
+    border-radius: 0;
+  }
 }

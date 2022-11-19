@@ -26,3 +26,10 @@
     align-items: center;
   } 
 }
+
+@media screen and (max-width: 665px) {
+  .logo {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}

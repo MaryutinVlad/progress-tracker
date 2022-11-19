@@ -16,3 +16,9 @@
     justify-content: flex-start;
   }
 }
+
+@media screen and (max-width: 855px) {
+  .activities__current {
+    border-radius: 0;
+  }
+}

@@ -8,3 +8,11 @@
     flex-direction: row;
     justify-content: center;
 }
+
+@media screen and (max-width: 855px) {
+    .activities__global-buttons {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        margin: 10px 0;
+    }
+}

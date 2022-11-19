@@ -27,3 +27,9 @@
     text-shadow: 0 0 10px antiquewhite;
     background-color: rgba(108, 103, 196, 0.1);
 }
+
+@media screen and (max-width: 835px) {
+    .challenges__navigation-link:last-child {
+        border-radius: 0;
+    }
+}

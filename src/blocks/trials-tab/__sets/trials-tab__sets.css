@@ -3,3 +3,16 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
 }
+
+@media screen and (max-width: 750px) {
+    .trials-tab__sets {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .trials-tab__sets {
+        display: flex;
+        flex-direction: column;
+    }
+}

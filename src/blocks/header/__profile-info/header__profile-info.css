@@ -34,5 +34,12 @@
         width: 100%;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        border-radius: 20px 20px 0 0;
     } 
 }
+
+@media screen and (max-width: 665px) {
+    .header__profile-info {
+      font-size: 12px;
+    }
+  }

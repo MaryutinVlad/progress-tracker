@@ -13,3 +13,10 @@
     padding: 0;
   } 
 }
+
+@media screen and (max-width: 665px) {
+  .logo__first-line {
+    letter-spacing: 1px;
+    font-size: 36px;
+  }
+}

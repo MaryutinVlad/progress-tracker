@@ -23,5 +23,6 @@
         padding: 0 10px;
         bottom: 0;
         background-color: rgba(31, 38, 48, 0.8);
+        border-radius: 0;
     }
 }

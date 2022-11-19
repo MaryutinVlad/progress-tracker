@@ -11,16 +11,23 @@
 }
 
 @media screen and (max-width: 880px) {
- .logo__second-line {
-    text-align: center;
-    padding: 5px 0 0 10px;
- }
+  .logo__second-line {
+     text-align: center;
+     padding: 5px 0 0 10px;
+  }
 }
 
 @media screen and (max-width: 855px) {
- .logo__second-line {
-    text-transform: capitalize;
-    font-size: 40px;
-    padding: 0;
- } 
+  .logo__second-line {
+     text-transform: capitalize;
+     font-size: 40px;
+     padding: 0;
+  } 
 }
+
+@media screen and (max-width: 665px) {
+   .logo__second-line {
+     letter-spacing: 1px;
+     font-size: 36px;
+   }
+ }
