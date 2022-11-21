@@ -1,0 +1,66 @@
+[
+  {
+		"name": "-G",
+		"description": "Gaming restriction",
+		"cost": 15,
+		"baseReward": 1,
+		"incReward": 1,
+		"maxReward": 5
+  },
+	{
+		"name": "-P",
+		"description": "Pett restriction",
+		"cost": 30,
+		"baseReward": 1,
+		"incReward": 1.5,
+		"maxReward": 8
+  },
+	{
+		"name": "-N",
+		"description": "Nicotine restriction",
+		"cost": 50,
+		"baseReward": 1,
+		"incReward": 2.5,
+		"maxReward": 13
+  },
+	{
+		"name": "-Hm lvl 1",
+		"description": "Harmful expenses restriction",
+		"cost": 20,
+		"baseReward": 1,
+		"incReward": 0.5,
+		"maxReward": 10
+  },
+	{
+		"name": "-Hm lvl 2",
+		"description": "Heavy harmful expenses restriction",
+		"cost": 65,
+		"baseReward": 1,
+		"incReward": 0.5,
+		"maxReward": 15
+  },
+	{
+		"name": "-Hm lvl 3",
+		"description": "Ultimate harmful expenses restriction",
+		"cost": 125,
+		"baseReward": 1,
+		"incReward": 0.5,
+		"maxReward": 25
+  },
+	{
+		"name": "test",
+		"description": "test",
+		"cost": 25,
+		"baseReward": 1,
+		"incReward": 1,
+		"maxReward": 8
+  },
+	{
+		"name": "another test",
+		"description": "another test",
+		"cost": 25,
+		"baseReward": 1,
+		"incReward": 1,
+		"maxReward": 8
+  }
+]

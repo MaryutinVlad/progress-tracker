@@ -1,0 +1,32 @@
+[
+  {
+		"name": "First zone",
+		"description": "Fist two slots",
+		"src": "first-zone.png",
+		"cost": 10
+	},
+	{
+		"name": "Second zone",
+		"description": "Third and fourth slots",
+		"src": "second-zone.png",
+		"cost": 15
+	},
+	{
+		"name": "Third zone",
+		"description": "Fifth and sisxth slots",
+		"src": "third-zone.png",
+		"cost": 25
+	},
+	{
+		"name": "Fourth zone",
+		"description": "Seventh and eighth slots",
+		"src": "fourth-zone.png",
+		"cost": 50
+	},
+	{
+		"name": "Fifth zone",
+		"description": "Final two slots",
+		"src": "fifth-zone.png",
+		"cost": 90
+	}
+]

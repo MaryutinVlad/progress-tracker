@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Physical Education",
+    "description": "Start build up your body with this starter pack. 10 times of any physical activity per unit.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [20, 60, 120],
+    "src": "physicalEducation.png"
+  },
+  {
+    "name": "House keeping",
+    "description": "Clean your living space or cook something. 1 action per unit.",
+    "reward": 1,
+    "step": 0.5,
+    "rankTab": [7, 15, 28],
+    "src": "houseKeeping.png"
+  },
+  {
+    "name": "Reading",
+    "description": "Any readable item is acceptable. 10 pages per unit.",
+    "reward": 1,
+    "step": 10,
+    "rankTab": [200, 400, 600],
+    "src": "biggerTestReading.png"
+  },
+  {
+    "name": "Coding",
+    "description": "Work hours doesn't count. 1 hour per unit.",
+    "reward": 1,
+    "step": 0.5,
+    "rankTab": [10, 20, 30],
+    "src": "coding.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  },
+  {
+    "name": "Diaring",
+    "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
+    "reward": 1,
+    "step": 1,
+    "rankTab": [5, 12, 25],
+    "src": "diaring.png"
+  }
+]

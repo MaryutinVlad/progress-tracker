@@ -6,6 +6,7 @@ import Main from './Main';
 import Auth from './Auth';
 import apiAuth from '../utils/apiAuth';
 import api from '../utils/api';
+import LocalModePopup from './LocalModePopup';
 import { ResourceContext } from '../contexts/ResourceContext';
 import { levelTab, upgradeCostTab } from '../utils/tabs';
 import { findBoughtItem, calculateRewards, distributeResults } from '../utils/functions';
@@ -19,6 +20,8 @@ function App() {
   
   const [loggedIn, setLoggedIn] = useState(false);
   const [isDataSent, setIsDataSent] = useState(false);
+  const [isLocalModePopupShown, setIsLocalModePopupShown] = useState(false);
+  const [isLocalMode, setIsLocalMode] = useState(false);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
   const [trials, setTrials] = useState([]);
@@ -188,6 +191,10 @@ function App() {
           logout={logout}
           loggedIn={loggedIn}
           levelProgress={`${userData.xp} / ${levelTab[userData.level]}`}
+        />
+
+        <LocalModePopup
+          isShown={isLocalModePopupShown}
         />
             
         <Routes>
