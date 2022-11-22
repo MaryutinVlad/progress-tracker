@@ -1,9 +1,9 @@
 import React from "react";
 
-function Header({ logout, levelProgress, userData, loggedIn }) {
+function Header({ logout, levelProgress, userData, loggedIn, biggerLogo }) {
   return (
     <header className="header">
-      <div className="logo">
+      <div className={`logo ${biggerLogo ? 'logo_bigger' : ''}`}>
         <p className="logo__first-line logo__animation-first-line">Progress</p>
         <p className="logo__second-line logo__animation-second-line">tracker</p>
       </div>

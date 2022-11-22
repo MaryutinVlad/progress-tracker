@@ -6,6 +6,7 @@ function Auth({
   formName,
   onEvent,
   redirectTo,
+  onLocalModeClick
 }) {
 
   const [email, setEmail] = useState('');
@@ -17,6 +18,10 @@ function Auth({
 
   function handlePasswordChange(e) {
     setPassword(e.target.value);
+  }
+
+  function toggleLocalMode() {
+    onLocalModeClick(true);
   }
 
   function handleSubmit(e) {
@@ -36,9 +41,14 @@ function Auth({
         <input className="auth__input-field" type="password" name="password" id="password-input"
         placeholder="password" value={password || ''} onChange={handlePasswordChange} required/>
         <span className='form__error'>{password.length < 6 && password.length !== 0 ? 'Invalid password' : ''}</span>
-        <button className="auth__submit-button" type="submit">
-          {title}
-        </button>
+        <div className='auth__button-container'>
+          <button className="auth__submit-button" type="submit">
+            {title}
+          </button>
+          <button className='auth__submit-button' type='button' onClick={toggleLocalMode}>
+            Local mode
+          </button>
+        </div>
       </form>
       <NavLink className="auth__link" to={redirectTo}>
         {redirectTo === '/signin' ? 

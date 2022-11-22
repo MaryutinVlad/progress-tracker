@@ -1,0 +1,15 @@
+.localMode__button {
+  margin: 10px auto 5px;
+  width: 35%;
+  font-size: 17px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5px;
+  cursor: pointer;
+  border-color: rgb(199, 204, 208);
+  background-color: rgb(199, 204, 208);
+}
+
+.localMode__button:hover {
+  background-color: rgb(221, 226, 230);
+}

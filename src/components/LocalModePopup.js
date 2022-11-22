@@ -1,8 +1,22 @@
 import React from "react";
 
-function LocalModePopup() {
+function LocalModePopup({
+  isShown,
+	onCloseClick,
+	onSubmit
+}) {
+
+	function closeClick() {
+		onCloseClick(false);
+	}
+
+	function enableLocalMode(e) {
+		e.preventDefault();
+		onSubmit(true);
+	}
+
   return (
-		<div className="overlay">
+		<div className={`overlay ${isShown ? 'overlay_visible' : ''}`} onClick={closeClick}>
 		  <form className="localMode">
 			  <h3 className="localMode__title">
 				  Connection failed
@@ -15,6 +29,7 @@ function LocalModePopup() {
 			  <button
 				  type="submit"
 				  className="localMode__button"
+					onClick={enableLocalMode}
 			  >
 				  Start in local mode
 			  </button>

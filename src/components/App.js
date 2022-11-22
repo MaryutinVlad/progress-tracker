@@ -22,6 +22,7 @@ function App() {
   const [isDataSent, setIsDataSent] = useState(false);
   const [isLocalModePopupShown, setIsLocalModePopupShown] = useState(false);
   const [isLocalMode, setIsLocalMode] = useState(false);
+  const [isLogoBigger, setIsLogoBigger] = useState(true);
   const [currentActivities, setCurrentActivities] = useState([]);
   const [availableActivities, setAvailableActivities] = useState([]);
   const [trials, setTrials] = useState([]);
@@ -43,6 +44,7 @@ function App() {
         setNextLevelAt(levelTab[user.level]);
         navigate('/');
         console.log(user);
+        setIsLogoBigger(false);
         })
       .then(() => {
         api.getTrials()
@@ -88,6 +90,10 @@ function App() {
       })
   }
 
+  function handleLocalModeClick(isShown) {
+    setIsLocalModePopupShown(isShown);
+  }
+
   function handleSignUp(data) {
     apiAuth.register(data)
       .then(() => {
@@ -111,6 +117,13 @@ function App() {
     setUserData({});
     setLoggedIn(false);
     navigate('/signin');
+    setIsLogoBigger(true);
+  }
+
+  function enableLocalMode() {
+    setIsLocalMode(true);
+    setIsLogoBigger(false);
+    navigate('/')
   }
 
   function handlePurchaseActivity(activityId) {
@@ -189,19 +202,22 @@ function App() {
         <Header
           userData={userData}
           logout={logout}
-          loggedIn={loggedIn}
+          loggedIn={loggedIn || isLocalMode}
           levelProgress={`${userData.xp} / ${levelTab[userData.level]}`}
+          biggerLogo={isLogoBigger}
         />
 
         <LocalModePopup
           isShown={isLocalModePopupShown}
+          onCloseClick={handleLocalModeClick}
+          onSubmit={enableLocalMode}
         />
             
         <Routes>
 
           <Route
             exact path='*'
-            element={ loggedIn ?
+            element={ loggedIn || isLocalMode ?
               <Main
                 availableActivities={availableActivities}
                 currentActivities={currentActivities}
@@ -229,6 +245,7 @@ function App() {
                 formName='login'
                 onEvent={handleSignIn}
                 redirectTo='/signup'
+                onLocalModeClick={handleLocalModeClick}
               />
             }
           />
@@ -241,6 +258,7 @@ function App() {
                 formName='register'
                 onEvent={handleSignUp}
                 redirectTo='/signin'
+                onLocalModeClick={handleLocalModeClick}
               />
             }
           />
