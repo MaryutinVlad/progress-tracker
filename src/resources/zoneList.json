@@ -1,32 +1,42 @@
 [
   {
+		"_id": "z1",
 		"name": "First zone",
 		"description": "Fist two slots",
 		"src": "first-zone.png",
-		"cost": 10
+		"cost": 10,
+		"bought": false
 	},
 	{
+		"_id": "z2",
 		"name": "Second zone",
 		"description": "Third and fourth slots",
 		"src": "second-zone.png",
-		"cost": 15
+		"cost": 15,
+		"bought": false
 	},
 	{
+		"_id": "z3",
 		"name": "Third zone",
 		"description": "Fifth and sisxth slots",
 		"src": "third-zone.png",
-		"cost": 25
+		"cost": 25,
+		"bought": false
 	},
 	{
+		"_id": "z4",
 		"name": "Fourth zone",
 		"description": "Seventh and eighth slots",
 		"src": "fourth-zone.png",
-		"cost": 50
+		"cost": 50,
+		"bought": false
 	},
 	{
+		"_id": "z5",
 		"name": "Fifth zone",
 		"description": "Final two slots",
 		"src": "fifth-zone.png",
-		"cost": 90
+		"cost": 90,
+		"bought": false
 	}
 ]

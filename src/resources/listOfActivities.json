@@ -1,5 +1,6 @@
 [
   {
+    "_id": "a1",
     "name": "Physical Education",
     "description": "Start build up your body with this starter pack. 10 times of any physical activity per unit.",
     "reward": 1,
@@ -8,6 +9,7 @@
     "src": "physicalEducation.png"
   },
   {
+    "_id": "a2",
     "name": "House keeping",
     "description": "Clean your living space or cook something. 1 action per unit.",
     "reward": 1,
@@ -16,6 +18,7 @@
     "src": "houseKeeping.png"
   },
   {
+    "_id": "a3",
     "name": "Reading",
     "description": "Any readable item is acceptable. 10 pages per unit.",
     "reward": 1,
@@ -24,6 +27,7 @@
     "src": "biggerTestReading.png"
   },
   {
+    "_id": "a4",
     "name": "Coding",
     "description": "Work hours doesn't count. 1 hour per unit.",
     "reward": 1,
@@ -32,6 +36,7 @@
     "src": "coding.png"
   },
   {
+    "_id": "a5",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -40,6 +45,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a6",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -48,6 +54,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a7",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -56,6 +63,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a8",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -64,6 +72,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a9",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -72,6 +81,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a10",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -80,6 +90,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a11",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,
@@ -88,6 +99,7 @@
     "src": "diaring.png"
   },
   {
+    "_id": "a12",
     "name": "Diaring",
     "description": "Thoughts and feelings fixed on paper. 1 action. Can't be overdone.",
     "reward": 1,

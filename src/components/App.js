@@ -10,6 +10,9 @@ import LocalModePopup from './LocalModePopup';
 import { ResourceContext } from '../contexts/ResourceContext';
 import { levelTab, upgradeCostTab } from '../utils/tabs';
 import { findBoughtItem, calculateRewards, distributeResults } from '../utils/functions';
+import localUser from '../resources/localUser.json';
+import localActivities from '../resources/listOfActivities.json';
+import localZones from '../resources/zoneList.json';
 
 //info for drawing (default size)
 //challenge's image size 380x158 px
@@ -123,7 +126,7 @@ function App() {
   function enableLocalMode() {
     setIsLocalMode(true);
     setIsLogoBigger(false);
-    navigate('/')
+    navigate('/');
   }
 
   function handlePurchaseActivity(activityId) {
@@ -194,16 +197,26 @@ function App() {
 
   useEffect(() => {
     handleAuthorize();
+    console.log(localActivities);
+    console.log(localZones);
+    console.log(localUser);
   }, []);
 
   return (
-    <ResourceContext.Provider value={{wp: userData.wp, slots: userData.slots }}>
+    <ResourceContext.Provider value={
+      isLocalMode ?
+      {wp: localUser.wp, slots: localUser.slots}
+      : {wp: userData.wp, slots: userData.slots }}
+      >
       <div className='page'>
         <Header
-          userData={userData}
+          userData={isLocalMode ? localUser : userData}
           logout={logout}
           loggedIn={loggedIn || isLocalMode}
-          levelProgress={`${userData.xp} / ${levelTab[userData.level]}`}
+          levelProgress={
+            `${isLocalMode ? localUser.xp : userData.xp} /
+            ${isLocalMode ? levelTab[localUser.level] : levelTab[userData.level]}`
+          }
           biggerLogo={isLogoBigger}
         />
 
@@ -219,12 +232,12 @@ function App() {
             exact path='*'
             element={ loggedIn || isLocalMode ?
               <Main
-                availableActivities={availableActivities}
+                availableActivities={isLocalMode ? localActivities : availableActivities}
                 currentActivities={currentActivities}
                 trials={trials}
                 challenges={challenges}
                 actions={actions}
-                zones={zones}
+                zones={isLocalMode ? localZones : zones}
                 achievements={achievements}
                 onPurchaseActivity={handlePurchaseActivity}
                 onPurchaseZone={handlePurchaseZone}

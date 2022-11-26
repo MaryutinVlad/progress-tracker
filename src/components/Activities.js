@@ -22,6 +22,7 @@ function Activities({
   const [values, setValues] = useState({});
 
   const { wp, slots } = useContext(ResourceContext);
+  console.log(zones);
 
   function handleMousingOverItem(item) {
     if (item.upgradeCost) {
