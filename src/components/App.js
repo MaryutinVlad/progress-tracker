@@ -13,6 +13,10 @@ import { findBoughtItem, calculateRewards, distributeResults } from '../utils/fu
 import localUser from '../resources/localUser.json';
 import localActivities from '../resources/listOfActivities.json';
 import localZones from '../resources/zoneList.json';
+import localAchievements from '../resources/listOfAchievements.json';
+import localActions from '../resources/listOfActions.json';
+import localChallenges from '../resources/listOfChallenges.json';
+import localTrials from '../resources/listOfTrials.json';
 
 //info for drawing (default size)
 //challenge's image size 380x158 px
@@ -26,16 +30,22 @@ function App() {
   const [isLocalModePopupShown, setIsLocalModePopupShown] = useState(false);
   const [isLocalMode, setIsLocalMode] = useState(false);
   const [isLogoBigger, setIsLogoBigger] = useState(true);
-  const [currentActivities, setCurrentActivities] = useState([]);
-  const [availableActivities, setAvailableActivities] = useState([]);
-  const [trials, setTrials] = useState([]);
-  const [challenges, setChallenges] = useState([]);
-  const [actions, setActions] = useState([]);
-  const [achievements, setAchievements] = useState([]);
-  const [zones, setZones] = useState([]);
-  const [userData, setUserData] = useState({});
-  const [upgradeCost, setUpgradeCost] = useState(0);
-  const [nextLevelAt, setNextLevelAt] = useState(20);
+  const [currentActivities, setCurrentActivities] = useState(
+    localActivities.filter(activity => activity.bought)
+  );
+  const [availableActivities, setAvailableActivities] = useState(
+    localActivities.filter(activity => !activity.bought)
+  );
+  const [trials, setTrials] = useState(localTrials);
+  const [challenges, setChallenges] = useState(localChallenges);
+  const [actions, setActions] = useState(localActions);
+  const [achievements, setAchievements] = useState(localAchievements);
+  const [zones, setZones] = useState(localZones);
+  const [userData, setUserData] = useState(localUser);
+  const [upgradeCost, setUpgradeCost] = useState(
+    upgradeCostTab[localZones.filter(zone => zone.bought).length]
+  );
+  const [nextLevelAt, setNextLevelAt] = useState(levelTab[localUser.level]);
 
   const navigate = useNavigate();
 
@@ -62,10 +72,10 @@ function App() {
           })
         api.getActivities()
           .then(({ activities, zones }) => {
-            const upgradeCostTier = zones.filter((zone) => zone.bought === true).length;
+            const upgradeCostTier = zones.filter((zone) => zone.bought).length;
 
-            setAvailableActivities(activities.filter((activity) => activity.bought === false));
-            setCurrentActivities(activities.filter((activity) => activity.bought === true));
+            setAvailableActivities(activities.filter((activity) => !activity.bought));
+            setCurrentActivities(activities.filter((activity) => activity.bought));
             setZones(zones);
             setUpgradeCost(upgradeCostTab[upgradeCostTier]);
             api.getAchievements()
@@ -126,6 +136,13 @@ function App() {
   function enableLocalMode() {
     setIsLocalMode(true);
     setIsLogoBigger(false);
+    if (localStorage.getItem('ptracker-local-user')) {
+      const { availableActivities, currentActivities } = JSON.parse(localStorage.getItem('ptracker-local-activities'));
+      setCurrentActivities(currentActivities);
+      setAvailableActivities(availableActivities);
+      setZones(JSON.parse(localStorage.getItem('ptracker-local-zones')));
+      setUserData(JSON.parse(localStorage.getItem('ptracker-local-user')));
+    }
     navigate('/');
   }
 
@@ -154,16 +171,16 @@ function App() {
     console.log('purchasing zone...', zoneId);
     api.purchaseZone(zoneId, userData.wp)
       .then(({ purchasedZone, updatedUser }) => {
-        const boughtItemIndex = findBoughtItem(zones, purchasedZone.name);
+        const boughtItemIndex = findBoughtItem(zones, purchasedZone.name, 'name');
         zones[boughtItemIndex] = purchasedZone;
         setUserData({...userData, wp: updatedUser.wp, slots: updatedUser.slots});
 
-        const upgradeCostTier = zones.filter((zone) => zone.bought === true).length;
+        const upgradeCostTier = zones.filter((zone) => zone.bought).length;
         setUpgradeCost(upgradeCostTab[upgradeCostTier]);
       })
       .catch((err) => {
-        console.log(err);
-      })
+        console.log(err)
+      })  
   }
 
   function handleUpgradeClick(activityId, rank) {
@@ -195,27 +212,49 @@ function App() {
       })
   }
 
+  //functions for local mode
+    function purchaseZoneLocally(zoneId) {
+      const { index, item } = findBoughtItem(zones, zoneId, '_id');
+      zones[index].bought = true;
+
+      const updatedUser = {...userData, wp: userData.wp - item.cost, slots: userData.slots + 2};
+      setUserData(updatedUser);
+      setUpgradeCost(upgradeCost + 1);
+      localStorage.setItem('ptracker-local-zones', JSON.stringify(zones));
+      localStorage.setItem('ptracker-local-user', JSON.stringify({user: updatedUser}))
+    }
+
+    function purchaseActivityLocally(activityId) {
+      console.log('purchasing activity...', activityId);
+      const { index, } = findBoughtItem(availableActivities, activityId, '_id');
+      
+      availableActivities[index].bought = true;
+      currentActivities.push(availableActivities[index]);
+      availableActivities.splice(index, 1);
+
+      const updatedUser = {...userData, slots: userData.slots - 1};
+      setUserData(updatedUser);
+      console.log(availableActivities, currentActivities);
+      localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
+      localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
+    }
+
   useEffect(() => {
     handleAuthorize();
-    console.log(localActivities);
-    console.log(localZones);
-    console.log(localUser);
+    //console.log(localActivities);
+    //console.log(localZones);
+    //console.log(localUser);
   }, []);
 
   return (
-    <ResourceContext.Provider value={
-      isLocalMode ?
-      {wp: localUser.wp, slots: localUser.slots}
-      : {wp: userData.wp, slots: userData.slots }}
-      >
+    <ResourceContext.Provider value={{wp: userData.wp, slots: userData.slots }}>
       <div className='page'>
         <Header
-          userData={isLocalMode ? localUser : userData}
+          userData={userData}
           logout={logout}
           loggedIn={loggedIn || isLocalMode}
           levelProgress={
-            `${isLocalMode ? localUser.xp : userData.xp} /
-            ${isLocalMode ? levelTab[localUser.level] : levelTab[userData.level]}`
+            `${userData.xp} / ${levelTab[userData.level]}`
           }
           biggerLogo={isLogoBigger}
         />
@@ -232,15 +271,15 @@ function App() {
             exact path='*'
             element={ loggedIn || isLocalMode ?
               <Main
-                availableActivities={isLocalMode ? localActivities : availableActivities}
+                availableActivities={availableActivities}
                 currentActivities={currentActivities}
                 trials={trials}
                 challenges={challenges}
                 actions={actions}
-                zones={isLocalMode ? localZones : zones}
+                zones={zones}
                 achievements={achievements}
-                onPurchaseActivity={handlePurchaseActivity}
-                onPurchaseZone={handlePurchaseZone}
+                onPurchaseActivity={isLocalMode ? purchaseActivityLocally : handlePurchaseActivity}
+                onPurchaseZone={isLocalMode ? purchaseZoneLocally : handlePurchaseZone}
                 onMapRestart={handleMapRestart}
                 onUpgradeClick={handleUpgradeClick}
                 onEndDay={handleEndDay}

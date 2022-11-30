@@ -1,9 +1,8 @@
-function findBoughtItem(list, target) {
+function findBoughtItem(list, target, prop) {
   let counter = 0;
-
   for (let item of list) {
-    if (item.name === target) {
-      return counter;
+    if (item[prop] === target) {
+      return { index: counter, item };
     }
     counter++;
   }
