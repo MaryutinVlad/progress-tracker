@@ -140,8 +140,10 @@ function App() {
       const { availableActivities, currentActivities } = JSON.parse(localStorage.getItem('ptracker-local-activities'));
       setCurrentActivities(currentActivities);
       setAvailableActivities(availableActivities);
-      setZones(JSON.parse(localStorage.getItem('ptracker-local-zones')));
+      const zones = JSON.parse(localStorage.getItem('ptracker-local-zones'));
+      setZones(zones);
       setUserData(JSON.parse(localStorage.getItem('ptracker-local-user')));
+      setUpgradeCost(upgradeCostTab[zones.filter(zone => zone.bought).length]);
     }
     navigate('/');
   }
@@ -196,8 +198,17 @@ function App() {
       })
   }
 
-  function handleEndDay(values) {
+  function handleUpgradeLocally(activityId, rank) {
 
+    const updatedUser = {...userData, wp: userData.wp - upgradeCost};
+    currentActivities.find(item => item._id === activityId).rank = rank;
+
+    setUserData(updatedUser);
+    localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
+    localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
+  }
+
+  function handleEndDay(values) {
     const wpToEarn = calculateRewards(values, 'currentValue');
     console.log({ values, wpToEarn, nextLevelAt, userData });
 
@@ -219,7 +230,7 @@ function App() {
 
       const updatedUser = {...userData, wp: userData.wp - item.cost, slots: userData.slots + 2};
       setUserData(updatedUser);
-      setUpgradeCost(upgradeCost + 1);
+      setUpgradeCost(upgradeCostTab[upgradeCost + 1]);
       localStorage.setItem('ptracker-local-zones', JSON.stringify(zones));
       localStorage.setItem('ptracker-local-user', JSON.stringify({user: updatedUser}))
     }
@@ -239,6 +250,18 @@ function App() {
       localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
     }
 
+    function handleEndDayLocally(values) {
+      const wpToEarn = calculateRewards(values, 'currentValue');
+      const updatedUser = { ...userData, xp: userData.xp + wpToEarn, wp: userData.wp + wpToEarn};
+      setUserData(updatedUser);
+  
+      for(let value in values) {
+        currentActivities.find((item) => item.name === value).completed = values[value].totalValue;
+      }
+      localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
+      localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
+    }
+
   useEffect(() => {
     handleAuthorize();
     //console.log(localActivities);
@@ -251,6 +274,7 @@ function App() {
       <div className='page'>
         <Header
           userData={userData}
+          nextLevelAt={nextLevelAt}
           logout={logout}
           loggedIn={loggedIn || isLocalMode}
           levelProgress={
@@ -281,8 +305,8 @@ function App() {
                 onPurchaseActivity={isLocalMode ? purchaseActivityLocally : handlePurchaseActivity}
                 onPurchaseZone={isLocalMode ? purchaseZoneLocally : handlePurchaseZone}
                 onMapRestart={handleMapRestart}
-                onUpgradeClick={handleUpgradeClick}
-                onEndDay={handleEndDay}
+                onUpgradeActivity={isLocalMode ? handleUpgradeLocally : handleUpgradeClick}
+                onEndDay={isLocalMode ? handleEndDayLocally : handleEndDay}
                 isDataSent={isDataSent}
                 upgradeCost={upgradeCost}
               /> :

@@ -6,7 +6,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [20, 60, 120],
-    "src": "physicalEducation.png"
+    "src": "physicalEducation.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a2",
@@ -15,7 +17,9 @@
     "reward": 1,
     "step": 0.5,
     "rankTab": [7, 15, 28],
-    "src": "houseKeeping.png"
+    "src": "houseKeeping.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a3",
@@ -24,7 +28,9 @@
     "reward": 1,
     "step": 10,
     "rankTab": [200, 400, 600],
-    "src": "biggerTestReading.png"
+    "src": "biggerTestReading.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a4",
@@ -33,7 +39,9 @@
     "reward": 1,
     "step": 0.5,
     "rankTab": [10, 20, 30],
-    "src": "coding.png"
+    "src": "coding.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a5",
@@ -42,7 +50,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a6",
@@ -51,7 +61,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a7",
@@ -60,7 +72,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a8",
@@ -69,7 +83,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a9",
@@ -78,7 +94,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a10",
@@ -87,7 +105,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a11",
@@ -96,7 +116,9 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   },
   {
     "_id": "a12",
@@ -105,6 +127,8 @@
     "reward": 1,
     "step": 1,
     "rankTab": [5, 12, 25],
-    "src": "diaring.png"
+    "src": "diaring.png",
+    "completed": 0,
+    "rank": 1
   }
 ]

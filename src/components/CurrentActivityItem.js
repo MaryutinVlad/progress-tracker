@@ -31,7 +31,7 @@ function CurrentActivityItem({
   }
 
   function handleMouseOverUpButton() {
-    mouseOver({ upgradeCost, rank, rankTitle: rankList[rank] });
+    mouseOver({ upgradeCost: (upgradeCost * rank), rank, rankTitle: rankList[rank] });
   }
 
   function handleMouseOut() {
@@ -44,12 +44,16 @@ function CurrentActivityItem({
 
   function increaseValue() {
     setInputValue(inputValue + step);
-    arrowClick({ [name]: { totalValue: (inputValue + step) * rank + completed, currentValue: (inputValue + step) * rank } });
+    arrowClick({ [name]: {
+        totalValue: (inputValue + step) * rank + completed,
+        currentValue: (inputValue + step) * rank
+       }
+    });
   }
 
   function handleUpgradeClick() {
-    if (wpCount.wp >= upgradeCost) {
-      upgradeClick(id, rank + 1 );
+    if (wpCount.wp >= (upgradeCost + 10 * rank) && calculatePercentage(completed, rankTab[rank - 1]) >= 100) {
+      upgradeClick(id, rank + 1);
       setActivityRank(rank + 1);
     } else {
       console.log('Not enough WP');
@@ -59,7 +63,11 @@ function CurrentActivityItem({
   function decreaseValue() {
     if (inputValue) {
       setInputValue(inputValue - step);
-      arrowClick({ [name]: { totalValue: (inputValue - step) * rank + completed, currentValue: (inputValue - step) * rank } });
+      arrowClick({ [name]: {
+          totalValue: (inputValue - step) * rank + completed,
+          currentValue: (inputValue - step) * rank
+        }
+      });
     }
   }
 
@@ -92,7 +100,8 @@ function CurrentActivityItem({
             }
         >
           <div className="activities__progress-bar_completed">
-            {calculatePercentage(completed, rankTab[rank - 1])} %
+            {calculatePercentage(completed, rankTab[rank - 1]) >= 100 ? 100 
+            : calculatePercentage(completed, rankTab[rank - 1])} %
           </div>
         </div>
 

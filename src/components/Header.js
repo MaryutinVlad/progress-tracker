@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header({ logout, levelProgress, userData, loggedIn, biggerLogo }) {
+function Header({ logout, levelProgress, userData, loggedIn, biggerLogo}) {
   return (
     <header className="header">
       <div className={`logo ${biggerLogo ? 'logo_bigger' : ''}`}>
