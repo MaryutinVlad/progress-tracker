@@ -1,66 +1,165 @@
-[
-  {
-		"name": "-G",
-		"description": "Gaming restriction",
-		"cost": 15,
-		"baseReward": 1,
-		"incReward": 1,
-		"maxReward": 5
-  },
-	{
-		"name": "-P",
-		"description": "Pett restriction",
-		"cost": 30,
-		"baseReward": 1,
-		"incReward": 1.5,
-		"maxReward": 8
-  },
-	{
-		"name": "-N",
-		"description": "Nicotine restriction",
-		"cost": 50,
-		"baseReward": 1,
-		"incReward": 2.5,
-		"maxReward": 13
-  },
-	{
-		"name": "-Hm lvl 1",
-		"description": "Harmful expenses restriction",
-		"cost": 20,
-		"baseReward": 1,
-		"incReward": 0.5,
-		"maxReward": 10
-  },
-	{
-		"name": "-Hm lvl 2",
-		"description": "Heavy harmful expenses restriction",
-		"cost": 65,
-		"baseReward": 1,
-		"incReward": 0.5,
-		"maxReward": 15
-  },
-	{
-		"name": "-Hm lvl 3",
-		"description": "Ultimate harmful expenses restriction",
-		"cost": 125,
-		"baseReward": 1,
-		"incReward": 0.5,
-		"maxReward": 25
-  },
-	{
-		"name": "test",
-		"description": "test",
-		"cost": 25,
-		"baseReward": 1,
-		"incReward": 1,
-		"maxReward": 8
-  },
-	{
-		"name": "another test",
-		"description": "another test",
-		"cost": 25,
-		"baseReward": 1,
-		"incReward": 1,
-		"maxReward": 8
-  }
-]
+{
+	"trials": [
+		{
+			"_id": "tt1",
+			"name": "-G",
+			"description": "Gaming restriction",
+			"cost": 15,
+			"baseReward": 1,
+			"incReward": 1,
+			"unlocked": false,
+			"maxReward": 5
+		},
+		{
+			"_id": "tt2",
+			"name": "-P",
+			"description": "Pett restriction",
+			"cost": 30,
+			"baseReward": 1,
+			"incReward": 1.5,
+			"unlocked": false,
+			"maxReward": 8
+		},
+		{
+			"_id": "tt3",
+			"name": "-N",
+			"description": "Nicotine restriction",
+			"cost": 50,
+			"baseReward": 1,
+			"incReward": 2.5,
+			"unlocked": false,
+			"maxReward": 13
+		},
+		{
+			"_id": "tt4",
+			"name": "-Hm lvl 1",
+			"description": "Harmful expenses restriction",
+			"cost": 20,
+			"baseReward": 1,
+			"incReward": 0.5,
+			"unlocked": false,
+			"maxReward": 10
+		},
+		{
+			"_id": "tt5",
+			"name": "-Hm lvl 2",
+			"description": "Heavy harmful expenses restriction",
+			"cost": 65,
+			"baseReward": 1,
+			"incReward": 0.5,
+			"unlocked": false,
+			"maxReward": 15
+		},
+		{
+			"_id": "tt6",
+			"name": "-Hm lvl 3",
+			"description": "Ultimate harmful expenses restriction",
+			"cost": 125,
+			"baseReward": 1,
+			"incReward": 0.5,
+			"unlocked": false,
+			"maxReward": 25
+		},
+		{
+			"_id": "tt7",
+			"name": "test",
+			"description": "test",
+			"cost": 25,
+			"baseReward": 1,
+			"incReward": 1,
+			"unlocked": false,
+			"maxReward": 8
+		},
+		{
+			"_id": "tt8",
+			"name": "another test",
+			"description": "another test",
+			"cost": 25,
+			"baseReward": 1,
+			"incReward": 1,
+			"unlocked": false,
+			"maxReward": 8
+		}
+	],
+	"actions": [
+		{
+			"_id": "ta1",
+			"name": "Uncloging",
+			"description": "Unclog water tubes",
+			"reward": 5,
+			"repeatable": true
+		},
+		{
+			"_id": "ta2",
+			"name": "Recycling",
+			"description": "Hand over your trash for recycling",
+			"reward": 5,
+			"repeatable": true
+		},
+		{
+			"_id": "ta3",
+			"name": "Registration",
+			"description": "Make a short term registration for foreigner",
+			"reward": 10,
+			"repeatable": true
+		},
+		{
+			"_id": "ta4",
+			"name": "Renovation stage 1",
+			"description": "Make a shelf, repair main's room water tube and install shelfs in storeroom",
+			"reward": 25,
+			"repeatable": false
+		},
+		{
+			"_id": "ta5",
+			"name": "Renovation stage 2",
+			"description": "Even walls in at least one room",
+			"reward": 40,
+			"repeatable": false
+		},
+		{
+			"_id": "ta6",
+			"name": "Renovation stage 3",
+			"description": "Even every walls in your flat",
+			"reward": 60,
+			"repeatable": false
+		}
+	],
+	"challenges": [
+		{
+			"_id": "tc1",
+			"name": "Pretend to job",
+			"description": "Make an attempt to start a career. Freedom set needed",
+			"reward": 50,
+			"repeatable": false
+		},
+		{
+			"_id": "tc2",
+			"name": "Get a job",
+			"description": "Achieving the goal marks an end of the current map",
+			"reward": 1000,
+			"repeatable": true
+		},
+		{
+			"_id": "tc3",
+			"name": "Baking race",
+			"description": "Make confectionary for 3 days. 1 meal per day",
+			"reward": 15,
+			"repeatable": true
+		},
+		{
+			"_id": "tc4",
+			"name": "Writing practice",
+			"description": "Write a novel, song or poem within a week",
+			"reward": 40,
+			"repeatable": true
+		},
+		{
+			"_id": "tc5",
+			"name": "Crafting practice",
+			"description": "Make a piece of art. Any. Within 4 days",
+			"reward": 30,
+			"repeatable": true
+		}
+	]
+}

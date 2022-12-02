@@ -9,14 +9,12 @@ import api from '../utils/api';
 import LocalModePopup from './LocalModePopup';
 import { ResourceContext } from '../contexts/ResourceContext';
 import { levelTab, upgradeCostTab } from '../utils/tabs';
-import { findBoughtItem, calculateRewards, distributeResults } from '../utils/functions';
+import { findBoughtItem, calculateRewards, distributeResults} from '../utils/functions';
 import localUser from '../resources/localUser.json';
 import localActivities from '../resources/listOfActivities.json';
 import localZones from '../resources/zoneList.json';
 import localAchievements from '../resources/listOfAchievements.json';
-import localActions from '../resources/listOfActions.json';
-import localChallenges from '../resources/listOfChallenges.json';
-import localTrials from '../resources/listOfTrials.json';
+import listOfTrials from '../resources/listOfTrials.json';
 
 //info for drawing (default size)
 //challenge's image size 380x158 px
@@ -36,9 +34,9 @@ function App() {
   const [availableActivities, setAvailableActivities] = useState(
     localActivities.filter(activity => !activity.bought)
   );
-  const [trials, setTrials] = useState(localTrials);
-  const [challenges, setChallenges] = useState(localChallenges);
-  const [actions, setActions] = useState(localActions);
+  const [trials, setTrials] = useState(listOfTrials.trials);
+  const [challenges, setChallenges] = useState(listOfTrials.challenges);
+  const [actions, setActions] = useState(listOfTrials.actions);
   const [achievements, setAchievements] = useState(localAchievements);
   const [zones, setZones] = useState(localZones);
   const [userData, setUserData] = useState(localUser);
@@ -136,13 +134,12 @@ function App() {
   function enableLocalMode() {
     setIsLocalMode(true);
     setIsLogoBigger(false);
-    if (localStorage.getItem('ptracker-local-user')) {
-      const { availableActivities, currentActivities } = JSON.parse(localStorage.getItem('ptracker-local-activities'));
-      setCurrentActivities(currentActivities);
-      setAvailableActivities(availableActivities);
-      const zones = JSON.parse(localStorage.getItem('ptracker-local-zones'));
+    if (localStorage.getItem('ptracker-local')) {
+      const { activities, zones, user } = JSON.parse(localStorage.getItem('ptracker-local'));
+      setUserData(user);
+      setCurrentActivities(activities.currentActivities);
+      setAvailableActivities(activities.availableActivities);
       setZones(zones);
-      setUserData(JSON.parse(localStorage.getItem('ptracker-local-user')));
       setUpgradeCost(upgradeCostTab[zones.filter(zone => zone.bought).length]);
     }
     navigate('/');
@@ -198,16 +195,6 @@ function App() {
       })
   }
 
-  function handleUpgradeLocally(activityId, rank) {
-
-    const updatedUser = {...userData, wp: userData.wp - upgradeCost};
-    currentActivities.find(item => item._id === activityId).rank = rank;
-
-    setUserData(updatedUser);
-    localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
-    localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
-  }
-
   function handleEndDay(values) {
     const wpToEarn = calculateRewards(values, 'currentValue');
     console.log({ values, wpToEarn, nextLevelAt, userData });
@@ -231,8 +218,14 @@ function App() {
       const updatedUser = {...userData, wp: userData.wp - item.cost, slots: userData.slots + 2};
       setUserData(updatedUser);
       setUpgradeCost(upgradeCostTab[upgradeCost + 1]);
-      localStorage.setItem('ptracker-local-zones', JSON.stringify(zones));
-      localStorage.setItem('ptracker-local-user', JSON.stringify({user: updatedUser}))
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
     }
 
     function purchaseActivityLocally(activityId) {
@@ -245,12 +238,18 @@ function App() {
 
       const updatedUser = {...userData, slots: userData.slots - 1};
       setUserData(updatedUser);
-      console.log(availableActivities, currentActivities);
-      localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
-      localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
     }
 
     function handleEndDayLocally(values) {
+      setIsDataSent(!isDataSent);
       const wpToEarn = calculateRewards(values, 'currentValue');
       const updatedUser = { ...userData, xp: userData.xp + wpToEarn, wp: userData.wp + wpToEarn};
       setUserData(updatedUser);
@@ -258,8 +257,45 @@ function App() {
       for(let value in values) {
         currentActivities.find((item) => item.name === value).completed = values[value].totalValue;
       }
-      localStorage.setItem('ptracker-local-user', JSON.stringify(updatedUser));
-      localStorage.setItem('ptracker-local-activities', JSON.stringify({availableActivities, currentActivities}));
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
+    }
+
+    function handleUpgradeLocally(activityId, rank) {
+
+      const updatedUser = {...userData, wp: userData.wp - upgradeCost};
+      currentActivities.find(item => item._id === activityId).rank = rank;
+  
+      setUserData(updatedUser);
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
+    }
+    
+    function restartMapLocally() {
+      localStorage.clear();
+      const updatedUser = {...userData, wp: 20, slots: 0}
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {
+          currentActivities: [],
+          availableActivities: localActivities
+        },
+        trials: listOfTrials,
+        zones: localZones,
+        user: updatedUser
+      }))
+      window.location.reload();
     }
 
   useEffect(() => {
@@ -304,7 +340,7 @@ function App() {
                 achievements={achievements}
                 onPurchaseActivity={isLocalMode ? purchaseActivityLocally : handlePurchaseActivity}
                 onPurchaseZone={isLocalMode ? purchaseZoneLocally : handlePurchaseZone}
-                onMapRestart={handleMapRestart}
+                onMapRestart={isLocalMode ? restartMapLocally : handleMapRestart}
                 onUpgradeActivity={isLocalMode ? handleUpgradeLocally : handleUpgradeClick}
                 onEndDay={isLocalMode ? handleEndDayLocally : handleEndDay}
                 isDataSent={isDataSent}

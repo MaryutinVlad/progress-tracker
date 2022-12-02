@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ResourceContext } from "../contexts/ResourceContext";
 import arrow from '../images/arrow-button.png';
 import { rankList } from '../utils/tabs';
+import { calculatePercentage } from "../utils/functions";
 
 function CurrentActivityItem({
   id,
@@ -36,10 +37,6 @@ function CurrentActivityItem({
 
   function handleMouseOut() {
     mouseOut();
-  }
-
-  function calculatePercentage(minor, major) {
-    return Math.round((minor / major) * 100)
   }
 
   function increaseValue() {
@@ -77,7 +74,13 @@ function CurrentActivityItem({
 
   return (
     <div className="activities__current-item">
-      <img className="activities__current-image" alt={name} src={require(`../images/${source}`)} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
+      <img
+        className="activities__current-image"
+        alt={name}
+        src={require(`../images/${source}`)}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      />
       <div className="activities__info">
 
         <h3 className="activities__info-title">

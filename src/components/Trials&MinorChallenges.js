@@ -15,9 +15,7 @@ function TrialsAndMinorChallenges({ trials, mouseOver, mouseMove, mouseOut }) {
 					return (
 						<TrialItem
 						  key={item._id}
-							name={item.name}
-							description={item.description}
-							baseReward={item.baseReward}
+							item={item}
 							mouseOver={mouseOver}
 							mouseMove={mouseMove}
 							mouseOut={mouseOut}

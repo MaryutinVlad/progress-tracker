@@ -32,4 +32,8 @@ function distributeResults(provider, consumer) {
   return consumer;
 }
 
-export { findBoughtItem, calculateRewards, distributeResults };
+function calculatePercentage(minor, major) {
+  return Math.round((minor / major) * 100)
+}
+
+export { findBoughtItem, calculateRewards, distributeResults, calculatePercentage };
