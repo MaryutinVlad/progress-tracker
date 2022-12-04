@@ -2,7 +2,14 @@ import React from "react";
 
 import TrialItem from './TrialItem';
 
-function TrialsAndMinorChallenges({ trials, mouseOver, mouseMove, mouseOut }) {
+function TrialsAndMinorChallenges({
+	trials,
+	mouseOver,
+	mouseMove,
+	mouseOut,
+	onUnlockTrial,
+	onCompleteTrial
+}) {
 
   return (
 		<div className="trials-tab">
@@ -19,6 +26,8 @@ function TrialsAndMinorChallenges({ trials, mouseOver, mouseMove, mouseOut }) {
 							mouseOver={mouseOver}
 							mouseMove={mouseMove}
 							mouseOut={mouseOut}
+							onUnlockTrial={onUnlockTrial}
+							onCompleteTrial={onCompleteTrial}
 						/>
 					)
 				})}

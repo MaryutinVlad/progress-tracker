@@ -135,11 +135,12 @@ function App() {
     setIsLocalMode(true);
     setIsLogoBigger(false);
     if (localStorage.getItem('ptracker-local')) {
-      const { activities, zones, user } = JSON.parse(localStorage.getItem('ptracker-local'));
+      const { activities, zones, user, trials } = JSON.parse(localStorage.getItem('ptracker-local'));
       setUserData(user);
       setCurrentActivities(activities.currentActivities);
       setAvailableActivities(activities.availableActivities);
       setZones(zones);
+      setTrials(trials);
       setUpgradeCost(upgradeCostTab[zones.filter(zone => zone.bought).length]);
     }
     navigate('/');
@@ -149,7 +150,7 @@ function App() {
     console.log('purchasing activity...', activityId);
     api.purchaseActivity(activityId, userData.wp, userData.slots)
       .then(({ boughtActivity, updatedUser }) => {
-        const boughtItemIndex = findBoughtItem(availableActivities, boughtActivity.name);
+        const boughtItemIndex = findBoughtItem(availableActivities, boughtActivity.name, 'name');
         availableActivities.splice(boughtItemIndex, 1);
         currentActivities.push(boughtActivity);
         setUserData({ ...userData, slots: updatedUser.slots });
@@ -189,7 +190,7 @@ function App() {
     api.upgradeActivity(activityId, rank, wpAfterPurchase)
       .then(({ upgradedActivity, updatedUser }) => {
         console.log({ upgradedActivity, updatedUser });
-        const upgradedItemIndex = findBoughtItem(currentActivities, upgradedActivity.name);
+        const upgradedItemIndex = findBoughtItem(currentActivities, upgradedActivity.name, 'name');
         currentActivities[upgradedItemIndex] = upgradedActivity;
         setUserData({ ...userData, wp: updatedUser.wp });
       })
@@ -207,6 +208,39 @@ function App() {
         setIsDataSent(false);
         setUserData(user);
         setNextLevelAt(levelTab[user.level]);
+      })
+  }
+
+  function handleUnlockTrial(item) {
+    const wpAfterUnlock = userData.wp - item.cost;
+
+    api.unlockTrial(item._id, wpAfterUnlock)
+      .then(({ updatedTrial, updatedUser }) => {
+        const { index } = findBoughtItem(trials, updatedTrial._id, '_id');
+        trials[index] = updatedTrial;
+
+        setUserData(updatedUser);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  function handleCompleteTrial(item) {
+    const nextReward = (item.baseReward + item.incReward) < item.maxReward ?
+      item.baseReward + item.incReward : item.maxReward;
+    const wpAfterCompletion = (nextReward === item.maxReward) ?
+      (item.maxReward + userData.wp) : (nextReward - item.baseReward + userData.wp);
+    
+    api.completeTrial(item._id, wpAfterCompletion, nextReward)
+      .then(({ updatedTrial, updatedUser }) => {
+        const { index } = findBoughtItem(trials, updatedTrial._id, '_id');
+        trials[index] = updatedTrial;
+
+        setUserData(updatedUser);
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 
@@ -298,6 +332,38 @@ function App() {
       window.location.reload();
     }
 
+    function unlockTrialLocally(item) {
+      const updatedUser = {...userData, wp: userData.wp - item.cost};
+      trials.find(trial => trial._id === item._id).unlocked = true;
+
+      setUserData(updatedUser);
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
+    }
+
+    function completeTrialLocally({_id, baseReward, incReward, maxReward}) {
+      const updatedUser = {...userData, wp: userData.wp + incReward};
+      const nextReward = (baseReward + incReward) < maxReward ?
+        baseReward + incReward : maxReward;
+      trials.find(trial => trial._id === _id).incReward = nextReward;
+
+      setUserData(updatedUser);
+      localStorage.setItem('ptracker-local', JSON.stringify({
+        activities: {currentActivities, availableActivities},
+        zones,
+        challenges,
+        actions,
+        trials,
+        user: updatedUser
+      }));
+    }
+
   useEffect(() => {
     handleAuthorize();
     //console.log(localActivities);
@@ -345,6 +411,8 @@ function App() {
                 onEndDay={isLocalMode ? handleEndDayLocally : handleEndDay}
                 isDataSent={isDataSent}
                 upgradeCost={upgradeCost}
+                onUnlockTrial={isLocalMode ? unlockTrialLocally : handleUnlockTrial}
+                onCompleteTrial={isLocalMode ? completeTrialLocally : handleCompleteTrial}
               /> :
               <Navigate to='/signin' />}
           />

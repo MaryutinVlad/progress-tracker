@@ -37,7 +37,7 @@ class Api {
   }
 
   restartMap() {
-    return this._request('/activities', 'DELETE');
+    return this._request('/restart', 'DELETE');
   }
 
   upgradeActivity(activityId, rank, wpAfterPurchase) {
@@ -58,6 +58,23 @@ class Api {
   getTrials() {
     delete this.options.body;
     return this._request('/trials', 'GET');
+  }
+
+  unlockTrial(trialId, wpAfterUnlock) {
+    this.options.body = JSON.stringify({
+      wp: wpAfterUnlock
+    });
+
+    return this._request(`/trials/${trialId}`, 'PUT');
+  }
+
+  completeTrial(trialId, wpAfterCompletion, nextReward) {
+    this.options.body = JSON.stringify({
+      wp: wpAfterCompletion,
+      nextReward
+    });
+
+    return this._request(`/trials/unlocked/${trialId}`, 'PUT');
   }
 
   getAchievements() {

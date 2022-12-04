@@ -22,7 +22,9 @@ function Main({
   onMapRestart,
   onUpgradeActivity,
   isDataSent,
-  upgradeCost
+  upgradeCost,
+  onUnlockTrial,
+  onCompleteTrial
 }) {
 
   return (
@@ -38,6 +40,8 @@ function Main({
               trials={trials}
               challenges={challenges}
               actions={actions}
+              onUnlockTrial={onUnlockTrial}
+              onCompleteTrial={onCompleteTrial}
             />
           }
         />

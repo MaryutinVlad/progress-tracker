@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import TrialsAndMinorChallenges from './Trials&MinorChallenges';
 import ActionsAndMajorChallenges from './Actions&MajorChallenges';
 
-function Trials({ trials, challenges, actions }) {
+function Trials({
+  trials,
+  challenges,
+  actions,
+  onUnlockTrial,
+  onCompleteTrial
+}) {
 
   const [popupClassList, setPopupClassList] = useState('challenges__popup');
   const [coordinates, setCoordinates] = useState([]);
@@ -30,6 +36,8 @@ function Trials({ trials, challenges, actions }) {
        mouseOver={openPopup}
        mouseMove={getCoordinates}
        mouseOut={closePopup}
+       onUnlockTrial={onUnlockTrial}
+       onCompleteTrial={onCompleteTrial}
       />
       <ActionsAndMajorChallenges
         actions={actions}

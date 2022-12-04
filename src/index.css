@@ -72,6 +72,7 @@
 @import url('./blocks/trialItem/__image/trialItem__image.css');
 @import url('./blocks/trialItem/__unlock-button/trialItem__unlock-button.css');
 @import url('./blocks/trialItem/__complete-button/trialItem__complete-button.css');
+@import url('./blocks/trialItem/__unlocked/trialItem__unlocked.css');
 
 @import url('./blocks/challenges/challenges.css');
 @import url('./blocks/challenges/__navigation/challenges__navigation.css');

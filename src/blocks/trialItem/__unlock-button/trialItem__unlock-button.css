@@ -1,11 +1,12 @@
 .trialItem__unlock-button {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
     border: none;
     transition-property: color, text-shadow;
     transition-duration: 1s;
     background-color: transparent;
-    color: rgb(167, 149, 149, .5);
+    color: rgba(129, 82, 82, 0.5);
+    margin: 0 auto;
 }
 
 .trialItem__unlock-button:hover {

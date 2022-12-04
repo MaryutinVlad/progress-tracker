@@ -1,6 +1,6 @@
 .trialItem__image {
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 3;
     width: 100%;
     height: 100%;
     color: rosybrown;

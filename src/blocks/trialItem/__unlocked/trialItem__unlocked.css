@@ -1,0 +1,6 @@
+.trialItem__unlocked {
+  color: #D4AF37;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 6px auto 0;
+}

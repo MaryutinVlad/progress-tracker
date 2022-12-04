@@ -1,11 +1,12 @@
 .trialItem__complete-button {
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
     border: none;
     transition-property: color, text-shadow;
     transition-duration: 1s;
     background-color: transparent;
     color: rgba(83, 111, 197, .5);
+    margin: 0 auto;
 }
 
 .trialItem__complete-button:hover {
