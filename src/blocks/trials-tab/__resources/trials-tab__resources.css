@@ -1,0 +1,10 @@
+.trials-tab__resources {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: aliceblue;
+  box-sizing: border-box;
+  border-top: 2px solid black;
+  font-size: 24px;
+}

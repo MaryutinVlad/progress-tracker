@@ -83,8 +83,8 @@ function App() {
               })
           })
       })  
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        setTimeout(() => {setIsLocalModePopupShown(true)}, 1500);
       });
   }
 
@@ -120,7 +120,7 @@ function App() {
 
     const token = localStorage.getItem('jwt');
 
-    retrieveProfileInfo(token);
+    retrieveProfileInfo(token)
   }
 
   function logout() {
@@ -231,8 +231,9 @@ function App() {
       item.baseReward + item.incReward : item.maxReward;
     const wpAfterCompletion = (nextReward === item.maxReward) ?
       (item.maxReward + userData.wp) : (nextReward - item.baseReward + userData.wp);
+    const nextCompleted = item.completed + 1;
     
-    api.completeTrial(item._id, wpAfterCompletion, nextReward)
+    api.completeTrial(item._id, wpAfterCompletion, nextReward, nextCompleted, userData.xp)
       .then(({ updatedTrial, updatedUser }) => {
         const { index } = findBoughtItem(trials, updatedTrial._id, '_id');
         trials[index] = updatedTrial;
@@ -348,10 +349,15 @@ function App() {
     }
 
     function completeTrialLocally({_id, baseReward, incReward, maxReward}) {
-      const updatedUser = {...userData, wp: userData.wp + incReward};
+      const updatedUser = {...userData, wp: userData.wp + incReward, xp: userData.xp + incReward};
       const nextReward = (baseReward + incReward) < maxReward ?
-        baseReward + incReward : maxReward;
-      trials.find(trial => trial._id === _id).incReward = nextReward;
+        baseReward + incReward : maxReward;  
+      const index = trials.findIndex(trial => trial._id === _id);
+      const completedTrial = trials[index];
+      completedTrial.incReward = nextReward;
+      completedTrial.completed += 1;
+      trials[index] = completedTrial;
+      
 
       setUserData(updatedUser);
       localStorage.setItem('ptracker-local', JSON.stringify({

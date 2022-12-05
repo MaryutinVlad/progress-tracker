@@ -68,6 +68,8 @@
 @import url('./blocks/trials-tab/trials-tab.css');
 @import url('./blocks/trials-tab/__title/trials-tab__title.css');
 @import url('./blocks/trials-tab/__sets/trials-tab__sets.css');
+@import url('./blocks//trials-tab/__resources/trials-tab__resources.css');
+@import url('./blocks/trials-tab/__resource/trials-tab__resource.css');
 @import url('./blocks/trialItem/trialItem.css');
 @import url('./blocks/trialItem/__image/trialItem__image.css');
 @import url('./blocks/trialItem/__unlock-button/trialItem__unlock-button.css');

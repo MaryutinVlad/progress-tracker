@@ -8,4 +8,5 @@
     background-color: rgba(44, 52, 65, .3);
     border-radius: 20px;
     animation: poping .4s linear 0s forwards;
+    gap: 15px;
 }

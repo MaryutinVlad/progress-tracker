@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import TrialItem from './TrialItem';
+import { ResourceContext } from '../contexts/ResourceContext';
 
 function TrialsAndMinorChallenges({
 	trials,
@@ -10,6 +11,8 @@ function TrialsAndMinorChallenges({
 	onUnlockTrial,
 	onCompleteTrial
 }) {
+	const { wp } = useContext(ResourceContext);
+	let totalCompleted = 0;
 
   return (
 		<div className="trials-tab">
@@ -19,6 +22,7 @@ function TrialsAndMinorChallenges({
 
 			<div className="trials-tab__sets">
 				{trials.map((item) => {
+					totalCompleted += item.completed;
 					return (
 						<TrialItem
 						  key={item._id}
@@ -31,6 +35,14 @@ function TrialsAndMinorChallenges({
 						/>
 					)
 				})}
+			</div>
+			<div className="trials-tab__resources">
+				<p className="trials-tab__resource">
+					WP: {wp}
+				</p>
+				<p className="trials-tab__resource">
+					Done: {totalCompleted}
+				</p>
 			</div>
 		</div>
 	)

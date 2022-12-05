@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import testImage from "../images/-Hm.png"
 
-function AchievementItem({ name, description, reward, cost, achieved }) {
+function AchievementItem({ name, description, reward, cost, achieved, mouseMove, mouseOut, mouseOver }) {
 
 	const [ isVisible, setIsVisible ] = useState(false);
+
+	function handleMouseOver() {
+		mouseOver({ name, description, reward });
+	}
 
 	function handleClickAchievement(e) {
 		setIsVisible(!isVisible);
 	}
 
   return (
-		<div className="achievementItem" onClick={handleClickAchievement}>
+		<div
+		  className="achievementItem"
+			onClick={handleClickAchievement}
+			onMouseOver={handleMouseOver}
+			onMouseMove={mouseMove}
+			onMouseOut={mouseOut}
+		>
 	  	<img
 			  className="achievementItem__image"
 				alt={name}

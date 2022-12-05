@@ -68,10 +68,12 @@ class Api {
     return this._request(`/trials/${trialId}`, 'PUT');
   }
 
-  completeTrial(trialId, wpAfterCompletion, nextReward) {
+  completeTrial(trialId, wpAfterCompletion, nextReward, nextCompleted, xp) {
     this.options.body = JSON.stringify({
       wp: wpAfterCompletion,
-      nextReward
+      nextReward,
+      nextCompleted,
+      xp
     });
 
     return this._request(`/trials/unlocked/${trialId}`, 'PUT');
