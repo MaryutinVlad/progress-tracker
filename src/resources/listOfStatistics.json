@@ -5,8 +5,13 @@
     "WP earned on Trials",
     "WP earned on Challenges",
     "WP earned on Actions",
-    "Trials unlocked (%)",
-    "Challenges done (%)",
-    "Max WP earned on action"
+    "Trials unlocked (percentage)",
+    "Challenges done (percentage)",
+    "Max WP earned on action",
+    "Max WP per day",
+    "Total faith gained",
+    "Stages revealed",
+    "Achievements (percentage)",
+    "Total map resets"
   ]
 }

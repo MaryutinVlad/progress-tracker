@@ -6,6 +6,7 @@ function Achievements({ achievements }) {
   const [popupClassList, setPopupClassList] = useState('challenges__popup');
   const [coordinates, setCoordinates] = useState([]);
   const [popupInfo, setPopupInfo] = useState('');
+  console.log(achievements)
 
   function openPopup(data) {
     setPopupInfo(data);

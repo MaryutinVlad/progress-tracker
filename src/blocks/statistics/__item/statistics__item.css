@@ -1,0 +1,11 @@
+.statistics__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.statistics__item:hover {
+  background-color: rgba(44, 52, 65, .6);
+  color: rgb(189, 159, 120);
+}

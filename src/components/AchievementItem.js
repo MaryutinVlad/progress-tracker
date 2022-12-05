@@ -37,7 +37,7 @@ function AchievementItem({ name, description, reward, cost, achieved, mouseMove,
 					"transition-duration":".5s",
 					"transform-origin": "0%",
 					"transform": "rotateY(0deg)"
-				}} 
+				}}
 			/>
 	    <div
 			  className="achievements__info"

@@ -4,17 +4,19 @@ import StatisticsItem from "./StatisticsItem";
 import listOfStatistics from "../resources/listOfStatistics.json";
 
 function Statistics() {
+
+  const { titles } = listOfStatistics
+
   return (
     <div className="statistics">
-      {
-        listOfStatistics.map(item => {
-          return (
-            <StatisticsItem
-              title={item}
-            />
-          )
-        })
-      }
+      {titles.map(item => {
+        return (
+          <StatisticsItem
+            key={item}
+            title={item}
+          />
+        )
+      })}
     </div>
   )
 }
