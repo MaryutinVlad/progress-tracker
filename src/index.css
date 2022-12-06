@@ -35,6 +35,14 @@
 @import url('./blocks/main/main.css');
 
 @import url('./blocks/frontPage/frontPage.css');
+@import url('./blocks/frontPage/__title/frontPage__title.css');
+@import url('./blocks/frontPage/__container/frontPage__container.css');
+@import url('./blocks/frontPage/__subcontainer/frontPage__subcontainer.css');
+@import url('./blocks/frontPage/__subtitle/frontPage__subtitle.css');
+@import url('./blocks/frontPage/__list/frontPage__list.css');
+@import url('./blocks/frontPage/__list-item/frontPage__list-item.css');
+@import url('./blocks/frontPage/__list-item/_finished/frontPage__list-item_finished.css');
+@import url('./blocks/frontPage/__list-item/_todo/frontPage__list-item_todo.css');
 
 @import url('./blocks/navigation/navigation.css');
 @import url('./blocks/navigation/__link/navigation__link.css');

@@ -25,40 +25,7 @@ function AchievementItem({ name, description, reward, cost, achieved, mouseMove,
 			  className="achievementItem__image"
 				alt={name}
 				src={testImage}
-				style={ isVisible ? {
-					"transition-property": "transform transform-origin opacity",
-					"opacity": "0",
-					"transition-duration":".5s",
-					"transform-origin": "0%",
-					"transform": "rotateY(90deg)"
-				} : {
-					"transition-property": "transform transform-origin opacity",
-					"opacity": "1",
-					"transition-duration":".5s",
-					"transform-origin": "0%",
-					"transform": "rotateY(0deg)"
-				}}
 			/>
-	    <div
-			  className="achievements__info"
-				style={ isVisible ? {
-					"transition-property": "transform transform-origin opacity",
-					"opacity": "1",
-					"transition-duration":".5s",
-					"transform-origin": "100%",
-					"transform": "rotateY(0deg)"
-				} : {
-					"transition-property": "transform transform-origin opacity",
-					"opacity": "0",
-					"transition-duration":".5s",
-					"transform-origin": "100%",
-					"transform": "rotateY(90deg)"
-				}}
-			>
-		    <h3 className="achievements__info-title">{name}</h3>
-		    <p className="achievements__info-text">{description}</p>
-		    <p className="achievements__info-numbers">Reward: {reward} WP</p>
-	    </div>
 		</div>
 	)
 }

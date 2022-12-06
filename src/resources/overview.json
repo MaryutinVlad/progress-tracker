@@ -1,0 +1,12 @@
+[
+  "Progress tracker is a time management and self developement application",
+  "Initially user have 20 WP (in-app currency, stands for will power) and activities section unlocked.",
+  "In Activities section user is able to choose any activity if any slots left",
+  "If user is out of slots, zone upgrade has to be bought",
+  "Any current activity can be upgraded to get more WP. Requirements for activity also raised",
+  "Once per day user can submit finished activities to get WP",
+  "To submit properly set amount of portions made for each activity and press 'End day' button",
+  "To refresh current run press 'Restart map' button",
+  "On gaining WP user also gets the same amount of XP",
+  "When certain amount of XP gained user level rises thus making new features available"
+]

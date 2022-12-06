@@ -1,0 +1,15 @@
+{
+  "finished": [
+    "achievements layout finished",
+    "statistics layout finished",
+    "front page layout finished"
+  ],
+  "toDo": [
+    "a lot of artwork for every section",
+    "to bind statistics with other sections",
+    "same for achievements",
+    "lock some features until certain user level achieved",
+    "refactor styles",
+    "restyle auth section"
+  ]
+}
