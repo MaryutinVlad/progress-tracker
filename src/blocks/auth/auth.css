@@ -1,6 +1,12 @@
 .auth {
-    width: 50%;
-    background-color: brown;
+    width: 35%;
+    background-color: rgba(246, 128, 128, 0.5);
     border-radius: 10px;
     margin: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .auth {
+        width: 50%;
+    }
 }

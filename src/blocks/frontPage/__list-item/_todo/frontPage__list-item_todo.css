@@ -1,3 +1,7 @@
 .frontPage__list-item_todo {
-  
+  list-style: none;
+}
+
+.frontPage__list-item_todo::before {
+  content: '-  ';
 }

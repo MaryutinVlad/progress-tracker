@@ -15,6 +15,7 @@ import localActivities from '../resources/listOfActivities.json';
 import localZones from '../resources/zoneList.json';
 import localAchievements from '../resources/listOfAchievements.json';
 import listOfTrials from '../resources/listOfTrials.json';
+import listOfStatistics from "../resources/listOfStatistics.json";
 
 //info for drawing (default size)
 //challenge's image size 380x158 px
@@ -44,6 +45,7 @@ function App() {
     upgradeCostTab[localZones.filter(zone => zone.bought).length]
   );
   const [nextLevelAt, setNextLevelAt] = useState(levelTab[localUser.level]);
+  const [statistics, setStatistics] = useState(listOfStatistics)
 
   const navigate = useNavigate();
 
@@ -419,6 +421,7 @@ function App() {
                 upgradeCost={upgradeCost}
                 onUnlockTrial={isLocalMode ? unlockTrialLocally : handleUnlockTrial}
                 onCompleteTrial={isLocalMode ? completeTrialLocally : handleCompleteTrial}
+                statistics={statistics}
               /> :
               <Navigate to='/signin' />}
           />

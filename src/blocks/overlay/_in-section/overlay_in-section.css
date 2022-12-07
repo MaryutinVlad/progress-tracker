@@ -1,0 +1,52 @@
+.overlay_in-section_first {
+  position: fixed;
+  height: 10px;
+  width: 74%;
+  left: calc(13%);
+  background-color: #0d1014;
+  bottom: 51px;
+  opacity: .5;
+}
+
+.overlay_in-section_second {
+  position: fixed;
+  width: 77%;
+  height: 9px;
+  bottom: 42px;
+  width: 74%;
+  left: calc(13%);
+  background-color: #0d1014;
+  opacity: .65;
+}
+
+.overlay_in-section_third {
+  position: fixed;
+  width: 77%;
+  height: 9px;
+  bottom: 33px;
+  width: 74%;
+  left: calc(13%);
+  background-color: #0d1014;
+  opacity: .8;
+}
+
+.overlay_in-section_fourth {
+  position: fixed;
+  width: 77%;
+  height: 7px;
+  bottom: 27px;
+  width: 74%;
+  left: calc(13%);
+  background-color: #0d1014;
+  opacity: .9;
+}
+
+.overlay_in-section_last {
+  position: fixed;
+  width: 77%;
+  height: 7px;
+  bottom: 20px;
+  width: 74%;
+  left: calc(13%);
+  background-color: #0d1014;
+}

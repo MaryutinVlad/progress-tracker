@@ -1,17 +1,58 @@
-{
-  "titles": [
-    "Total WP",
-    "WP earned on Activities",
-    "WP earned on Trials",
-    "WP earned on Challenges",
-    "WP earned on Actions",
-    "Trials unlocked (percentage)",
-    "Challenges done (percentage)",
-    "Max WP earned on action",
-    "Max WP per day",
-    "Total faith gained",
-    "Stages revealed",
-    "Achievements (percentage)",
-    "Total map resets"
-  ]
-}
+[
+  {
+    "title": "Total WP earned",
+    "value": 0
+  },
+  {
+    "title": "Total WP spent",
+    "value": 0
+  },
+  {
+    "title": "WP earned on Activities",
+    "value": 0
+  },
+  {
+    "title": "WP earned on Trials",
+    "value": 0
+  },
+  {
+    "title": "WP earned on Challenges",
+    "value": 0
+  },
+  {
+    "title": "WP earned on Actions",
+    "value": 0
+  },
+  {
+    "title": "Trials unlocked (percentage)",
+    "value": 0
+  },
+  {
+    "title": "Challenges done (percentage)",
+    "value": 0
+  },
+  {
+    "title": "Max WP earned on action",
+    "value": 0
+  },
+  {
+    "title": "Max WP per day",
+    "value": 0
+  },
+  {
+    "title": "Total faith gained",
+    "value": 0
+  },
+  {
+    "title": "Stages revealed",
+    "value": 0
+  },
+  {
+    "title": "Achievements (percentage)",
+    "value": 0
+  },
+  {
+    "title": "Total map resets",
+    "value": 0
+  }
+]

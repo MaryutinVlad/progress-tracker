@@ -24,7 +24,8 @@ function Main({
   isDataSent,
   upgradeCost,
   onUnlockTrial,
-  onCompleteTrial
+  onCompleteTrial,
+  statistics
 }) {
 
   return (
@@ -58,7 +59,9 @@ function Main({
         <Route 
           path="/statistics"
           element={
-            <Statistics />
+            <Statistics
+              data={statistics}
+            />
           }      
         />
 

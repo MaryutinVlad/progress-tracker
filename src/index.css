@@ -27,6 +27,7 @@
 
 @import url('./blocks/overlay/overlay.css');
 @import url('./blocks/overlay/_visible/overlay_visible.css');
+@import url('./blocks/overlay/_in-section/overlay_in-section.css');
 @import url('./blocks/localMode/localMode.css');
 @import url('./blocks/localMode/__title/localMode__title.css');
 @import url('./blocks/localMode/__description/localMode__description.css');

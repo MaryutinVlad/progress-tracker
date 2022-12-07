@@ -1,3 +1,8 @@
 .auth__input-field {
-    
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(25, 24, 24);
+  outline: none;
+  color: rgb(149, 188, 175);
+  font-size: 20px;
 }

@@ -1,3 +1,14 @@
 .auth__submit-button {
-    width: 20%;
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(224, 204, 177);
+    border-color: rgb(187, 162, 130);
+    color: rgb(37, 35, 35);
+    cursor: pointer;
+}
+
+.auth__submit-button:hover {
+    background-color: rgb(251, 229, 199);
 }
